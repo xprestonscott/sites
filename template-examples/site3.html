@@ -1,0 +1,478 @@
+<!-- NAME: Quiet Counter | VIBE: Refined light editorial for Purely You — elegant Fraunces serif on warm white, hairline borders, generous air, one muted clay accent. Looks designed, not generated. | ANIM: slow Ken Burns image drift, ultra-gentle staggered fades with long easings, hairline scroll progress + count-up pantry stats -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purely You — Baked good, made honest. | Owasso, OK</title>
+<meta name="description" content="Purely You — an Owasso bakery for healthier baked goods, herbal wellness blends, and pet-friendly treats. Baked good, made honest.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fdfcf9;
+  --paper-2:#f7f4ed;
+  --ink:#26221c;
+  --mute:#7c756a;
+  --line:#e5e0d6;
+  --clay:#b0704f;
+  --clay-soft:#f3e7df;
+  --sage:#8a9479;
+  --serif:'Fraunces',serif;
+  --sans:'Inter',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.65;font-size:15.5px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:min(1120px,90vw);margin-inline:auto}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;line-height:1.12}
+h2{font-size:clamp(2rem,4.2vw,3.2rem)}
+h2 em,h1 em{font-style:italic;font-weight:300;color:var(--clay)}
+.kicker{font-size:.68rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
+.section{padding:clamp(4.5rem,9vw,7.5rem) 0}
+.center{text-align:center}
+.lede{color:var(--mute);font-size:1.02rem;max-width:36em}
+
+/* ---------- progress ---------- */
+#progress{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--clay);z-index:1000}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.3rem 0;background:rgba(253,252,249,0);transition:background .4s,border-color .4s,padding .4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(253,252,249,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:var(--line);padding:.85rem 0}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{font-family:var(--serif);font-size:1.25rem;text-decoration:none;letter-spacing:-.01em}
+.brand em{font-style:italic;color:var(--clay)}
+.nav-links{display:flex;gap:2.1rem;list-style:none;font-size:.82rem;font-weight:500;color:var(--mute)}
+.nav-links a{text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;font-weight:600;font-size:.86rem;padding:.85em 1.7em;border-radius:999px;border:1px solid var(--ink);transition:background .25s,color .25s,transform .2s,box-shadow .25s;cursor:pointer;white-space:nowrap}
+.btn .arr{transition:transform .25s}
+.btn:hover .arr{transform:translateX(4px)}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{background:var(--clay);border-color:var(--clay);transform:translateY(-1px);box-shadow:0 10px 26px rgba(176,112,79,.22)}
+.btn.quiet{border-color:var(--line);color:var(--ink);background:transparent}
+.btn.quiet:hover{border-color:var(--ink);transform:translateY(-1px)}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+header.hero{padding:10.5rem 0 5rem;text-align:center}
+.badge-loved{display:inline-flex;align-items:center;gap:.65rem;font-size:.78rem;font-weight:500;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:.55em 1.3em;background:#fff;margin-bottom:2rem}
+.badge-loved .stars{color:var(--clay);letter-spacing:.12em}
+.hero h1{font-size:clamp(2.9rem,7.5vw,5.6rem);max-width:11em;margin-inline:auto}
+.hero .lede{margin:1.8rem auto 2.4rem}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;list-style:none;margin-bottom:2.4rem}
+.chips li{font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:.55em 1.2em;background:#fff}
+.cta-row{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:center}
+.scroll-cue{margin-top:4rem;display:inline-flex;flex-direction:column;align-items:center;gap:.6rem;font-size:.6rem;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--mute)}
+.scroll-cue svg{animation:cueFloat 2s ease-in-out infinite}
+@keyframes cueFloat{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(7px);opacity:1}}
+
+/* hero photo strip */
+.photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:4.5rem;text-align:left}
+.ph-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:.7rem .7rem .95rem;box-shadow:0 1px 2px rgba(38,34,28,.04),0 12px 32px -18px rgba(38,34,28,.14);transition:transform .35s cubic-bezier(.22,.9,.3,1),box-shadow .35s}
+.ph-card:hover{transform:translateY(-5px);box-shadow:0 2px 3px rgba(38,34,28,.05),0 24px 44px -18px rgba(38,34,28,.2)}
+.ph-card .frame{border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:var(--paper-2)}
+.ph-card img{width:100%;height:100%;object-fit:cover}
+.kenburns img{animation:kb 26s ease-in-out infinite alternate;will-change:transform}
+@keyframes kb{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.14) translate(-2.5%,2%)}}
+.kenburns.kb-b img{animation-duration:32s;animation-direction:alternate-reverse}
+.ph-card figcaption{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--mute);padding:.75rem .35rem 0}
+@media(max-width:820px){.photo-strip{grid-template-columns:1fr;max-width:430px;margin-inline:auto;margin-top:3.2rem}}
+
+/* ---------- ticker ---------- */
+.ticker{border-block:1px solid var(--line);padding:1rem 0;overflow:hidden;background:var(--paper)}
+.ticker-track{display:flex;width:max-content;animation:tick 34s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-track span{display:flex;align-items:center;gap:2.4rem;padding-right:2.4rem;font-size:.72rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.ticker-track i{font-style:normal;color:var(--clay);font-size:.5rem}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- menu / the counter ---------- */
+.counter-sec{background:var(--paper-2)}
+.menu-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3.5rem}
+.menu-col{background:#fff;border:1px solid var(--line);border-radius:20px;padding:2.1rem 1.9rem;transition:transform .35s cubic-bezier(.22,.9,.3,1),box-shadow .35s}
+.menu-col:hover{transform:translateY(-4px);box-shadow:0 20px 44px -20px rgba(38,34,28,.18)}
+.menu-col .tag{display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);background:var(--clay-soft);border-radius:999px;padding:.5em 1.1em;margin-bottom:1.3rem}
+.menu-col:nth-child(2) .tag{color:var(--sage);background:#eef0e9}
+.menu-col h3{font-size:1.55rem;margin-bottom:1.4rem}
+.menu-list{list-style:none;display:grid}
+.menu-list li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding:.75rem 0;border-top:1px solid var(--line);font-size:.92rem}
+.menu-list li:first-child{border-top:none}
+.menu-list b{font-weight:500}
+.menu-list small{display:block;color:var(--mute);font-size:.78rem;font-weight:400}
+.menu-list .price{font-family:var(--serif);color:var(--ink);white-space:nowrap}
+@media(max-width:880px){.menu-cols{grid-template-columns:1fr}}
+
+/* ---------- stats ---------- */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:3.5rem}
+.stat{background:#fff;padding:2.2rem 1.4rem;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-weight:300;font-size:clamp(2rem,3.8vw,2.9rem);color:var(--clay);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat span{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+@media(max-width:760px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- split ---------- */
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+.split-photo{border:1px solid var(--line);border-radius:20px;padding:.7rem;background:#fff;box-shadow:0 24px 48px -24px rgba(38,34,28,.18)}
+.split-photo .frame{border-radius:14px;overflow:hidden;aspect-ratio:3/4;background:var(--paper-2)}
+.split-photo img{width:100%;height:100%;object-fit:cover}
+.split-photo figcaption{font-family:var(--serif);font-style:italic;color:var(--mute);padding:.85rem .3rem .2rem;font-size:1.05rem;text-align:center}
+.split-copy .kicker{display:block;margin-bottom:1.1rem}
+.split-copy p{color:var(--mute);margin:1.3rem 0;max-width:30em}
+.tenet-list{list-style:none;margin:1.8rem 0 2.2rem;display:grid}
+.tenet-list li{padding:1rem 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:baseline}
+.tenet-list li:last-child{border-bottom:1px solid var(--line)}
+.tenet-list .n{font-family:var(--serif);font-style:italic;color:var(--clay);font-size:.95rem}
+.tenet-list b{font-weight:500;font-size:.95rem}
+.tenet-list span{display:block;color:var(--mute);font-size:.85rem;font-weight:400}
+@media(max-width:880px){.split-grid{grid-template-columns:1fr}.split-photo{max-width:420px;margin-inline:auto}}
+
+/* ---------- week schedule ---------- */
+.week-sec{background:var(--paper-2)}
+.week-table{margin-top:3.2rem;border:1px solid var(--line);border-radius:20px;background:#fff;overflow:hidden}
+.week-row{display:grid;grid-template-columns:140px 1fr auto;gap:1.5rem;align-items:center;padding:1.25rem 1.9rem;border-top:1px solid var(--line);transition:background .3s}
+.week-row:first-child{border-top:none}
+.week-row:hover{background:var(--paper)}
+.week-row .day{font-family:var(--serif);font-size:1.12rem}
+.week-row p{font-size:.9rem;color:var(--mute)}
+.week-row .note{font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);border:1px solid var(--clay-soft);background:var(--clay-soft);border-radius:999px;padding:.45em 1em;white-space:nowrap}
+.week-row .note.alt{color:var(--sage);background:#eef0e9;border-color:#eef0e9}
+@media(max-width:700px){.week-row{grid-template-columns:1fr}.week-row .note{justify-self:start}}
+
+/* ---------- reviews ---------- */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3.5rem}
+.rev-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:2.1rem 1.9rem;display:flex;flex-direction:column;gap:1.1rem;transition:transform .35s cubic-bezier(.22,.9,.3,1),box-shadow .35s}
+.rev-card:hover{transform:translateY(-4px);box-shadow:0 20px 44px -20px rgba(38,34,28,.16)}
+.rev-card .stars{color:var(--clay);letter-spacing:.14em;font-size:.85rem}
+.rev-card blockquote{font-family:var(--serif);font-size:1.08rem;line-height:1.5;font-weight:300}
+.rev-card .who{margin-top:auto;font-size:.8rem;color:var(--mute)}
+.rev-card .who b{color:var(--ink);font-weight:600}
+@media(max-width:880px){.rev-grid{grid-template-columns:1fr}}
+
+/* ---------- find us ---------- */
+.find-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:4rem;margin-top:3.2rem;align-items:start}
+.addr h3{font-size:1.7rem;margin-bottom:.7rem}
+.addr p{color:var(--mute)}
+.addr .phone{display:inline-block;font-family:var(--serif);font-size:clamp(1.7rem,3.4vw,2.4rem);color:var(--ink);text-decoration:none;margin:1.1rem 0 1.6rem;border-bottom:1px solid var(--line);padding-bottom:.2rem;transition:border-color .3s,color .3s}
+.addr .phone:hover{color:var(--clay);border-color:var(--clay)}
+.area{font-family:var(--serif);font-style:italic;color:var(--mute);margin-top:1.8rem;font-size:1.1rem}
+.hours-card{border:1px solid var(--line);border-radius:20px;background:#fff;padding:2.1rem}
+.hours-card h3{font-size:1.25rem;margin-bottom:1.1rem}
+.hours-card table{width:100%;border-collapse:collapse;font-size:.92rem}
+.hours-card td{padding:.7rem 0;border-top:1px solid var(--line);color:var(--mute)}
+.hours-card tr:first-child td{border-top:none}
+.hours-card td:last-child{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+.hours-card .closed{color:var(--clay)}
+@media(max-width:880px){.find-grid{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:3.2rem 0;background:var(--paper)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:space-between;align-items:center}
+footer .fine{font-size:.78rem;color:var(--mute)}
+footer .fine a{color:var(--clay);text-decoration:none;font-weight:600}
+footer .fine a:hover{text-decoration:underline}
+
+/* ---------- reveal ---------- */
+[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.16,.8,.26,1),transform 1s cubic-bezier(.16,.8,.26,1)}
+[data-reveal].in{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.16,.8,.26,1),transform .9s cubic-bezier(.16,.8,.26,1)}
+.stagger.in>*{opacity:1;transform:none}
+.stagger.in>*:nth-child(1){transition-delay:.08s}
+.stagger.in>*:nth-child(2){transition-delay:.22s}
+.stagger.in>*:nth-child(3){transition-delay:.36s}
+.stagger.in>*:nth-child(4){transition-delay:.5s}
+.stagger.in>*:nth-child(5){transition-delay:.64s}
+.stagger.in>*:nth-child(6){transition-delay:.78s}
+.stagger.in>*:nth-child(7){transition-delay:.92s}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  [data-reveal],.stagger>*{opacity:1!important;transform:none!important}
+  .kenburns img{animation:none}
+  .ticker-track{animation:none}
+  #progress{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Purely <em>You</em></a>
+    <ul class="nav-links">
+      <li><a href="#counter">The counter</a></li>
+      <li><a href="#story">Our story</a></li>
+      <li><a href="#week">This week</a></li>
+      <li><a href="#reviews">Kind words</a></li>
+      <li><a href="#findus">Visit</a></li>
+    </ul>
+    <a class="btn solid" href="tel:+19184012247">Call the bakery <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="badge-loved" data-reveal><span class="stars" aria-label="Five stars">★★★★★</span> Loved by locals — Owasso's honest bakery</div>
+    <h1 data-reveal>Baked good, <em>made honest.</em></h1>
+    <p class="lede center" style="margin-inline:auto" data-reveal>A small Owasso bakery for people who read labels. Healthier baked goods, herbal wellness blends, and treats your dog is allowed to beg for.</p>
+    <ul class="chips stagger" data-stagger>
+      <li>No refined-sugar shortcuts</li>
+      <li>Gluten-free options daily</li>
+      <li>Pet-friendly counter</li>
+      <li>Baked in-house</li>
+    </ul>
+    <div class="cta-row" data-reveal>
+      <a class="btn solid" href="tel:+19184012247">Call now <span class="arr">→</span></a>
+      <a class="btn quiet" href="#counter">See the counter <span class="arr">→</span></a>
+    </div>
+
+    <div class="photo-strip stagger" data-stagger>
+      <figure class="ph-card">
+        <div class="frame kenburns"><img src="bakery.jpg" alt="Chocolate date clusters being dusted with coconut snow"></div>
+        <figcaption>Cocoa date clusters, mid-snowstorm.</figcaption>
+      </figure>
+      <figure class="ph-card">
+        <div class="frame kenburns kb-b"><img src="bakery2.jpg" alt="The grab-and-go fridge stocked with fresh prepared items and juices"></div>
+        <figcaption>The grab-and-go fridge, restocked Tuesdays.</figcaption>
+      </figure>
+      <figure class="ph-card">
+        <div class="frame"><img src="bakery3.jpg" alt="A social media post for a locally-made pickle dip stocked at the bakery" style="object-position:center 20%"></div>
+        <figcaption>From our feed — local makers we stock.</figcaption>
+      </figure>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      Scroll on down
+      <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M7 1v14m0 0 5-5m-5 5-5-5" stroke="#7c756a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Sourdough Saturdays <i>●</i> Sugar-conscious <i>●</i> Herbal wellness <i>●</i> Pup-approved <i>●</i> Baked in Owasso <i>●</i> Small batch, every batch <i>●</i></span>
+    <span>Sourdough Saturdays <i>●</i> Sugar-conscious <i>●</i> Herbal wellness <i>●</i> Pup-approved <i>●</i> Baked in Owasso <i>●</i> Small batch, every batch <i>●</i></span>
+  </div>
+</div>
+
+<section class="section counter-sec" id="counter">
+  <div class="wrap">
+    <div class="center" data-reveal>
+      <span class="kicker">The counter</span>
+      <h2 style="margin-top:1rem">Choose your <em>treat.</em></h2>
+      <p class="lede" style="margin:1.2rem auto 0">Everything below is baked or blended in-house. Ask what came out of the oven this morning — the answer changes daily.</p>
+    </div>
+    <div class="menu-cols stagger" data-stagger>
+      <div class="menu-col">
+        <span class="tag">Baked honest</span>
+        <h3>From the oven</h3>
+        <ul class="menu-list">
+          <li><span><b>Cocoa date clusters</b><small>Sweetened with dates, dusted in coconut</small></span><span class="price">$4.50</span></li>
+          <li><span><b>Honey-oat sourdough</b><small>48-hour ferment, Saturday drop</small></span><span class="price">$9</span></li>
+          <li><span><b>Almond flour banana bread</b><small>Gluten-free, no refined sugar</small></span><span class="price">$6</span></li>
+          <li><span><b>Protein morning muffins</b><small>Half-dozen, rotating flavors</small></span><span class="price">$14</span></li>
+        </ul>
+      </div>
+      <div class="menu-col">
+        <span class="tag">Herbal wellness</span>
+        <h3>From the kettle</h3>
+        <ul class="menu-list">
+          <li><span><b>Calm blend</b><small>Chamomile, lemon balm, lavender</small></span><span class="price">$12</span></li>
+          <li><span><b>Summer hydration juice</b><small>Cold-pressed, from the fridge</small></span><span class="price">$7</span></li>
+          <li><span><b>Tropical greens juice</b><small>Pineapple, spinach, ginger</small></span><span class="price">$7</span></li>
+          <li><span><b>Elderberry syrup</b><small>Small-batch, seasonal</small></span><span class="price">$16</span></li>
+        </ul>
+      </div>
+      <div class="menu-col">
+        <span class="tag">For the pups</span>
+        <h3>From the dog case</h3>
+        <ul class="menu-list">
+          <li><span><b>Peanut butter biscuits</b><small>Three ingredients, that's it</small></span><span class="price">$5</span></li>
+          <li><span><b>Pumpkin softies</b><small>For the senior dogs</small></span><span class="price">$5.50</span></li>
+          <li><span><b>Birthday pup-cake</b><small>Order two days ahead</small></span><span class="price">$12</span></li>
+          <li><span><b>Trail mix for two</b><small>Half for you, half for them</small></span><span class="price">$8</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stats-row" data-reveal>
+      <div class="stat"><b><span data-count="60" data-suffix="+">0</span></b><span>Weekly bakes</span></div>
+      <div class="stat"><b><span data-count="12">0</span></b><span>Herbal blends</span></div>
+      <div class="stat"><b><span data-count="0">0</span></b><span>Refined-sugar shortcuts</span></div>
+      <div class="stat"><b><span data-count="100" data-suffix="%">0</span></b><span>Pup approved</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="story">
+  <div class="wrap">
+    <div class="split-grid">
+      <figure class="split-photo" data-reveal>
+        <div class="frame kenburns"><img src="bakery.jpg" alt="Close-up of chocolate clusters under a dusting of coconut"></div>
+        <figcaption>The 6 a.m. batch, photographed badly, eaten fast.</figcaption>
+      </figure>
+      <div class="split-copy" data-reveal>
+        <span class="kicker">Our story</span>
+        <h2>Honest is a <em>recipe.</em></h2>
+        <p>Purely You started at an Owasso farmers market table with one banana bread and a strong opinion: treats shouldn't need a confession afterward. Three years later the opinion hasn't changed — the ovens just got bigger.</p>
+        <ul class="tenet-list">
+          <li><span class="n">No. 1</span><span><b>Ingredients you can pronounce</b><span>Dates, oats, honey, almond flour. The label reads like a pantry, not a lab.</span></span></li>
+          <li><span class="n">No. 2</span><span><b>Small batch, every batch</b><span>If it didn't come out right, it doesn't go in the case. Ask about "oops bags" on Fridays.</span></span></li>
+          <li><span class="n">No. 3</span><span><b>Everyone eats, dogs included</b><span>Gluten-free, dairy-light, and a whole case just for the pups tied up out front.</span></span></li>
+        </ul>
+        <a class="btn solid" href="#findus">Come say hi <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section week-sec" id="week">
+  <div class="wrap">
+    <div class="center" data-reveal>
+      <span class="kicker">The rhythm</span>
+      <h2 style="margin-top:1rem">A week at <em>Purely You.</em></h2>
+    </div>
+    <div class="week-table stagger" data-stagger>
+      <div class="week-row"><span class="day">Tuesday</span><p>Grab-and-go fridge restock — cold-pressed juices, prepped snack boxes, and the good salsa.</p><span class="note">Fridge day</span></div>
+      <div class="week-row"><span class="day">Wednesday</span><p>Dog case bake day. Peanut butter biscuits come out around 10 a.m. and the regulars know it.</p><span class="note alt">Pup day</span></div>
+      <div class="week-row"><span class="day">Friday</span><p>"Oops bags" — perfectly imperfect bakes at half price, first come first served.</p><span class="note">Half price</span></div>
+      <div class="week-row"><span class="day">Saturday</span><p>Sourdough drop at 8 a.m. sharp. The honey-oat loaves have never once lasted past noon.</p><span class="note alt">Bread day</span></div>
+      <div class="week-row"><span class="day">Sunday</span><p>Closed. We're the ones at the farmers market table — come find us there.</p><span class="note">Market day</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="wrap">
+    <div class="center" data-reveal>
+      <span class="kicker">Kind words</span>
+      <h2 style="margin-top:1rem">Word around <em>town.</em></h2>
+    </div>
+    <div class="rev-grid stagger" data-stagger>
+      <article class="rev-card">
+        <span class="stars" aria-label="Five stars">★★★★★</span>
+        <blockquote>"The banana bread converted my husband, who claims to hate 'healthy stuff.' He doesn't know it's gluten-free. Please don't tell him."</blockquote>
+        <p class="who"><b>Rachel M.</b> · Owasso</p>
+      </article>
+      <article class="rev-card">
+        <span class="stars" aria-label="Five stars">★★★★★</span>
+        <blockquote>"My dog drags me here. Literally changes route on our walk. The staff knows her name and I'm fairly sure they don't know mine."</blockquote>
+        <p class="who"><b>Devon K.</b> · Stone Canyon</p>
+      </article>
+      <article class="rev-card">
+        <span class="stars" aria-label="Five stars">★★★★★</span>
+        <blockquote>"The calm tea blend is the only thing that survived my quitting-coffee era. Kind people, honest food, and Saturday sourdough worth the alarm."</blockquote>
+        <p class="who"><b>Priya S.</b> · Collinsville</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section counter-sec" id="findus">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="kicker">Visit</span>
+      <h2 style="margin-top:1rem">Come find <em>us.</em></h2>
+    </div>
+    <div class="find-grid">
+      <div class="addr" data-reveal>
+        <h3>Purely You Bakery</h3>
+        <p>12905 E 86th St N, Owasso, OK 74055</p>
+        <a class="phone" href="tel:+19184012247">(918) 401-2247</a>
+        <div class="cta-row" style="justify-content:flex-start">
+          <a class="btn solid" href="https://www.google.com/maps/search/?api=1&query=12905+E+86th+St+N+Owasso+OK+74055" target="_blank" rel="noopener">Get directions <span class="arr">→</span></a>
+          <a class="btn quiet" href="tel:+19184012247">Call ahead <span class="arr">→</span></a>
+        </div>
+        <p class="area">Two doors down from the nail place, look for the dog bowl by the door.</p>
+      </div>
+      <div class="hours-card" data-reveal>
+        <h3>Hours</h3>
+        <table>
+          <tr><td>Tuesday – Friday</td><td>7:00a – 3:00p</td></tr>
+          <tr><td>Saturday</td><td>8:00a – 2:00p</td></tr>
+          <tr><td>Sunday</td><td class="closed">At the farmers market</td></tr>
+          <tr><td>Monday</td><td class="closed">Resting the ovens</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top">Purely <em>You</em></a>
+    <p class="fine">© 2026 Purely You Bakery · Owasso, OK<br>Website by <a href="#">Preston Scott Systems</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* nav + progress */
+  var nav = document.getElementById('nav');
+  var bar = document.getElementById('progress');
+  var ticking = false;
+  function onScroll(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    if(!reduced){
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ requestAnimationFrame(onScroll); ticking = true; }
+  }, {passive:true});
+  onScroll();
+
+  /* reveal */
+  var els = document.querySelectorAll('[data-reveal],[data-stagger]');
+  document.querySelectorAll('[data-stagger]').forEach(function(el){ el.classList.add('stagger'); });
+  if(reduced || !('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.15, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  /* counters */
+  var counters = document.querySelectorAll('[data-count]');
+  function runCounter(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    if(reduced || target === 0){ el.textContent = target + suffix; return; }
+    var dur = 1500, start = null;
+    function frame(t){
+      if(start === null) start = t;
+      var p = Math.min((t - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if(p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  if(reduced || !('IntersectionObserver' in window)){
+    counters.forEach(runCounter);
+  } else {
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ runCounter(e.target); cio.unobserve(e.target); }
+      });
+    },{threshold:.6});
+    counters.forEach(function(el){ cio.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>

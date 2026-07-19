@@ -1,0 +1,574 @@
+<!-- NAME: Night Shift | VIBE: Dark cinematic luxury-editorial for Premier Pest Pros — near-black, oversized Anton + italic-serif headlines, one glowing accent word. | ANIM: sticky pinned 4-step process with crossfading panel, rAF parallax glow field, clip-path curtain image reveals -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Pest Pros — The night shift is ours. | Sand Springs & Tulsa, OK</title>
+<meta name="description" content="Premier Pest Pros — precision pest control for Sand Springs and greater Tulsa. Mosquito, rodent, residential and commercial programs. Call (918) 973-0344.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0a0c;
+  --black-2:#0e0e12;
+  --panel:rgba(255,255,255,.035);
+  --line:rgba(255,255,255,.12);
+  --line-soft:rgba(255,255,255,.07);
+  --bone:#ece7dc;
+  --mute:rgba(236,231,220,.62);
+  --green:#9dff3d;
+  --green-deep:#59c21a;
+  --gold:#e8c46a;
+  --sans:'Inter',system-ui,sans-serif;
+  --display:'Anton',sans-serif;
+  --serif:'Instrument Serif',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--black);color:var(--bone);line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:min(1200px,92vw);margin-inline:auto}
+.display{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.96}
+.serif-it{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:1.06em}
+h2.display{font-size:clamp(2.6rem,6vw,4.8rem)}
+.glow-word{background:linear-gradient(100deg,#eaffd0 0%,var(--green) 45%,var(--green-deep) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(157,255,61,.45))}
+.section{padding:clamp(5rem,10vw,8.5rem) 0;position:relative}
+.pill-badge{display:inline-flex;align-items:center;gap:.6rem;font-size:.68rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:.55em 1.3em;background:rgba(255,255,255,.02)}
+.pill-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+.kicker{font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--mute)}
+
+/* ---------- nav ---------- */
+nav{position:fixed;inset:0 0 auto;z-index:900;padding:1.2rem 0;transition:background .4s,backdrop-filter .4s,border-color .4s,padding .4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(10,10,12,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line-soft);padding:.75rem 0}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.brand .mark{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;background:var(--panel)}
+.brand b{font-family:var(--display);font-weight:400;font-size:1rem;letter-spacing:.08em;text-transform:uppercase}
+.brand b i{font-family:var(--serif);font-style:italic;text-transform:none;color:var(--green);letter-spacing:0;font-size:1.15em}
+.nav-links{display:flex;gap:2rem;list-style:none;font-size:.82rem;font-weight:500;color:var(--mute)}
+.nav-links a{text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--bone)}
+.btn{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:600;font-size:.9rem;padding:.9em 1.7em;border-radius:999px;transition:transform .2s ease,box-shadow .25s ease,background .25s ease,border-color .25s;cursor:pointer;border:1px solid transparent;white-space:nowrap}
+.btn .arr{transition:transform .25s ease}
+.btn:hover .arr{transform:translateX(4px)}
+.btn.solid{background:var(--green);color:#0c1503;box-shadow:0 0 0 rgba(157,255,61,0)}
+.btn.solid:hover{transform:translateY(-2px);box-shadow:0 8px 34px rgba(157,255,61,.35)}
+.btn.line{border-color:var(--line);color:var(--bone);background:rgba(255,255,255,.02)}
+.btn.line:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.05)}
+@media(max-width:880px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:8rem 0 4rem}
+.glow-field{position:absolute;inset:-20% -10%;pointer-events:none}
+.glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;will-change:transform}
+.g1{width:52vw;height:52vw;max-width:760px;max-height:760px;background:radial-gradient(circle,rgba(157,255,61,.16),transparent 65%);top:-6%;right:-12%}
+.g2{width:38vw;height:38vw;max-width:560px;max-height:560px;background:radial-gradient(circle,rgba(232,196,106,.10),transparent 65%);bottom:-10%;left:-10%}
+.g3{width:24vw;height:24vw;max-width:340px;max-height:340px;background:radial-gradient(circle,rgba(120,190,255,.08),transparent 65%);top:30%;left:26%}
+.speck{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(236,231,220,.35);will-change:transform}
+.hero .wrap{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1.9rem}
+.hero h1{font-size:clamp(3.3rem,11vw,9rem)}
+.hero h1 .serif-it{font-size:.92em;margin-left:.06em}
+.hero .lede{max-width:38em;color:var(--mute);font-size:clamp(.98rem,1.3vw,1.12rem)}
+.loved{display:inline-flex;align-items:center;gap:.7rem;font-size:.82rem;font-weight:600}
+.loved .stars{color:var(--gold);letter-spacing:.14em;text-shadow:0 0 14px rgba(232,196,106,.5)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;list-style:none}
+.chips li{font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line-soft);border-radius:999px;padding:.55em 1.2em}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.scroll-cue{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.7rem;font-size:.62rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--mute)}
+.scroll-cue .pulse{width:1px;height:44px;background:linear-gradient(var(--green),transparent);animation:cuepulse 1.8s ease-in-out infinite}
+@keyframes cuepulse{0%,100%{opacity:.25;transform:scaleY(.6);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
+
+/* ---------- marquee ---------- */
+.marquee{border-block:1px solid var(--line-soft);padding:1.15rem 0;overflow:hidden;background:var(--black-2)}
+.marquee-track{display:flex;width:max-content;animation:mq 30s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{display:flex;align-items:center;gap:2.6rem;padding-right:2.6rem;font-family:var(--display);font-size:1rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(236,231,220,.5);white-space:nowrap}
+.marquee-track i{font-style:normal;color:var(--green);font-size:.6rem;text-shadow:0 0 12px var(--green)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- services ---------- */
+.svc-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1.5rem;margin-bottom:3.2rem}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
+.svc-card{border:1px solid var(--line-soft);border-radius:20px;background:var(--panel);padding:2rem 1.6rem;display:flex;flex-direction:column;gap:1rem;min-height:280px;transition:transform .28s ease,border-color .28s,box-shadow .28s,background .28s;position:relative;overflow:hidden}
+.svc-card::after{content:"";position:absolute;inset:auto -40% -60% -40%;height:70%;background:radial-gradient(closest-side,rgba(157,255,61,.13),transparent);opacity:0;transition:opacity .35s}
+.svc-card:hover{transform:translateY(-6px);border-color:rgba(157,255,61,.35);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.svc-card:hover::after{opacity:1}
+.svc-card .tag{align-self:flex-start;font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--green);border:1px solid rgba(157,255,61,.35);border-radius:999px;padding:.45em 1em}
+.svc-card h3{font-family:var(--display);font-weight:400;font-size:1.45rem;letter-spacing:.03em;text-transform:uppercase}
+.svc-card p{font-size:.88rem;color:var(--mute)}
+.svc-card .from{margin-top:auto;font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--gold)}
+@media(max-width:1000px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.svc-grid{grid-template-columns:1fr}.svc-card{min-height:0}}
+
+/* ---------- pinned process ---------- */
+.process{background:var(--black-2);border-block:1px solid var(--line-soft)}
+.proc-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.proc-sticky{position:sticky;top:16vh;align-self:start;height:fit-content}
+.proc-panel{position:relative;min-height:300px}
+.proc-slide{position:absolute;inset:0;opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
+.proc-slide.active{opacity:1;transform:none}
+.proc-slide .num{font-family:var(--display);font-size:clamp(5rem,10vw,8.5rem);line-height:1;background:linear-gradient(180deg,rgba(236,231,220,.9),rgba(236,231,220,.06));-webkit-background-clip:text;background-clip:text;color:transparent}
+.proc-slide h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(1.6rem,3vw,2.4rem);margin:.4rem 0 .8rem}
+.proc-slide h3 em{font-family:var(--serif);font-style:italic;text-transform:none;color:var(--green)}
+.proc-slide p{color:var(--mute);max-width:26em}
+.proc-steps{display:grid;gap:1.2rem}
+.proc-step{border:1px solid var(--line-soft);border-radius:20px;padding:2.2rem 1.9rem;background:var(--panel);min-height:46vh;display:flex;flex-direction:column;justify-content:center;gap:.8rem;transition:border-color .4s,background .4s}
+.proc-step.lit{border-color:rgba(157,255,61,.4);background:rgba(157,255,61,.04)}
+.proc-step .step-k{font-size:.66rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--green)}
+.proc-step h4{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.3rem;letter-spacing:.03em}
+.proc-step p{font-size:.92rem;color:var(--mute);max-width:30em}
+.proc-step ul{list-style:none;margin-top:.6rem;display:grid;gap:.45rem}
+.proc-step li{font-size:.84rem;color:var(--mute);display:flex;gap:.7rem;align-items:baseline}
+.proc-step li::before{content:"—";color:var(--green)}
+@media(max-width:900px){
+  .proc-grid{grid-template-columns:1fr}
+  .proc-sticky{display:none}
+  .proc-step{min-height:0;justify-content:flex-start}
+}
+
+/* ---------- split / curtain images ---------- */
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.curtain{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line-soft);aspect-ratio:4/3;background:#131313}
+.curtain img{width:100%;height:100%;object-fit:cover;filter:grayscale(.55) contrast(1.08) brightness(.82);transform:scale(1.12);transition:transform 1.6s cubic-bezier(.19,.8,.26,1)}
+.curtain::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(157,255,61,.14),rgba(10,10,12,.25));mix-blend-mode:overlay;z-index:2;pointer-events:none}
+.curtain::after{content:"";position:absolute;inset:0;background:var(--black);z-index:3;transform:translateX(0);transition:transform 1.1s cubic-bezier(.75,.05,.2,1)}
+.curtain.in::after{transform:translateX(101%)}
+.curtain.in img{transform:scale(1.0)}
+.fig-cap{font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--mute);margin-top:1rem}
+.split-copy .kicker{display:block;margin-bottom:1.2rem}
+.split-copy p{color:var(--mute);margin:1.4rem 0;max-width:32em}
+.mini-stats{display:flex;gap:2.5rem;margin:2rem 0;flex-wrap:wrap}
+.mini-stats b{display:block;font-family:var(--display);font-size:2rem;color:var(--green);letter-spacing:.02em}
+.mini-stats span{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+@media(max-width:900px){.split-grid{grid-template-columns:1fr}}
+
+/* ---------- gallery ---------- */
+.gal-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:1.4rem;margin-top:3rem}
+.gal-item{position:relative}
+.gal-item .curtain{aspect-ratio:16/10}
+.gal-item.social .curtain{aspect-ratio:4/5}
+.gal-item.social .curtain img{filter:none}
+.gal-item.social .curtain::before{display:none}
+.quote-tile{border:1px solid var(--line-soft);border-radius:22px;background:var(--panel);padding:2.4rem 2rem;display:flex;flex-direction:column;justify-content:center;gap:1.2rem}
+.quote-tile .display{font-size:1.7rem;line-height:1.15}
+.quote-tile .display em{font-family:var(--serif);font-style:italic;text-transform:none;color:var(--green)}
+.quote-tile cite{font-style:normal;font-size:.8rem;color:var(--mute);letter-spacing:.14em;text-transform:uppercase}
+.gal-col{display:grid;gap:1.4rem;align-content:start}
+@media(max-width:900px){.gal-grid{grid-template-columns:1fr}}
+
+/* ---------- seasons ---------- */
+.seasons{background:var(--black-2);border-block:1px solid var(--line-soft)}
+.season-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:3rem}
+.season-card{border:1px solid var(--line-soft);border-radius:20px;padding:1.8rem 1.5rem;background:var(--panel);transition:transform .28s,border-color .28s}
+.season-card:hover{transform:translateY(-5px);border-color:rgba(232,196,106,.4)}
+.season-card b{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.15rem;letter-spacing:.06em;color:var(--gold)}
+.season-card p{font-size:.85rem;color:var(--mute);margin-top:.7rem}
+.season-card .when{display:inline-block;margin-top:1.1rem;font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:.45em 1em}
+@media(max-width:900px){.season-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.season-grid{grid-template-columns:1fr}}
+
+/* ---------- reviews ---------- */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
+.rev-card{border:1px solid var(--line-soft);border-radius:20px;background:var(--panel);padding:2rem 1.7rem;display:flex;flex-direction:column;gap:1.1rem;transition:transform .28s,border-color .28s}
+.rev-card:hover{transform:translateY(-5px);border-color:rgba(232,196,106,.35)}
+.rev-card .stars{color:var(--gold);letter-spacing:.16em;text-shadow:0 0 12px rgba(232,196,106,.4)}
+.rev-card p{font-size:.93rem;color:rgba(236,231,220,.85)}
+.rev-card footer{margin-top:auto;display:flex;flex-direction:column;gap:.1rem;background:none;padding:0}
+.rev-card footer b{font-size:.9rem}
+.rev-card footer span{font-size:.72rem;color:var(--mute);letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:900px){.rev-grid{grid-template-columns:1fr}}
+
+/* ---------- find us ---------- */
+.find-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3.5rem;margin-top:3rem;align-items:start}
+.phone-huge{font-family:var(--display);font-size:clamp(2rem,4.6vw,3.6rem);letter-spacing:.02em;text-decoration:none;display:inline-block;margin:1.2rem 0 1.8rem;color:var(--bone);transition:color .25s,text-shadow .25s}
+.phone-huge:hover{color:var(--green);text-shadow:0 0 30px rgba(157,255,61,.5)}
+.addr p{color:var(--mute)}
+.hours{border:1px solid var(--line-soft);border-radius:22px;background:var(--panel);padding:2rem}
+.hours h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.1rem;letter-spacing:.1em;margin-bottom:1.2rem}
+.hours table{width:100%;border-collapse:collapse;font-size:.92rem}
+.hours td{padding:.7rem 0;border-top:1px solid var(--line-soft);color:rgba(236,231,220,.85)}
+.hours tr:first-child td{border-top:none}
+.hours td:last-child{text-align:right;font-variant-numeric:tabular-nums;color:var(--bone)}
+.hours .closed{color:var(--gold)}
+.area{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--mute);margin-top:1.6rem}
+@media(max-width:900px){.find-grid{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--line-soft);padding:3.5rem 0;background:var(--black)}
+footer.site .wrap{display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:center}
+footer.site .fine{font-size:.78rem;color:var(--mute)}
+footer.site .fine a{color:var(--green);text-decoration:none;font-weight:600}
+footer.site .fine a:hover{text-decoration:underline}
+
+/* ---------- reveal ---------- */
+[data-reveal]{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.22,.9,.3,1),transform .8s cubic-bezier(.22,.9,.3,1)}
+[data-reveal].in{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,.9,.3,1),transform .7s cubic-bezier(.22,.9,.3,1)}
+.stagger.in>*{opacity:1;transform:none}
+.stagger.in>*:nth-child(1){transition-delay:.06s}
+.stagger.in>*:nth-child(2){transition-delay:.18s}
+.stagger.in>*:nth-child(3){transition-delay:.3s}
+.stagger.in>*:nth-child(4){transition-delay:.42s}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  [data-reveal],.stagger>*{opacity:1!important;transform:none!important}
+  .curtain::after{display:none}
+  .curtain img{transform:none}
+  .glow,.speck{transform:none!important}
+  .marquee-track{animation:none}
+  .proc-slide{position:static;opacity:1;transform:none;margin-bottom:2rem}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <span class="mark" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3c-2 0-3.6 1.6-3.6 3.6 0 .5.1 1 .3 1.4A5.6 5.6 0 0 0 6 12.8C6 15.7 8.7 18 12 18s6-2.3 6-5.2c0-1.9-1-3.5-2.7-4.8.2-.4.3-.9.3-1.4C15.6 4.6 14 3 12 3Z" fill="#9dff3d"/><path d="M12 11v7" stroke="#0a0a0c" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </span>
+      <b>Premier Pest <i>Pros</i></b>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#work">Field notes</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#findus">Find us</a></li>
+    </ul>
+    <a class="btn solid" href="tel:+19189730344">Call now <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="glow-field" aria-hidden="true">
+    <div class="glow g1" data-depth="0.14"></div>
+    <div class="glow g2" data-depth="0.08"></div>
+    <div class="glow g3" data-depth="0.2"></div>
+    <div class="speck" style="top:22%;left:12%" data-depth="0.3"></div>
+    <div class="speck" style="top:64%;left:22%" data-depth="0.5"></div>
+    <div class="speck" style="top:34%;left:78%" data-depth="0.4"></div>
+    <div class="speck" style="top:72%;left:86%" data-depth="0.25"></div>
+    <div class="speck" style="top:14%;left:54%" data-depth="0.6"></div>
+  </div>
+  <div class="wrap">
+    <span class="pill-badge" data-reveal>Sand Springs · Greater Tulsa · Since 2016</span>
+    <h1 class="display" data-reveal>Bugs out.<br><span class="glow-word">Peace</span> <span class="serif-it">back.</span></h1>
+    <p class="lede" data-reveal>Precision pest control, run like a craft. We inspect, treat, and seal — then we stand behind it. Mosquitoes, rodents, and everything Oklahoma sends at your door.</p>
+    <div class="loved" data-reveal><span class="stars" aria-label="Five stars">★★★★★</span> Loved by locals — 4.9 across 300+ reviews</div>
+    <ul class="chips stagger" data-stagger>
+      <li>Licensed &amp; insured</li>
+      <li>Kid &amp; pet safe</li>
+      <li>Same-week service</li>
+      <li>Free quotes</li>
+    </ul>
+    <div class="cta-row" data-reveal>
+      <a class="btn solid" href="tel:+19189730344">Call (918) 973-0344 <span class="arr">→</span></a>
+      <a class="btn line" href="#work">See our work <span class="arr">→</span></a>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">Scroll on down<span class="pulse"></span></div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Mosquito control <i>◆</i> Rodent removal <i>◆</i> Residential programs <i>◆</i> Commercial accounts <i>◆</i> Wasps &amp; hornets <i>◆</i> Entry-point sealing <i>◆</i></span>
+    <span>Mosquito control <i>◆</i> Rodent removal <i>◆</i> Residential programs <i>◆</i> Commercial accounts <i>◆</i> Wasps &amp; hornets <i>◆</i> Entry-point sealing <i>◆</i></span>
+  </div>
+</div>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="svc-head" data-reveal>
+      <div>
+        <span class="kicker">Programs</span>
+        <h2 class="display" style="margin-top:.8rem">Built for <span class="serif-it glow-word">your</span> block.</h2>
+      </div>
+      <a class="btn line" href="tel:+19189730344">Get a quote <span class="arr">→</span></a>
+    </div>
+    <div class="svc-grid stagger" data-stagger>
+      <article class="svc-card">
+        <span class="tag">Most booked</span>
+        <h3>Mosquito Control</h3>
+        <p>Monthly barrier treatments April through October. Your yard back, your evenings back, your ankles back.</p>
+        <span class="from">from $69 / month</span>
+      </article>
+      <article class="svc-card">
+        <span class="tag">Year-round</span>
+        <h3>Residential Pest</h3>
+        <p>Quarterly interior and exterior defense against ants, spiders, and roaches — with free re-treats between visits.</p>
+        <span class="from">from $39 / quarter</span>
+      </article>
+      <article class="svc-card">
+        <span class="tag">For business</span>
+        <h3>Commercial Pest</h3>
+        <p>Discreet recurring service for restaurants, retail, and offices. Full documentation for every inspection.</p>
+        <span class="from">custom plans</span>
+      </article>
+      <article class="svc-card">
+        <span class="tag">Urgent</span>
+        <h3>Rodent Control</h3>
+        <p>Trap, remove, and seal every entry point. The scratching in the attic stops — and stays stopped.</p>
+        <span class="from">from $149</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section process" id="process">
+  <div class="wrap">
+    <div data-reveal style="margin-bottom:3.5rem">
+      <span class="kicker">The method</span>
+      <h2 class="display" style="margin-top:.8rem">Four passes. <span class="serif-it glow-word">Zero</span> comebacks.</h2>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-sticky" aria-hidden="true">
+        <div class="proc-panel" id="procPanel">
+          <div class="proc-slide active" data-step="0">
+            <div class="num">01</div>
+            <h3>We <em>inspect.</em></h3>
+            <p>Every job starts with a full-perimeter walk — attic to slab. We find where they get in, what feeds them, and why they stay.</p>
+          </div>
+          <div class="proc-slide" data-step="1">
+            <div class="num">02</div>
+            <h3>We <em>treat.</em></h3>
+            <p>Targeted products, applied precisely where they matter — chosen for households with kids, dogs, and vegetable gardens.</p>
+          </div>
+          <div class="proc-slide" data-step="2">
+            <div class="num">03</div>
+            <h3>We <em>seal.</em></h3>
+            <p>The step most companies skip. Gaps, weep holes, and pipe chases get closed so the next generation never moves in.</p>
+          </div>
+          <div class="proc-slide" data-step="3">
+            <div class="num">04</div>
+            <h3>We <em>stand by it.</em></h3>
+            <p>Anything comes back between visits, so do we — free. It's in writing on every invoice.</p>
+          </div>
+        </div>
+      </div>
+      <div class="proc-steps" id="procSteps">
+        <div class="proc-step" data-step="0">
+          <span class="step-k">Step 01 — Inspect</span>
+          <h4>The full-perimeter walk</h4>
+          <p>Attic, crawlspace, foundation, and yard. We map every entry point and conducive condition before a drop is sprayed.</p>
+          <ul><li>Moisture &amp; harborage check</li><li>Entry-point mapping</li><li>Written findings, photographed</li></ul>
+        </div>
+        <div class="proc-step" data-step="1">
+          <span class="step-k">Step 02 — Treat</span>
+          <h4>Precision application</h4>
+          <p>Products matched to the pest and the household — applied to cracks, voids, and harborage zones, not fogged over everything you own.</p>
+          <ul><li>Kid &amp; pet safe selections</li><li>Interior + exterior barrier</li><li>Targeted, not blanket</li></ul>
+        </div>
+        <div class="proc-step" data-step="2">
+          <span class="step-k">Step 03 — Seal</span>
+          <h4>Exclusion work</h4>
+          <p>Copper mesh, sealant, and door sweeps on every gap we found in step one. Prevention beats re-treatment, every time.</p>
+          <ul><li>Gaps &amp; weep holes closed</li><li>Pipe chases meshed</li><li>Vents screened</li></ul>
+        </div>
+        <div class="proc-step" data-step="3">
+          <span class="step-k">Step 04 — Stand by it</span>
+          <h4>The written guarantee</h4>
+          <p>If activity returns between scheduled visits, we come back at no charge. That promise is printed on your invoice.</p>
+          <ul><li>Free re-treats between visits</li><li>Text-ahead arrival windows</li><li>One dedicated technician</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="split-grid">
+      <div>
+        <figure>
+          <div class="curtain" data-curtain>
+            <img src="pest.jpg" alt="Paper wasps on an exposed nest before removal" style="object-position:10% 50%">
+          </div>
+          <figcaption class="fig-cap">Paper wasps behind a porch light — Prattville, gone by noon.</figcaption>
+        </figure>
+      </div>
+      <div class="split-copy" data-reveal>
+        <span class="kicker">Field notes</span>
+        <h2 class="display">We treat the cause. <span class="serif-it glow-word">Not</span> the symptom.</h2>
+        <p>Anyone can spray a baseboard. The difference is knowing that the ants in your kitchen start at a mulch bed twenty feet away — and fixing that instead.</p>
+        <div class="mini-stats">
+          <div><b>1,200+</b><span>Homes protected</span></div>
+          <div><b>48hr</b><span>Avg. response</span></div>
+          <div><b>9yrs</b><span>In Sand Springs</span></div>
+        </div>
+        <a class="btn solid" href="tel:+19189730344">Book an inspection <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <div class="gal-grid">
+      <div class="gal-col">
+        <div class="gal-item">
+          <figure>
+            <div class="curtain" data-curtain>
+              <img src="pest.jpg" alt="Close detail of a wasp nest from a recent removal" style="object-position:0% 40%">
+            </div>
+            <figcaption class="fig-cap">Every job photographed, before and after.</figcaption>
+          </figure>
+        </div>
+        <div class="quote-tile" data-reveal>
+          <div class="display">"They found the entry point <em>three other companies</em> missed."</div>
+          <cite>— Voicemail we saved, March 2026</cite>
+        </div>
+      </div>
+      <div class="gal-item social">
+        <figure>
+          <div class="curtain" data-curtain>
+            <img src="pest2.jpg" alt="Premier Pest Pros social post about fruit fly season">
+          </div>
+          <figcaption class="fig-cap">From the feed — fruit fly season, annotated.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section seasons">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="kicker">Plan ahead</span>
+      <h2 class="display" style="margin-top:.8rem">The season, <span class="serif-it glow-word">at a glance.</span></h2>
+    </div>
+    <div class="season-grid stagger" data-stagger>
+      <div class="season-card"><b>Spring</b><p>Termites swarm, ants march. The best window all year for preventative perimeter work.</p><span class="when">Book by March</span></div>
+      <div class="season-card"><b>Summer</b><p>Mosquito and wasp peak. Monthly barriers keep the patio yours through August.</p><span class="when">Monthly service</span></div>
+      <div class="season-card"><b>Fall</b><p>Rodents scout warm attics as nights cool. Exclusion now saves a winter of scratching.</p><span class="when">Seal-up season</span></div>
+      <div class="season-card"><b>Winter</b><p>Spiders and roaches shelter indoors. Interior treatment keeps the quiet months quiet.</p><span class="when">Interior focus</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="kicker">Word around town</span>
+      <h2 class="display" style="margin-top:.8rem">Neighbors <span class="serif-it glow-word">talk.</span></h2>
+    </div>
+    <div class="rev-grid stagger" data-stagger>
+      <article class="rev-card">
+        <span class="stars" aria-label="Five stars">★★★★★</span>
+        <p>"Wasp nest over the kids' swing set — they were out the next morning and it hasn't come back. Professional from the first call."</p>
+        <footer><b>Dana R.</b><span>Sand Springs</span></footer>
+      </article>
+      <article class="rev-card">
+        <span class="stars" aria-label="Five stars">★★★★★</span>
+        <p>"Third company we tried, the only one that found where the mice were getting in. Sealed it, trapped them, done. Worth every penny."</p>
+        <footer><b>Marcus T.</b><span>Tulsa</span></footer>
+      </article>
+      <article class="rev-card">
+        <span class="stars" aria-label="Five stars">★★★★★</span>
+        <p>"The mosquito plan changed our whole summer. We eat dinner on the patio now. And they text before they arrive — every single time."</p>
+        <footer><b>Kellie B.</b><span>Prattville</span></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="findus" style="background:var(--black-2);border-top:1px solid var(--line-soft)">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="kicker">Come find us</span>
+      <h2 class="display" style="margin-top:.8rem">Right here <span class="serif-it glow-word">in town.</span></h2>
+    </div>
+    <div class="find-grid">
+      <div class="addr" data-reveal>
+        <p>114 N Main St, Sand Springs, OK 74063</p>
+        <a class="phone-huge" href="tel:+19189730344">(918) 973-0344</a>
+        <div class="cta-row" style="justify-content:flex-start">
+          <a class="btn solid" href="https://www.google.com/maps/search/?api=1&query=114+N+Main+St+Sand+Springs+OK+74063" target="_blank" rel="noopener">Get directions <span class="arr">→</span></a>
+          <a class="btn line" href="tel:+19189730344">Call now <span class="arr">→</span></a>
+        </div>
+        <p class="area">Serving Sand Springs, Prattville, Berryhill, and all of greater Tulsa.</p>
+      </div>
+      <div class="hours" data-reveal>
+        <h3>Office hours</h3>
+        <table>
+          <tr><td>Monday – Friday</td><td>8:00a – 6:00p</td></tr>
+          <tr><td>Saturday</td><td>9:00a – 1:00p</td></tr>
+          <tr><td>Sunday</td><td class="closed">Closed</td></tr>
+          <tr><td>Emergencies</td><td>We answer. Call.</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>Premier Pest <i>Pros</i></b></a>
+    <p class="fine">© 2026 Premier Pest Pros · Sand Springs, OK · Licensed &amp; insured<br>Website by <a href="#">Preston Scott Systems</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* sticky nav */
+  var nav = document.getElementById('nav');
+  function navState(){ nav.classList.toggle('scrolled', window.scrollY > 50); }
+  navState();
+  window.addEventListener('scroll', navState, {passive:true});
+
+  /* parallax glow field */
+  if(!reduced){
+    var layers = document.querySelectorAll('[data-depth]');
+    var raf = false;
+    function parallax(){
+      var y = window.scrollY;
+      layers.forEach(function(el){
+        el.style.transform = 'translateY(' + (y * parseFloat(el.dataset.depth)) + 'px)';
+      });
+      raf = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!raf){ requestAnimationFrame(parallax); raf = true; }
+    }, {passive:true});
+  }
+
+  /* reveal + stagger + curtains */
+  var els = document.querySelectorAll('[data-reveal],[data-stagger],[data-curtain]');
+  document.querySelectorAll('[data-stagger]').forEach(function(el){ el.classList.add('stagger'); });
+  if(reduced || !('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.18, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  /* pinned process — sync sticky panel with scrolling steps */
+  var slides = document.querySelectorAll('.proc-slide');
+  var steps = document.querySelectorAll('.proc-step');
+  if(slides.length && !reduced && 'IntersectionObserver' in window){
+    var pio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var idx = e.target.getAttribute('data-step');
+          slides.forEach(function(s){ s.classList.toggle('active', s.getAttribute('data-step') === idx); });
+          steps.forEach(function(s){ s.classList.toggle('lit', s.getAttribute('data-step') === idx); });
+        }
+      });
+    },{threshold:.55});
+    steps.forEach(function(s){ pio.observe(s); });
+  } else {
+    steps.forEach(function(s){ s.classList.add('lit'); });
+  }
+})();
+</script>
+</body>
+</html>

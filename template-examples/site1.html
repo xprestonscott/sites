@@ -1,0 +1,566 @@
+<!-- NAME: Field Guide | VIBE: Warm-cream Americana field manual for Premier Pest Pros — sticker cards, hard shadows, acid-lime accents on deep moss. | ANIM: staggered sticker-card reveals, count-up stat counters, scroll progress bar + sticky nav state change -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Pest Pros — Bugs out. Peace back. | Sand Springs & Tulsa, OK</title>
+<meta name="description" content="Premier Pest Pros — mosquito, rodent, residential & commercial pest control for Sand Springs and greater Tulsa. Licensed, insured, kid & pet safe. Call (918) 973-0344.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,800;0,900;1,500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6f1e4;
+  --cream-2:#efe7d3;
+  --ink:#141a12;
+  --moss:#1d2a1e;
+  --moss-2:#243425;
+  --acid:#b7e04a;
+  --amber:#f2a93b;
+  --rust:#d4643a;
+  --paper-line:rgba(20,26,18,.14);
+  --shadow:6px 6px 0 var(--ink);
+  --shadow-lift:10px 10px 0 var(--ink);
+  --radius:18px;
+  --sans:'Archivo',system-ui,sans-serif;
+  --script:'Caveat',cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.55;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+h1,h2,h3{font-weight:900;letter-spacing:-.02em;line-height:1.04}
+h2{font-size:clamp(2.1rem,4.6vw,3.6rem)}
+.script{font-family:var(--script);font-weight:700;letter-spacing:0;line-height:.9}
+h2 .script,h1 .script{font-size:1.18em;display:inline-block;transform:rotate(-2deg)}
+.eyebrow{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:.35em .9em;border:2px solid var(--ink);border-radius:999px;background:var(--acid)}
+.section{padding:clamp(4rem,9vw,7.5rem) 0}
+.center{text-align:center}
+
+/* ---------- scroll progress ---------- */
+#progress{position:fixed;top:0;left:0;height:5px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--acid),var(--amber));z-index:1000}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.1rem 0;transition:background .35s ease,box-shadow .35s ease,padding .35s ease}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+nav.scrolled{background:var(--cream);box-shadow:0 2px 0 var(--ink);padding:.65rem 0}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:900;font-size:1.12rem;text-decoration:none;letter-spacing:-.02em}
+.brand svg{width:34px;height:34px}
+.brand span em{font-family:var(--script);font-style:normal;font-size:1.25em;color:var(--rust)}
+.nav-links{display:flex;gap:1.6rem;list-style:none;font-weight:600;font-size:.9rem}
+.nav-links a{text-decoration:none;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;height:2px;width:0;background:var(--ink);transition:width .25s}
+.nav-links a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:800;font-size:.92rem;text-decoration:none;padding:.85em 1.5em;border:2px solid var(--ink);border-radius:999px;background:var(--acid);color:var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .18s ease,box-shadow .18s ease,background .18s ease;cursor:pointer;white-space:nowrap}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.ghost{background:var(--cream)}
+.btn.dark{background:var(--ink);color:var(--cream);box-shadow:4px 4px 0 var(--rust)}
+.btn.dark:hover{box-shadow:6px 6px 0 var(--rust)}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+header.hero{padding:9.5rem 0 4.5rem;position:relative;background:
+  radial-gradient(1100px 500px at 85% -10%,rgba(183,224,74,.35),transparent 60%),
+  var(--cream)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
+.badge-loved{display:inline-flex;align-items:center;gap:.6rem;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:.45em 1.1em;font-weight:800;font-size:.82rem;box-shadow:4px 4px 0 var(--ink);margin-bottom:1.4rem}
+.stars{color:var(--amber);letter-spacing:.1em;font-size:.95rem}
+.hero h1{font-size:clamp(2.9rem,7vw,5.4rem)}
+.hero h1 .script{color:var(--rust)}
+.hero p.lede{font-size:clamp(1.02rem,1.4vw,1.2rem);max-width:34em;margin:1.3rem 0 1.8rem;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 2rem;list-style:none}
+.chips li{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--ink);border-radius:999px;padding:.45em 1em;background:var(--cream-2);display:inline-flex;align-items:center;gap:.4em}
+.chips li::before{content:"";width:.55em;height:.55em;border-radius:50%;background:var(--acid);border:1.5px solid var(--ink)}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-art{position:relative}
+.hero-photo{border:3px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow-lift);overflow:hidden;aspect-ratio:4/5;background:var(--moss)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:0% 50%;transform:scale(1.02)}
+.hero-sticker{position:absolute;bottom:-1.4rem;left:-1.6rem;background:var(--amber);border:2.5px solid var(--ink);border-radius:14px;padding:.7rem 1.1rem;font-family:var(--script);font-size:1.5rem;font-weight:700;transform:rotate(-5deg);box-shadow:var(--shadow)}
+.hero-tag{position:absolute;top:-1rem;right:-.8rem;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:.4em 1em;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;transform:rotate(4deg);box-shadow:4px 4px 0 var(--ink)}
+.scroll-cue{margin-top:3.5rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;font-size:.7rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;opacity:.75}
+.scroll-cue .arrow{width:2px;height:38px;background:var(--ink);position:relative;overflow:hidden}
+.scroll-cue .arrow::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--rust);animation:dropline 1.6s ease-in-out infinite}
+@keyframes dropline{0%{top:-100%}60%{top:100%}100%{top:100%}}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-art{max-width:420px;margin-inline:auto;width:100%}
+  header.hero{padding-top:7.5rem}
+}
+
+/* ---------- marquee ---------- */
+.marquee{background:var(--ink);color:var(--cream);overflow:hidden;padding:1rem 0;border-block:3px solid var(--ink)}
+.marquee-track{display:flex;width:max-content;animation:mq 26s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{display:flex;align-items:center;gap:2.2rem;padding-right:2.2rem;font-weight:800;letter-spacing:.22em;font-size:.85rem;text-transform:uppercase;white-space:nowrap}
+.marquee-track i{font-style:normal;color:var(--acid);font-size:.7rem}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- services ---------- */
+.services{background:var(--cream)}
+.sec-head{max-width:44em;margin-bottom:3rem}
+.sec-head .script{color:var(--rust)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.card{background:#fff;border:2.5px solid var(--ink);border-radius:var(--radius);padding:1.6rem 1.4rem 1.7rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.9rem;transition:transform .22s ease,box-shadow .22s ease}
+.card:hover{transform:translate(-4px,-4px) rotate(-.6deg);box-shadow:var(--shadow-lift)}
+.card .eyebrow{align-self:flex-start}
+.card:nth-child(2) .eyebrow{background:var(--amber)}
+.card:nth-child(3) .eyebrow{background:#a8d8ea}
+.card:nth-child(4) .eyebrow{background:var(--rust);color:var(--cream)}
+.card h3{font-size:1.35rem}
+.card p{font-size:.92rem;opacity:.85}
+.card .from{margin-top:auto;font-family:var(--script);font-size:1.35rem;color:var(--moss)}
+.card svg{width:44px;height:44px}
+@media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.cards{grid-template-columns:1fr}}
+
+/* ---------- counters ---------- */
+.stats{background:var(--moss);color:var(--cream);position:relative;overflow:hidden}
+.stats::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 300px at 15% 0%,rgba(183,224,74,.14),transparent 60%)}
+.stats .wrap{position:relative}
+.stats h2 .script{color:var(--acid)}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem}
+.stat{border:2px solid var(--cream);border-radius:var(--radius);padding:1.8rem 1.2rem;text-align:center;background:rgba(255,255,255,.03)}
+.stat b{display:block;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:900;color:var(--acid);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat span{font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+@media(max-width:800px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- split ---------- */
+.split{background:var(--cream-2)}
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.photo-card{background:#fff;border:2.5px solid var(--ink);border-radius:var(--radius);padding:.9rem .9rem 1rem;box-shadow:var(--shadow-lift);transform:rotate(-1.5deg)}
+.photo-card figure{overflow:hidden;border-radius:10px;border:2px solid var(--ink);aspect-ratio:4/3;background:var(--moss)}
+.photo-card img{width:100%;height:100%;object-fit:cover}
+.photo-card figcaption{font-family:var(--script);font-size:1.45rem;padding:.8rem .4rem .1rem;color:var(--moss);text-align:center}
+.split-copy h2 .script{color:var(--rust)}
+.split-copy p{margin:1.2rem 0;max-width:32em}
+.check-list{list-style:none;margin:1.6rem 0 2rem;display:grid;gap:.8rem}
+.check-list li{display:flex;gap:.8rem;align-items:flex-start;font-weight:600;font-size:.98rem}
+.check-list li::before{content:"✓";flex:none;width:1.5em;height:1.5em;display:grid;place-items:center;border:2px solid var(--ink);border-radius:50%;background:var(--acid);font-size:.8rem;font-weight:900;margin-top:.1em}
+@media(max-width:900px){.split-grid{grid-template-columns:1fr}}
+
+/* ---------- gallery ---------- */
+.gallery{background:var(--cream)}
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;align-items:start;margin-top:3rem}
+.gal-card{background:#fff;border:2.5px solid var(--ink);border-radius:var(--radius);padding:.8rem .8rem .9rem;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease}
+.gal-card:hover{transform:translate(-3px,-5px) rotate(0deg) !important;box-shadow:var(--shadow-lift)}
+.gal-card:nth-child(1){transform:rotate(-2deg)}
+.gal-card:nth-child(2){transform:rotate(1.4deg);margin-top:1.6rem}
+.gal-card:nth-child(3){transform:rotate(-1deg)}
+.gal-card figure{overflow:hidden;border-radius:10px;border:2px solid var(--ink);aspect-ratio:1/1;background:var(--moss)}
+.gal-card img{width:100%;height:100%;object-fit:cover;transition:transform 6s ease}
+.gal-card:hover img{transform:scale(1.07)}
+.gal-card figcaption{font-family:var(--script);font-size:1.35rem;padding:.7rem .3rem 0;color:var(--moss);text-align:center}
+.gal-card .feed-tag{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--cream);border-radius:6px;padding:.3em .8em;margin:.2rem .3rem 0}
+.gal-quote{border:2.5px solid var(--ink);border-radius:var(--radius);background:var(--amber);padding:2rem 1.6rem;box-shadow:var(--shadow);font-weight:800;font-size:1.25rem;line-height:1.35}
+.gal-quote .script{display:block;font-size:2rem;margin-top:.8rem;color:var(--ink)}
+@media(max-width:900px){.gal-grid{grid-template-columns:1fr;max-width:440px;margin-inline:auto}.gal-card:nth-child(2){margin-top:0}}
+
+/* ---------- season calendar ---------- */
+.seasons{background:var(--moss);color:var(--cream)}
+.seasons h2 .script{color:var(--acid)}
+.season-rows{margin-top:3rem;display:grid;gap:1rem}
+.season-row{display:grid;grid-template-columns:130px 1fr auto;gap:1.4rem;align-items:center;border:2px solid var(--cream);border-radius:14px;padding:1.1rem 1.4rem;background:rgba(255,255,255,.03);transition:background .25s ease,transform .25s ease}
+.season-row:hover{background:rgba(183,224,74,.1);transform:translateX(6px)}
+.season-row b{font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acid)}
+.season-row p{font-size:.95rem;opacity:.9}
+.season-row .pill{font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;border:2px solid var(--cream);border-radius:999px;padding:.4em 1em;white-space:nowrap}
+@media(max-width:700px){.season-row{grid-template-columns:1fr}.season-row .pill{justify-self:start}}
+
+/* ---------- reviews ---------- */
+.reviews{background:var(--cream)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.rev-card{background:#fff;border:2.5px solid var(--ink);border-radius:var(--radius);padding:1.8rem 1.5rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:1rem;transition:transform .22s ease,box-shadow .22s ease}
+.rev-card:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow-lift)}
+.rev-card p{font-size:.97rem}
+.rev-card .who{margin-top:auto;display:flex;align-items:center;gap:.8rem}
+.rev-card .who .dot{width:42px;height:42px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font-weight:900;background:var(--acid)}
+.rev-card .who b{display:block;font-size:.92rem}
+.rev-card .who span{font-size:.76rem;opacity:.7}
+@media(max-width:900px){.rev-grid{grid-template-columns:1fr}}
+
+/* ---------- find us ---------- */
+.findus{background:#a8d8ea;border-block:3px solid var(--ink)}
+.findus h2 .script{color:var(--moss)}
+.find-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;margin-top:2.6rem;align-items:start}
+.hours-card{background:var(--cream);border:2.5px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow-lift);padding:1.8rem}
+.hours-card table{width:100%;border-collapse:collapse;font-size:.95rem}
+.hours-card th{text-align:left;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;padding-bottom:.8rem}
+.hours-card td{padding:.55rem 0;border-top:1.5px dashed var(--paper-line);font-weight:600}
+.hours-card td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.hours-card .closed{color:var(--rust)}
+.addr-card h3{font-size:1.5rem;margin-bottom:.6rem}
+.addr-card p{font-weight:600;margin-bottom:.4rem}
+.addr-card .phone{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;letter-spacing:-.02em;display:inline-block;margin:1rem 0 1.4rem;text-decoration:none;border-bottom:4px solid var(--ink)}
+.service-area{margin-top:2rem;font-family:var(--script);font-size:1.5rem;color:var(--moss)}
+@media(max-width:900px){.find-grid{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--cream);padding:3.5rem 0 2.5rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:center}
+footer .brand{color:var(--cream)}
+footer .fine{font-size:.8rem;opacity:.7}
+footer .fine a{color:var(--acid);text-decoration:none;font-weight:700}
+footer .fine a:hover{text-decoration:underline}
+
+/* ---------- reveal system ---------- */
+[data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .7s cubic-bezier(.22,.9,.3,1),transform .7s cubic-bezier(.22,.9,.3,1)}
+[data-reveal].in{opacity:1;transform:none}
+[data-reveal="left"]{transform:translateX(-44px)}
+[data-reveal="right"]{transform:translateX(44px)}
+[data-reveal="pop"]{transform:translateY(24px) scale(.94)}
+.stagger>*{opacity:0;transform:translateY(30px);transition:opacity .65s cubic-bezier(.22,.9,.3,1),transform .65s cubic-bezier(.22,.9,.3,1)}
+.stagger.in>*{opacity:1;transform:none}
+.stagger.in>*:nth-child(1){transition-delay:.05s}
+.stagger.in>*:nth-child(2){transition-delay:.16s}
+.stagger.in>*:nth-child(3){transition-delay:.27s}
+.stagger.in>*:nth-child(4){transition-delay:.38s}
+.stagger.in>*:nth-child(5){transition-delay:.49s}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  [data-reveal],.stagger>*{opacity:1!important;transform:none!important}
+  #progress{display:none}
+  .marquee-track{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Premier Pest Pros home">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="10" fill="#141a12"/><path d="M20 9c-3 0-5.5 2.4-5.5 5.4 0 .8.2 1.6.5 2.3-1.9 1.3-3 3.4-3 5.8 0 4 3.6 7.2 8 7.2s8-3.2 8-7.2c0-2.4-1.1-4.5-3-5.8.3-.7.5-1.5.5-2.3C25.5 11.4 23 9 20 9Z" fill="#b7e04a"/><circle cx="17.4" cy="14.6" r="1.3" fill="#141a12"/><circle cx="22.6" cy="14.6" r="1.3" fill="#141a12"/><path d="M20 18v9" stroke="#141a12" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span>Premier <em>Pest&nbsp;Pros</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Our work</a></li>
+      <li><a href="#seasons">Pest calendar</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#findus">Find us</a></li>
+    </ul>
+    <a class="btn" href="tel:+19189730344">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" fill="currentColor"/></svg>
+      (918) 973-0344
+    </a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="badge-loved" data-reveal="pop"><span class="stars" aria-label="Five stars">★★★★★</span> Loved by locals — 4.9 on Google</div>
+        <h1 data-reveal>Bugs out.<br><span class="script" style="color:var(--rust)">Peace back.</span></h1>
+        <p class="lede" data-reveal>Family-run pest control for Sand Springs and greater Tulsa. We show up on time, treat like it's our own house, and don't leave until the problem's actually solved.</p>
+        <ul class="chips stagger" data-stagger>
+          <li>Licensed &amp; insured</li>
+          <li>Kid &amp; pet safe</li>
+          <li>Same-week service</li>
+          <li>Local since 2016</li>
+        </ul>
+        <div class="cta-row" data-reveal>
+          <a class="btn" href="tel:+19189730344">Call now</a>
+          <a class="btn ghost" href="#work">See our work</a>
+        </div>
+      </div>
+      <div class="hero-art" data-reveal="right">
+        <div class="hero-tag">Sand Springs, OK</div>
+        <div class="hero-photo"><img src="pest.jpg" alt="Close-up of a paper wasp nest before removal"></div>
+        <div class="hero-sticker">Wasp nest? Gone by Friday.</div>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true">
+      Scroll on down
+      <div class="arrow"></div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Mosquito control <i>◆</i> Rodent removal <i>◆</i> Wasps &amp; hornets <i>◆</i> Termite checks <i>◆</i> Spiders <i>◆</i> Ants <i>◆</i> Commercial accounts <i>◆</i> Free quotes <i>◆</i></span>
+    <span>Mosquito control <i>◆</i> Rodent removal <i>◆</i> Wasps &amp; hornets <i>◆</i> Termite checks <i>◆</i> Spiders <i>◆</i> Ants <i>◆</i> Commercial accounts <i>◆</i> Free quotes <i>◆</i></span>
+  </div>
+</div>
+
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow" style="background:var(--amber)">What we handle</span>
+      <h2 style="margin-top:1rem">Every pest has a plan. <span class="script">So do we.</span></h2>
+    </div>
+    <div class="cards stagger" data-stagger>
+      <article class="card">
+        <span class="eyebrow">Most booked</span>
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#b7e04a" stroke="#141a12" stroke-width="2.5"/><path d="M24 12v10m0 0-6 12h12l-6-12Zm-8-4 4 4m12-4-4 4" stroke="#141a12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Mosquito control</h3>
+        <p>Barrier treatments that knock the yard back to livable. Monthly through the warm months — bare feet on the porch again.</p>
+        <span class="from">from $69/mo</span>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Year-round</span>
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="12" fill="#f2a93b" stroke="#141a12" stroke-width="2.5"/><path d="M14 30 24 16l10 14H14Zm10 0v6" stroke="#141a12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Residential pest</h3>
+        <p>Quarterly interior + exterior protection against ants, spiders, roaches, and whatever Oklahoma throws at your baseboards.</p>
+        <span class="from">from $39/qtr</span>
+      </article>
+      <article class="card">
+        <span class="eyebrow">For business</span>
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="12" fill="#a8d8ea" stroke="#141a12" stroke-width="2.5"/><path d="M14 34V18h8v16m0-10h12v10M12 34h26" stroke="#141a12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Commercial pest</h3>
+        <p>Restaurants, shops, and offices on discreet recurring schedules — with documentation your health inspector will love.</p>
+        <span class="from">custom plans</span>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Urgent</span>
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#d4643a" stroke="#141a12" stroke-width="2.5"/><path d="M17 27c0-5 3-9 7-9s7 4 7 9-3 7-7 7-7-2-7-7Zm7-9v-4m-8 9-3-2m19 2 3-2" stroke="#141a12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Rodent control</h3>
+        <p>Trap, remove, and — the part most companies skip — seal every entry point so they don't move back in come November.</p>
+        <span class="from">from $149</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section stats">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">The scoreboard</span>
+      <h2 style="margin-top:1rem">Numbers we're <span class="script">proud of.</span></h2>
+    </div>
+    <div class="stat-grid stagger" data-stagger>
+      <div class="stat"><b><span data-count="1200" data-suffix="+">0</span></b><span>Homes protected</span></div>
+      <div class="stat"><b><span data-count="4.9" data-decimals="1">0</span></b><span>Google rating</span></div>
+      <div class="stat"><b><span data-count="9">0</span></b><span>Years in Sand Springs</span></div>
+      <div class="stat"><b><span data-count="48" data-suffix="hr">0</span></b><span>Average response</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section split" id="work">
+  <div class="wrap">
+    <div class="split-grid">
+      <div data-reveal="left">
+        <div class="photo-card">
+          <figure><img src="pest.jpg" alt="Paper wasps clustered on a honeycomb nest under an eave" style="object-position:12% 50%"></figure>
+          <figcaption>Paper wasps under a Prattville eave — evicted same day.</figcaption>
+        </div>
+      </div>
+      <div class="split-copy" data-reveal="right">
+        <span class="eyebrow" style="background:#a8d8ea">How we work</span>
+        <h2 style="margin-top:1rem">We treat the cause. <span class="script">Not just the bug.</span></h2>
+        <p>Anybody can spray a wall. We inspect first — find where they're getting in, why they're staying, and what's feeding them. Then we treat, seal, and put it in writing.</p>
+        <ul class="check-list">
+          <li>Full-perimeter inspection on every first visit</li>
+          <li>Products chosen for homes with kids &amp; pets</li>
+          <li>Entry points sealed, not just noted</li>
+          <li>Free re-treat between visits if anything comes back</li>
+        </ul>
+        <a class="btn dark" href="tel:+19189730344">Get a free quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery">
+  <div class="wrap">
+    <div class="sec-head center" style="margin-inline:auto" data-reveal>
+      <span class="eyebrow">From the field</span>
+      <h2 style="margin-top:1rem">Straight off <span class="script">the truck.</span></h2>
+    </div>
+    <div class="gal-grid stagger" data-stagger>
+      <figure class="gal-card">
+        <figure><img src="pest.jpg" alt="Wasp nest close-up from a recent job" style="object-position:8% 45%"></figure>
+        <figcaption>Found this one behind a porch light. Yikes.</figcaption>
+      </figure>
+      <div class="gal-quote">
+        "They found the entry point three other companies missed."
+        <span class="script">— an actual voicemail we saved</span>
+      </div>
+      <figure class="gal-card">
+        <figure><img src="pest2.jpg" alt="Premier Pest Pros social post about fruit flies on a lemon"></figure>
+        <figcaption>From our feed — fruit fly season is real.</figcaption>
+        <span class="feed-tag">@premierpestpros</span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section seasons" id="seasons">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Plan ahead</span>
+      <h2 style="margin-top:1rem">The Oklahoma <span class="script">pest calendar.</span></h2>
+    </div>
+    <div class="season-rows stagger" data-stagger>
+      <div class="season-row">
+        <b>Spring</b>
+        <p>Termites swarm and ants march. The single best time of year for a preventative perimeter treatment.</p>
+        <span class="pill">Book by March</span>
+      </div>
+      <div class="season-row">
+        <b>Summer</b>
+        <p>Mosquitoes, wasps, and hornets peak. Monthly barrier sprays keep the backyard yours through August.</p>
+        <span class="pill">Monthly service</span>
+      </div>
+      <div class="season-row">
+        <b>Fall</b>
+        <p>Rodents feel the temperature drop and start scouting your attic. Exclusion work now saves a winter of scratching.</p>
+        <span class="pill">Seal-up season</span>
+      </div>
+      <div class="season-row">
+        <b>Winter</b>
+        <p>Spiders and roaches shelter indoors. Interior treatments and monitoring keep the quiet months quiet.</p>
+        <span class="pill">Interior focus</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reviews" id="reviews">
+  <div class="wrap">
+    <div class="sec-head center" style="margin-inline:auto" data-reveal>
+      <span class="eyebrow" style="background:var(--amber)">Word around town</span>
+      <h2 style="margin-top:1rem">Neighbors <span class="script">talk.</span></h2>
+    </div>
+    <div class="rev-grid stagger" data-stagger>
+      <article class="rev-card">
+        <span class="stars" aria-label="Five stars">★★★★★</span>
+        <p>"We had a wasp situation over the kids' swing set and they were out the next morning. Haven't seen one since. These guys are the real deal."</p>
+        <div class="who"><span class="dot">D</span><span><b>Dana R.</b><span>Sand Springs</span></span></div>
+      </article>
+      <article class="rev-card">
+        <span class="stars" aria-label="Five stars">★★★★★</span>
+        <p>"Third pest company we tried and the only one that actually found where the mice were getting in. Sealed it, trapped them, done. Worth every penny."</p>
+        <div class="who"><span class="dot" style="background:#a8d8ea">M</span><span><b>Marcus T.</b><span>Tulsa</span></span></div>
+      </article>
+      <article class="rev-card">
+        <span class="stars" aria-label="Five stars">★★★★★</span>
+        <p>"The mosquito plan changed our whole summer. We eat dinner on the patio now. Also they text before they show up, which I appreciate more than I can say."</p>
+        <div class="who"><span class="dot" style="background:var(--amber)">K</span><span><b>Kellie B.</b><span>Prattville</span></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section findus" id="findus">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow" style="background:var(--cream)">Come find us</span>
+      <h2 style="margin-top:1rem">Right here <span class="script">in town.</span></h2>
+    </div>
+    <div class="find-grid">
+      <div class="addr-card" data-reveal="left">
+        <h3>Premier Pest Pros</h3>
+        <p>114 N Main St, Sand Springs, OK 74063</p>
+        <a class="phone" href="tel:+19189730344">(918) 973-0344</a>
+        <div class="cta-row">
+          <a class="btn dark" href="https://www.google.com/maps/search/?api=1&query=114+N+Main+St+Sand+Springs+OK+74063" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn ghost" href="tel:+19189730344">Call now</a>
+        </div>
+        <p class="service-area">Serving Sand Springs, Prattville, Berryhill, and all of greater Tulsa.</p>
+      </div>
+      <div class="hours-card" data-reveal="right">
+        <table>
+          <thead><tr><th colspan="2">Office hours</th></tr></thead>
+          <tbody>
+            <tr><td>Monday – Friday</td><td>8:00a – 6:00p</td></tr>
+            <tr><td>Saturday</td><td>9:00a – 1:00p</td></tr>
+            <tr><td>Sunday</td><td class="closed">Closed — go fishing</td></tr>
+            <tr><td>Emergencies</td><td>We answer. Call us.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="10" fill="#b7e04a"/><path d="M20 9c-3 0-5.5 2.4-5.5 5.4 0 .8.2 1.6.5 2.3-1.9 1.3-3 3.4-3 5.8 0 4 3.6 7.2 8 7.2s8-3.2 8-7.2c0-2.4-1.1-4.5-3-5.8.3-.7.5-1.5.5-2.3C25.5 11.4 23 9 20 9Z" fill="#141a12"/></svg>
+      <span>Premier <em style="color:var(--amber)">Pest&nbsp;Pros</em></span>
+    </a>
+    <p class="fine">© 2026 Premier Pest Pros · Sand Springs, OK · Licensed &amp; insured<br>Website by <a href="#">Preston Scott Systems</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* sticky nav state */
+  var nav = document.getElementById('nav');
+  function navState(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
+  navState();
+  window.addEventListener('scroll', navState, {passive:true});
+
+  /* scroll progress bar */
+  var bar = document.getElementById('progress');
+  var ticking = false;
+  function progress(){
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+    ticking = false;
+  }
+  if(!reduced){
+    window.addEventListener('scroll', function(){
+      if(!ticking){ requestAnimationFrame(progress); ticking = true; }
+    }, {passive:true});
+    progress();
+  }
+
+  /* reveal on scroll */
+  var revealEls = document.querySelectorAll('[data-reveal],[data-stagger]');
+  if(reduced || !('IntersectionObserver' in window)){
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.14, rootMargin:'0px 0px -6% 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+  document.querySelectorAll('[data-stagger]').forEach(function(el){ el.classList.add('stagger'); });
+
+  /* count-up counters */
+  var counters = document.querySelectorAll('[data-count]');
+  function runCounter(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if(reduced){ el.textContent = target.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g,',') + suffix; return; }
+    var dur = 1600, start = null;
+    function frame(t){
+      if(start === null) start = t;
+      var p = Math.min((t - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g,',') + suffix;
+      if(p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  if(reduced || !('IntersectionObserver' in window)){
+    counters.forEach(runCounter);
+  } else {
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ runCounter(e.target); cio.unobserve(e.target); }
+      });
+    },{threshold:.5});
+    counters.forEach(function(el){ cio.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>

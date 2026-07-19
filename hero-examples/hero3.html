@@ -1,0 +1,137 @@
+<!-- NAME: Editorial Type | WHY: Oversized magazine typography on warm paper carries the hero; photos shrink to small rounded accents where clutter reads as authentic texture, never under text. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Pest Pros — Sand Springs Pest Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f1e8;
+    --ink:#1c1a16;
+    --accent:#c8451f;
+    --line:rgba(28,26,22,.14);
+    --muted:rgba(28,26,22,.62);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink)}
+
+  .nav{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 32px;
+    background:rgba(246,241,232,.88);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{font-family:'Instrument Serif',serif;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+  .brand i{font-style:italic;color:var(--accent)}
+  .nav-call{
+    background:var(--ink);color:var(--paper);text-decoration:none;
+    font-weight:600;font-size:14px;padding:10px 20px;border-radius:999px;
+    transition:background .15s ease;
+  }
+  .nav-call:hover{background:var(--accent)}
+
+  .hero{
+    min-height:calc(100vh - 60px);
+    max-width:1240px;margin:0 auto;padding:52px 32px 64px;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .kicker{
+    display:flex;align-items:center;gap:16px;margin-bottom:26px;
+    font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  }
+  .kicker::after{content:"";flex:1;height:1px;background:var(--line)}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line);padding:7px 14px;border-radius:999px;
+    font-size:12.5px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);
+  }
+  .stars{color:var(--accent);letter-spacing:2px;font-size:11px}
+
+  h1{
+    font-family:'Instrument Serif',serif;font-weight:400;
+    font-size:clamp(58px,10.5vw,148px);line-height:.96;letter-spacing:-.025em;
+    margin-bottom:34px;
+  }
+  h1 .l2{display:block;font-style:italic;color:var(--accent)}
+
+  .hero-row{
+    display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+    gap:48px;align-items:end;
+  }
+  .sub{font-size:clamp(17px,1.5vw,21px);line-height:1.6;color:var(--muted);max-width:44ch;margin-bottom:30px}
+  .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:16px;padding:16px 30px;border-radius:999px;transition:transform .15s ease,background .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 12px 28px rgba(200,69,31,.24)}
+  .btn-ghost{color:var(--ink);border:1.5px solid var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+  .phone{font-size:14px;color:var(--muted);margin-bottom:24px}
+  .phone a{color:var(--ink);font-weight:700;text-decoration:none;border-bottom:2px solid var(--accent)}
+  .chips{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{
+    font-size:13px;font-weight:500;border:1px solid var(--line);
+    padding:8px 15px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;background:#fff9;
+  }
+  .chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+  .photo-stack{display:flex;gap:16px;align-items:flex-end;justify-content:flex-end}
+  .snap{border-radius:18px;overflow:hidden;background:#ddd;box-shadow:0 18px 44px rgba(28,26,22,.18);position:relative}
+  .snap img{width:100%;height:100%;object-fit:cover;display:block}
+  .snap-a{width:min(300px,52%);aspect-ratio:4/5;transform:rotate(-2deg)}
+  .snap-b{width:min(220px,40%);aspect-ratio:1/1.05;transform:rotate(2.5deg) translateY(-26px)}
+  .snap .cap{
+    position:absolute;left:12px;bottom:12px;
+    background:rgba(246,241,232,.92);color:var(--ink);
+    font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:8px;
+  }
+
+  @media (max-width:880px){
+    .hero{padding:40px 20px 56px}
+    .hero-row{grid-template-columns:1fr;gap:38px}
+    h1{margin-bottom:26px}
+    .photo-stack{justify-content:flex-start}
+    .snap-a{width:56%}
+    .snap-b{width:38%;transform:rotate(2.5deg) translateY(-14px)}
+    .btn{flex:1;justify-content:center;min-width:140px}
+  }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="#">Premier <i>Pest Pros</i></a>
+  <a class="nav-call" href="tel:9189730344">Call (918) 973-0344</a>
+</nav>
+
+<section class="hero">
+  <div class="kicker">
+    Sand Springs · Est. locally
+    <span class="badge"><span class="stars">★★★★★</span> Loved by locals</span>
+  </div>
+  <h1>Bugs out.<span class="l2">Peace back.</span></h1>
+  <div class="hero-row">
+    <div>
+      <p class="sub">Family-run pest control keeping Sand Springs and greater Tulsa critter-free.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="tel:9189730344">Call now</a>
+        <a class="btn btn-ghost" href="#work">See our work</a>
+      </div>
+      <p class="phone">Or reach us directly at <a href="tel:9189730344">(918) 973-0344</a></p>
+      <div class="chips">
+        <span class="chip">Locally owned</span>
+        <span class="chip">Free estimates</span>
+        <span class="chip">Serving Sand Springs</span>
+      </div>
+    </div>
+    <div class="photo-stack">
+      <div class="snap snap-a"><img src="pest.jpg" alt="On the job"><span class="cap">On the job</span></div>
+      <div class="snap snap-b"><img src="bakery.jpg" alt="Happy customers"><span class="cap">Our community</span></div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

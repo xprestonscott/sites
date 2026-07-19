@@ -1,0 +1,139 @@
+<!-- NAME: Bento Collage | WHY: Several photos become small bento tiles beside a stat card — shrunk and gridded, busy shots read as a lively proof-of-work mosaic while all text stays on clean white. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Pest Pros — Sand Springs Pest Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfbf9;
+    --ink:#171a14;
+    --accent:#3f7d20;
+    --accent-dark:#2d5d15;
+    --tint:#eef4e8;
+    --muted:#666d5e;
+    --line:rgba(23,26,20,.09);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink)}
+
+  .nav{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 28px;
+    background:rgba(251,251,249,.86);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:18px;text-decoration:none;color:var(--ink)}
+  .brand-mark{width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:16px}
+  .nav-call{
+    background:var(--accent);color:#fff;text-decoration:none;
+    font-weight:700;font-size:14px;padding:10px 20px;border-radius:999px;
+    transition:background .15s ease;
+  }
+  .nav-call:hover{background:var(--accent-dark)}
+
+  .hero{
+    min-height:calc(100vh - 63px);
+    max-width:1260px;margin:0 auto;padding:56px 32px 64px;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:56px;align-items:center;
+  }
+  .copy .badge{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--tint);color:var(--accent-dark);
+    padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:26px;
+  }
+  .stars{letter-spacing:2px;font-size:12px}
+  h1{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+    font-size:clamp(44px,5.4vw,70px);line-height:1.02;letter-spacing:-.03em;margin-bottom:20px;
+  }
+  h1 span{color:var(--accent)}
+  .sub{font-size:clamp(16px,1.4vw,19px);line-height:1.65;color:var(--muted);max-width:46ch;margin-bottom:34px}
+  .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+  .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:16px;padding:16px 30px;border-radius:14px;transition:transform .15s ease,box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{box-shadow:0 12px 26px rgba(23,26,20,.22)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid rgba(23,26,20,.18)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .phone{font-size:14px;color:var(--muted);margin-bottom:26px}
+  .phone a{color:var(--ink);font-weight:800;text-decoration:none;border-bottom:2px solid var(--accent)}
+  .chips{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{
+    font-size:13px;font-weight:600;background:#fff;border:1px solid var(--line);
+    padding:9px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;
+  }
+  .chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+  /* Bento */
+  .bento{
+    display:grid;gap:14px;
+    grid-template-columns:repeat(2,1fr);
+    grid-template-rows:230px 150px 150px;
+  }
+  .tile{border-radius:20px;overflow:hidden;position:relative;background:#e8e8e2}
+  .tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+  .tile:hover img{transform:scale(1.04)}
+  .t1{grid-column:1/3}
+  .t4{
+    background:var(--accent);color:#fff;
+    display:flex;flex-direction:column;justify-content:center;gap:4px;
+    padding:22px;
+  }
+  .t4 .num{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(30px,3vw,40px);font-weight:800;line-height:1}
+  .t4 .lbl{font-size:13px;font-weight:600;opacity:.85}
+  .tile .tag{
+    position:absolute;left:12px;bottom:12px;
+    background:rgba(251,251,249,.92);color:var(--ink);
+    font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;
+  }
+
+  @media (max-width:920px){
+    .hero{grid-template-columns:1fr;gap:44px;padding:44px 20px 60px;min-height:auto}
+    .bento{grid-template-rows:200px 130px 130px}
+    .btn{flex:1;justify-content:center;min-width:145px}
+  }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="#"><span class="brand-mark">P</span>Premier Pest Pros</a>
+  <a class="nav-call" href="tel:9189730344">Call (918) 973-0344</a>
+</nav>
+
+<section class="hero">
+  <div class="copy">
+    <div class="badge"><span class="stars">★★★★★</span> Loved by locals</div>
+    <h1>Bugs out.<br><span>Peace back.</span></h1>
+    <p class="sub">Family-run pest control keeping Sand Springs and greater Tulsa critter-free.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="tel:9189730344">Call now</a>
+      <a class="btn btn-ghost" href="#work">See our work</a>
+    </div>
+    <p class="phone">Straight to the owner: <a href="tel:9189730344">(918) 973-0344</a></p>
+    <div class="chips">
+      <span class="chip">Locally owned</span>
+      <span class="chip">Free estimates</span>
+      <span class="chip">Serving Sand Springs</span>
+    </div>
+  </div>
+
+  <div class="bento">
+    <div class="tile t1"><img src="pest.jpg" alt="Recent job"><span class="tag">Recent job · Sand Springs</span></div>
+    <div class="tile t2"><img src="bakery.jpg" alt="Local community"><span class="tag">Local roots</span></div>
+    <div class="tile t3"><img src="bakery2.jpg" alt="Neighborhood partners"><span class="tag">Neighborhood pros</span></div>
+    <div class="tile t4">
+      <span class="num">1,200+</span>
+      <span class="lbl">homes protected around Tulsa</span>
+    </div>
+    <div class="tile t5" style="grid-column:2/3"><img src="pest.jpg" alt="On the job" style="object-position:70% 40%"><span class="tag">Before &amp; after</span></div>
+  </div>
+</section>
+</body>
+</html>

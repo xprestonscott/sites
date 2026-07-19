@@ -1,0 +1,154 @@
+<!-- NAME: Color Block + Film Strip | WHY: A bold solid-color hero owns the message; photos are demoted to a slim rounded film strip along the bottom, so cluttered shots become a small proof reel that never touches the headline. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Pest Pros — Sand Springs Pest Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --block:#12244d;
+    --block-2:#0c1a3a;
+    --accent:#ffd21f;
+    --white:#ffffff;
+    --muted:rgba(255,255,255,.72);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:var(--block-2);color:var(--white)}
+
+  .nav{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 28px;
+    background:rgba(12,26,58,.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;text-decoration:none;color:#fff}
+  .brand-mark{width:34px;height:34px;border-radius:8px;background:var(--accent);color:var(--block-2);display:grid;place-items:center;font-weight:900;font-size:16px}
+  .nav-call{
+    background:var(--accent);color:var(--block-2);text-decoration:none;
+    font-weight:800;font-size:14px;padding:10px 20px;border-radius:10px;
+    transition:transform .15s ease;
+  }
+  .nav-call:hover{transform:translateY(-1px)}
+
+  .hero{
+    min-height:calc(100vh - 63px);
+    background:
+      radial-gradient(900px 500px at 85% -10%,rgba(255,210,31,.12),transparent 60%),
+      linear-gradient(180deg,var(--block) 0%,var(--block-2) 100%);
+    display:flex;flex-direction:column;
+  }
+  .hero-top{
+    flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+    max-width:1180px;width:100%;margin:0 auto;padding:56px 32px 34px;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:9px;
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+    padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:28px;
+  }
+  .stars{color:var(--accent);letter-spacing:2px;font-size:12px}
+  h1{
+    font-family:'Archivo',sans-serif;font-weight:900;text-transform:uppercase;
+    font-size:clamp(46px,8.4vw,110px);line-height:.95;letter-spacing:-.02em;
+    margin-bottom:24px;
+  }
+  h1 .hl{
+    display:inline-block;background:var(--accent);color:var(--block-2);
+    padding:0 .18em;border-radius:.08em;transform:rotate(-1deg);
+  }
+  .sub{font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:var(--muted);max-width:52ch;margin-bottom:36px}
+  .cta-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:28px}
+  .ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:16px;padding:17px 32px;border-radius:12px;font-family:'Archivo',sans-serif;transition:transform .15s ease,box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--accent);color:var(--block-2);box-shadow:0 12px 32px rgba(255,210,31,.25)}
+  .btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.25)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .phone{font-size:14px;color:var(--muted)}
+  .phone a{color:#fff;font-weight:800;text-decoration:none;border-bottom:2px solid var(--accent)}
+  .chips{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{
+    font-size:13px;font-weight:600;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+    padding:9px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;
+  }
+  .chip::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--accent)}
+
+  /* Film strip */
+  .strip-wrap{padding:26px 0 34px;overflow:hidden;position:relative}
+  .strip-label{
+    max-width:1180px;margin:0 auto 14px;padding:0 32px;
+    font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:14px;
+  }
+  .strip-label::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.12)}
+  .strip{display:flex;gap:16px;width:max-content;animation:scroll 32s linear infinite;padding:0 16px}
+  .strip:hover{animation-play-state:paused}
+  .frame{
+    width:230px;height:150px;border-radius:14px;overflow:hidden;flex-shrink:0;
+    border:1px solid rgba(255,255,255,.14);position:relative;
+  }
+  .frame img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92)}
+  .frame span{
+    position:absolute;left:10px;bottom:10px;
+    background:rgba(12,26,58,.82);color:#fff;font-size:11px;font-weight:700;
+    padding:5px 10px;border-radius:999px;
+  }
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  @media (max-width:640px){
+    .hero-top{padding:44px 22px 24px}
+    .btn{flex:1;justify-content:center}
+    .ctas{width:100%}
+    .frame{width:180px;height:120px}
+  }
+  @media (prefers-reduced-motion:reduce){.strip{animation:none}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="#"><span class="brand-mark">P</span>Premier Pest Pros</a>
+  <a class="nav-call" href="tel:9189730344">(918) 973-0344</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-top">
+    <div class="badge"><span class="stars">★★★★★</span> Loved by locals</div>
+    <h1>Bugs out.<br><span class="hl">Peace back.</span></h1>
+    <p class="sub">Family-run pest control keeping Sand Springs and greater Tulsa critter-free.</p>
+    <div class="cta-row">
+      <div class="ctas">
+        <a class="btn btn-primary" href="tel:9189730344">Call now</a>
+        <a class="btn btn-ghost" href="#work">See our work</a>
+      </div>
+      <p class="phone"><a href="tel:9189730344">(918) 973-0344</a></p>
+    </div>
+    <div class="chips">
+      <span class="chip">Locally owned</span>
+      <span class="chip">Free estimates</span>
+      <span class="chip">Serving Sand Springs</span>
+    </div>
+  </div>
+
+  <div class="strip-wrap">
+    <div class="strip-label">From recent jobs</div>
+    <div class="strip">
+      <div class="frame"><img src="pest.jpg" alt="Job photo"><span>Wasp nest removal</span></div>
+      <div class="frame"><img src="bakery.jpg" alt="Job photo"><span>Local partners</span></div>
+      <div class="frame"><img src="bakery2.jpg" alt="Job photo"><span>Around town</span></div>
+      <div class="frame"><img src="pest.jpg" alt="Job photo"><span>On the job</span></div>
+      <!-- duplicate set for seamless loop -->
+      <div class="frame"><img src="pest.jpg" alt=""><span>Wasp nest removal</span></div>
+      <div class="frame"><img src="bakery.jpg" alt=""><span>Local partners</span></div>
+      <div class="frame"><img src="bakery2.jpg" alt=""><span>Around town</span></div>
+      <div class="frame"><img src="pest.jpg" alt=""><span>On the job</span></div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

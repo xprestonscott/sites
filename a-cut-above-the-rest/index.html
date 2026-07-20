@@ -1,0 +1,530 @@
+<!-- NAME: Quiet Counter | VIBE: Refined light editorial — elegant serif on warm white, hairline borders, generous air, one muted clay accent. Looks designed, not generated. | ANIM: slow Ken Burns image drift, ultra-gentle staggered fades with long easings, hairline scroll progress + count-up stats -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Concept demo: must never be indexed or outrank the real business. -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>A Cut Above the Rest — Owasso</title>
+<meta name="description" content="A Cut Above the Rest — A neighborhood hair salon in Owasso where folks keep coming back. Owasso. Call (918) 272-0909.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#151311;
+  --paper:#faf4f7;
+  --clay:#be185d;
+  --serif:'Playfair Display';
+  --sans:'Inter';
+
+  /* light editorial surfaces derived from the brand tokens (fallbacks first) */
+  --paper:#fdfcf9;         --paper:color-mix(in srgb, #faf4f7 86%, #ffffff);
+  --paper-2:#f7f4ed;       --paper-2:color-mix(in srgb, var(--clay) 6%, color-mix(in srgb, var(--paper) 88%, #ffffff));
+  --card:#ffffff;          --card:color-mix(in srgb, var(--paper) 30%, #ffffff);
+  --mute:#7c756a;          --mute:color-mix(in srgb, var(--ink) 56%, var(--paper));
+  --line:#e5e0d6;          --line:color-mix(in srgb, var(--ink) 13%, var(--paper));
+  --line-soft:#efebe3;     --line-soft:color-mix(in srgb, var(--ink) 7%, var(--paper));
+  --clay-soft:#f3e7df;     --clay-soft:color-mix(in srgb, var(--clay) 14%, var(--paper));
+  --clay-deep:var(--clay); --clay-deep:color-mix(in srgb, var(--clay) 78%, var(--ink));
+  --shade:rgba(38,34,28,.14); --shade:color-mix(in srgb, var(--ink) 15%, transparent);
+  --shade-soft:rgba(38,34,28,.05); --shade-soft:color-mix(in srgb, var(--ink) 5%, transparent);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans),system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;font-size:15.5px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:min(1120px,90vw);margin-inline:auto}
+h1,h2,h3{font-family:var(--serif),Georgia,serif;font-weight:400;letter-spacing:-.015em;line-height:1.12}
+h2{font-size:clamp(2rem,4.2vw,3.2rem)}
+h2 em,h1 em,h3 em{font-style:italic;font-weight:300;color:var(--clay)}
+.kicker{font-size:.68rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
+.section{padding:clamp(4.5rem,9vw,7.5rem) 0}
+.center{text-align:center}
+.lede{color:var(--mute);font-size:1.02rem;max-width:36em}
+
+/* ---------- progress ---------- */
+#progress{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--clay);z-index:1000}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.3rem 0;transition:background .4s,border-color .4s,padding .4s;border-bottom:1px solid transparent}
+nav.scrolled{background:color-mix(in srgb, var(--paper) 90%, transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:var(--line);padding:.85rem 0}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{font-family:var(--serif),Georgia,serif;font-size:1.25rem;text-decoration:none;letter-spacing:-.01em}
+.nav-links{display:flex;gap:2.1rem;list-style:none;font-size:.82rem;font-weight:500;color:var(--mute)}
+.nav-links a{text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;font-weight:600;font-size:.86rem;padding:.85em 1.7em;border-radius:999px;border:1px solid var(--ink);transition:background .25s,color .25s,transform .2s,box-shadow .25s,border-color .25s;cursor:pointer;white-space:nowrap}
+.btn .arr{transition:transform .25s}
+.btn:hover .arr{transform:translateX(4px)}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{background:var(--clay);border-color:var(--clay);transform:translateY(-1px);box-shadow:0 10px 26px color-mix(in srgb, var(--clay) 26%, transparent)}
+.btn.quiet{border-color:var(--line);color:var(--ink);background:transparent}
+.btn.quiet:hover{border-color:var(--ink);transform:translateY(-1px)}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+header.hero{padding:10.5rem 0 5rem;text-align:center}
+.badge-loved{display:inline-flex;align-items:center;gap:.65rem;flex-wrap:wrap;justify-content:center;font-size:.78rem;font-weight:500;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:.55em 1.3em;background:var(--card);margin-bottom:2rem}
+.badge-loved .stars{color:var(--clay);letter-spacing:.12em}
+.hero h1{font-size:clamp(2.9rem,7.5vw,5.6rem);max-width:11em;margin-inline:auto}
+/* HEADLINE arrives as per-word <span class="w" style="animation-delay:.24s">Word</span>.
+   The signature italic phrase is done in CSS: the final words lean into italic clay. */
+.hero h1 .w{display:inline-block;opacity:0;animation:wordUp 1.1s cubic-bezier(.16,.8,.26,1) forwards}
+.hero h1 .w:nth-last-child(-n+2){font-style:italic;font-weight:300;color:var(--clay)}
+@keyframes wordUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hero .lede{margin:1.8rem auto 2.4rem}
+/* trust chips: TRUST_CHIPS -> <span><b>&#10003;</b> Locally owned</span> */
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-bottom:2.4rem}
+.chips span{display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:.55em 1.2em;background:var(--card)}
+.chips b{color:var(--clay);font-weight:600}
+.cta-row{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:center}
+.scroll-cue{margin-top:4rem;display:inline-flex;flex-direction:column;align-items:center;gap:.6rem;font-size:.6rem;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--mute)}
+.scroll-cue svg{animation:cueFloat 2s ease-in-out infinite}
+.scroll-cue svg path{stroke:currentColor}
+@keyframes cueFloat{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(7px);opacity:1}}
+
+/* hero showpiece frame — HERO_BG is an <img class="hero-bg"> OR <div class="hero-bg grad"> */
+.hero-frame{margin-top:4.5rem;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:.7rem .7rem .95rem;
+  box-shadow:0 1px 2px var(--shade-soft),0 26px 54px -26px var(--shade)}
+.hero-frame .frame{border-radius:14px;overflow:hidden;aspect-ratio:16/9;background:var(--paper-2);position:relative}
+.hero-frame figcaption{font-family:var(--serif),Georgia,serif;font-style:italic;font-size:1.02rem;color:var(--mute);padding:.8rem .35rem 0}
+img.hero-bg{width:100%;height:100%;object-fit:cover;animation:kb 30s ease-in-out infinite alternate;will-change:transform}
+@keyframes kb{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.13) translate(-2.2%,1.8%)}}
+/* no-photo fallback: an intentional, premium paper-and-clay panel */
+.hero-bg.grad{position:absolute;inset:0;
+  background:
+    radial-gradient(80% 90% at 18% 6%, var(--clay-soft), transparent 62%),
+    radial-gradient(70% 80% at 92% 96%, color-mix(in srgb, var(--clay) 9%, transparent), transparent 60%),
+    linear-gradient(155deg, var(--card) 0%, var(--paper-2) 58%, color-mix(in srgb, var(--clay) 11%, var(--paper)) 100%)}
+.hero-bg.grad::before{content:"";position:absolute;inset:0;opacity:.55;
+  background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+  background-size:58px 58px;-webkit-mask-image:radial-gradient(78% 70% at 50% 45%,#000,transparent 82%);mask-image:radial-gradient(78% 70% at 50% 45%,#000,transparent 82%)}
+.hero-bg.grad::after{content:"";position:absolute;inset:auto auto 12% 9%;width:74px;height:1px;background:var(--clay);opacity:.7}
+@media(max-width:820px){.hero-frame{margin-top:3.2rem}.hero-frame .frame{aspect-ratio:4/3}}
+
+/* ---------- ticker: MARQUEE -> <span>PHRASE</span><b>&#9679;</b> ---------- */
+.ticker{border-block:1px solid var(--line);padding:1rem 0;overflow:hidden;background:var(--paper)}
+.ticker-track{display:flex;width:max-content;animation:tick 34s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-track .tk{display:flex;align-items:center;gap:1.4rem;padding-right:1.4rem;white-space:nowrap}
+.ticker-track span{font-size:.72rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.ticker-track b{color:var(--clay);font-size:.5rem;font-weight:400;line-height:1}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- services: SERVICE_CARDS ----------
+   <div class="card"><span class="num">01/</span><span class="pill">MOST BOOKED</span><h3>..</h3><p>..</p></div> */
+.counter-sec{background:var(--paper-2)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3.5rem}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:2.1rem 1.9rem;
+  display:flex;flex-direction:column;gap:.55rem;transition:transform .35s cubic-bezier(.22,.9,.3,1),box-shadow .35s,border-color .35s}
+.card:hover{transform:translateY(-4px);border-color:color-mix(in srgb, var(--clay) 34%, var(--line));box-shadow:0 20px 44px -20px var(--shade)}
+.card .num{font-family:var(--serif),Georgia,serif;font-style:italic;font-weight:300;font-size:1.05rem;color:var(--clay);letter-spacing:.02em}
+.card .pill{position:absolute;top:1.9rem;right:1.9rem;font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--clay-deep);background:var(--clay-soft);border-radius:999px;padding:.5em 1.1em}
+.card h3{font-size:1.5rem;margin-top:.3rem;padding-right:1rem}
+.card p{color:var(--mute);font-size:.94rem;margin-top:.35rem}
+@media(max-width:880px){.grid{grid-template-columns:1fr}.card .pill{position:static;align-self:flex-start;order:-1;margin-bottom:.6rem}.card h3{padding-right:0}}
+
+/* ---------- stats: STATS -> <div><div class="n">Local</div><div class="l">owned &amp; operated</div></div> ---------- */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:3.5rem}
+.stats-row>div{background:var(--card);padding:2.2rem 1.4rem;text-align:center}
+.stats-row .n{font-family:var(--serif),Georgia,serif;font-weight:300;font-size:clamp(1.7rem,3.5vw,2.9rem);line-height:1.05;color:var(--clay);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stats-row .l{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-top:.6rem}
+@media(max-width:760px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- about split: ABOUT_PHOTO is an <img> or a <div> gradient panel ---------- */
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+.split-photo{border:1px solid var(--line);border-radius:20px;padding:.7rem;background:var(--card);box-shadow:0 24px 48px -24px var(--shade)}
+.split-photo .frame{border-radius:14px;overflow:hidden;aspect-ratio:3/4;background:var(--paper-2);position:relative}
+.split-photo .frame img{width:100%;height:100%;object-fit:cover;animation:kb 34s ease-in-out infinite alternate-reverse;will-change:transform}
+.split-photo .frame>div{position:absolute;inset:0;
+  background:
+    radial-gradient(85% 60% at 20% 10%, var(--clay-soft), transparent 62%),
+    linear-gradient(160deg, var(--card) 0%, var(--paper-2) 55%, color-mix(in srgb, var(--clay) 13%, var(--paper)) 100%)}
+.split-photo .frame>div::after{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);background-size:52px 52px}
+.split-photo figcaption{font-family:var(--serif),Georgia,serif;font-style:italic;color:var(--mute);padding:.85rem .3rem .2rem;font-size:1.05rem;text-align:center}
+.split-copy .kicker{display:block;margin-bottom:1.1rem}
+.split-copy p{color:var(--mute);margin:1.3rem 0;max-width:30em}
+.pull-quote{font-family:var(--serif),Georgia,serif;font-style:italic;font-weight:300;font-size:1.28rem;line-height:1.45;color:var(--ink);
+  border-left:1px solid var(--clay);padding-left:1.2rem;margin:1.8rem 0}
+.tenet-list{list-style:none;margin:1.8rem 0 2.2rem;display:grid}
+.tenet-list li{padding:1rem 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:baseline}
+.tenet-list li:last-child{border-bottom:1px solid var(--line)}
+.tenet-list .n{font-family:var(--serif),Georgia,serif;font-style:italic;color:var(--clay);font-size:.95rem}
+.tenet-list b{font-weight:500;font-size:.95rem}
+.tenet-list span span{display:block;color:var(--mute);font-size:.85rem;font-weight:400}
+@media(max-width:880px){.split-grid{grid-template-columns:1fr;gap:2.8rem}.split-photo{max-width:420px;margin-inline:auto}}
+
+/* ---------- gallery: GALLERY_SECTION ----------
+   <figure class="shot"><img ... style="object-position:.."><figcaption class="cap"><b>01</b>Recent work</figcaption></figure>
+   never override the inline object-position */
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:1.4rem;margin-top:3.5rem}
+.shot{grid-column:span 4;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:.7rem .7rem .2rem;
+  box-shadow:0 1px 2px var(--shade-soft),0 14px 34px -20px var(--shade);transition:transform .35s cubic-bezier(.22,.9,.3,1),box-shadow .35s}
+.shot:hover{transform:translateY(-5px);box-shadow:0 2px 3px var(--shade-soft),0 26px 46px -20px var(--shade)}
+.shot .frame{border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:var(--paper-2)}
+.shot img{width:100%;height:100%;object-fit:cover;border-radius:12px;background:var(--paper-2);
+  animation:kb 30s ease-in-out infinite alternate;will-change:transform}
+.shot .frame img{border-radius:0;height:100%}
+.shot:nth-child(even) img{animation-duration:36s;animation-direction:alternate-reverse}
+.shot .cap{font-family:var(--serif),Georgia,serif;font-style:italic;font-size:1rem;color:var(--mute);padding:.75rem .35rem .75rem}
+.shot .cap b{font-style:normal;font-family:var(--sans),system-ui,sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.22em;
+  color:var(--clay);margin-right:.7rem;vertical-align:.08em}
+/* social-post graphics: portrait slot, no grading, text stays legible */
+.shot.social .frame{aspect-ratio:4/5}
+.shot.social img{aspect-ratio:4/5;animation:none;transform:none;filter:none}
+@media(max-width:880px){.shot{grid-column:span 6}}
+@media(max-width:560px){.shot{grid-column:span 12}}
+
+/* ---------- reviews: REVIEWS ----------
+   <div class="rev"><div class="stars">…</div><p>"…"</p><div class="who">- Name</div></div> */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3.5rem}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:2.1rem 1.9rem;display:flex;flex-direction:column;gap:1.1rem;
+  transition:transform .35s cubic-bezier(.22,.9,.3,1),box-shadow .35s}
+.rev:hover{transform:translateY(-4px);box-shadow:0 20px 44px -20px var(--shade)}
+.rev .stars{color:var(--clay);letter-spacing:.14em;font-size:.85rem}
+.rev p{font-family:var(--serif),Georgia,serif;font-size:1.08rem;line-height:1.5;font-weight:300}
+.rev .who{margin-top:auto;font-size:.8rem;color:var(--mute);font-weight:600}
+@media(max-width:880px){.rev-grid{grid-template-columns:1fr}}
+
+/* ---------- faq: FAQ -> <details><summary>..</summary><p>..</p></details> ---------- */
+.week-sec{background:var(--paper-2)}
+.faq{margin-top:3.2rem;border:1px solid var(--line);border-radius:20px;background:var(--card);overflow:hidden}
+.faq details{border-top:1px solid var(--line);transition:background .3s}
+.faq details:first-child{border-top:none}
+.faq details[open],.faq details:hover{background:var(--paper)}
+.faq summary{list-style:none;cursor:pointer;padding:1.35rem 1.9rem;display:flex;justify-content:space-between;gap:1.5rem;align-items:center;
+  font-family:var(--serif),Georgia,serif;font-size:1.12rem;transition:color .25s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--clay)}
+.faq summary::after{content:"+";color:var(--clay);font-family:var(--sans),system-ui,sans-serif;font-size:1.2rem;line-height:1;flex:none;transition:transform .3s}
+.faq details[open] summary::after{content:"+";transform:rotate(45deg)}
+.faq p{font-size:.92rem;color:var(--mute);padding:0 1.9rem 1.5rem;max-width:64ch}
+
+/* ---------- cta band ---------- */
+.ctaband{background:var(--paper-2);border-block:1px solid var(--line);text-align:center;position:relative;overflow:hidden}
+.ctaband::before{content:"";position:absolute;inset:-40% -10% auto -10%;height:140%;pointer-events:none;
+  background:radial-gradient(closest-side, var(--clay-soft), transparent 72%)}
+.ctaband .wrap{position:relative}
+.ctaband h2{margin:1rem auto .9rem;max-width:18ch}
+.ctaband p{color:var(--mute);margin-bottom:1.9rem}
+
+/* ---------- find us ---------- */
+.find-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:4rem;margin-top:3.2rem;align-items:start}
+.addr h3{font-size:1.7rem;margin-bottom:.7rem}
+.addr p{color:var(--mute)}
+.addr .phone{display:inline-block;font-family:var(--serif),Georgia,serif;font-size:clamp(1.7rem,3.4vw,2.4rem);color:var(--ink);text-decoration:none;
+  margin:1.1rem 0 1.6rem;border-bottom:1px solid var(--line);padding-bottom:.2rem;transition:border-color .3s,color .3s}
+.addr .phone:hover{color:var(--clay);border-color:var(--clay)}
+.area{font-family:var(--serif),Georgia,serif;font-style:italic;color:var(--mute);margin-top:1.8rem;font-size:1.1rem}
+/* hours: HOURS_ROWS -> <div><span>Monday - Friday</span><span>8:00 AM - 5:00 PM</span></div> */
+.hours-card{border:1px solid var(--line);border-radius:20px;background:var(--card);padding:2.1rem}
+.hours-card h3{font-size:1.25rem;margin-bottom:1.1rem}
+.hours-rows>div{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;border-top:1px solid var(--line);font-size:.92rem}
+.hours-rows>div:first-child{border-top:none}
+.hours-rows>div span:first-child{color:var(--mute)}
+.hours-rows>div span:last-child{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+@media(max-width:880px){.find-grid{grid-template-columns:1fr;gap:2.6rem}}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:3.2rem 0;background:var(--paper)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:space-between;align-items:center}
+footer .fine{font-size:.78rem;color:var(--mute)}
+footer .fine a,footer .fsoc a{color:var(--clay);text-decoration:none;font-weight:600}
+footer .fine a:hover,footer .fsoc a:hover{text-decoration:underline}
+footer .fsoc{display:flex;gap:1.4rem;font-size:.8rem}
+
+/* ---------- reveal ---------- */
+[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.16,.8,.26,1),transform 1s cubic-bezier(.16,.8,.26,1)}
+[data-reveal].in{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.16,.8,.26,1),transform .9s cubic-bezier(.16,.8,.26,1)}
+.stagger.in>*{opacity:1;transform:none}
+.stagger.in>*:nth-child(1){transition-delay:.08s}
+.stagger.in>*:nth-child(2){transition-delay:.22s}
+.stagger.in>*:nth-child(3){transition-delay:.36s}
+.stagger.in>*:nth-child(4){transition-delay:.5s}
+.stagger.in>*:nth-child(5){transition-delay:.64s}
+.stagger.in>*:nth-child(6){transition-delay:.78s}
+.stagger.in>*:nth-child(7){transition-delay:.92s}
+.stagger.in>*:nth-child(n+8){transition-delay:1.02s}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  [data-reveal],.stagger>*{opacity:1!important;transform:none!important}
+  .hero h1 .w{opacity:1!important;animation:none!important;transform:none!important}
+  img.hero-bg,.split-photo .frame img,.shot img{animation:none;transform:none}
+  .ticker-track{animation:none}
+  #progress{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">A Cut Above the Rest</a>
+    <ul class="nav-links">
+      <li><a href="#services">What we do</a></li>
+      <li><a href="#story">Our story</a></li>
+      <li><a href="#faq">Good to know</a></li>
+      <li><a href="#reviews">Kind words</a></li>
+      <li><a href="#findus">Visit</a></li>
+    </ul>
+    <a class="btn solid" href="tel:9182720909">Call now <span class="arr">&rarr;</span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="badge-loved" data-reveal><span class="stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Loved by locals</div>
+    <h1><span class="w" style="animation-delay:0.12s">Word</span> <span class="w" style="animation-delay:0.24s">around</span> <span class="w" style="animation-delay:0.36s">town.</span></h1>
+    <p class="lede center" style="margin-inline:auto" data-reveal>A neighborhood hair salon in Owasso where folks keep coming back.</p>
+    <div class="chips stagger" data-stagger><span><b>&#10003;</b> Locally owned</span><span><b>&#10003;</b> Free estimates</span><span><b>&#10003;</b> Serving Owasso</span></div>
+    <div class="cta-row" data-reveal>
+      <a class="btn solid" href="tel:9182720909">Call (918) 272-0909 <span class="arr">&rarr;</span></a>
+      <a class="btn quiet" href="#services">See what we do <span class="arr">&rarr;</span></a>
+    </div>
+
+    <figure class="hero-frame" data-reveal>
+      <div class="frame"><div class="hero-bg grad"></div></div>
+      <figcaption>Hair Salon &mdash; Owasso</figcaption>
+    </figure>
+
+    <div class="scroll-cue" aria-hidden="true">
+      Scroll on down
+      <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M7 1v14m0 0 5-5m-5 5-5-5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="tk"><span>OWASSO LOCAL</span><b>&#9679;</b><span>WALK IN, LEAVE GRINNING</span><b>&#9679;</b><span>REAL TALK ABOUT YOUR HAIR</span><b>&#9679;</b><span>REGULARS SINCE DAY ONE</span><b>&#9679;</b></div>
+    <div class="tk"><span>OWASSO LOCAL</span><b>&#9679;</b><span>WALK IN, LEAVE GRINNING</span><b>&#9679;</b><span>REAL TALK ABOUT YOUR HAIR</span><b>&#9679;</b><span>REGULARS SINCE DAY ONE</span><b>&#9679;</b></div>
+  </div>
+</div>
+
+<section class="section counter-sec" id="services">
+  <div class="wrap">
+    <div class="center" data-reveal>
+      <span class="kicker">Hair Salon</span>
+      <h2 style="margin-top:1rem">What we <em>do.</em></h2>
+      <p class="lede" style="margin:1.2rem auto 0">We're a hair salon tucked into the shops at 8805 N 145th E Ave in Owasso, and we've built our chairs around regulars — the kind of clients whose kids grow up in here. Color, cuts, styling, the works. You'll get an honest opinion about what'll actually work with your hair, not a sales pitch for something you don't need.</p>
+    </div>
+    <div class="grid stagger" data-stagger><div class="card"><span class="num">01/</span><span class="pill">most booked</span><h3>Cuts & Trims</h3><p>A cut that fits your hair, your routine, and how much time you actually spend on it in the morning.</p></div>
+<div class="card"><span class="num">02/</span><span class="pill">fan favorite</span><h3>Color & Highlights</h3><p>All-over color, dimensional highlights, balayage, or a root touch-up to buy yourself a few more weeks.</p></div>
+<div class="card"><span class="num">03/</span><span class="pill">seasonal</span><h3>Special Occasion Styling</h3><p>Weddings, prom, senior pictures — updos and blowouts that hold up through the whole day.</p></div>
+<div class="card"><span class="num">04/</span><h3>Conditioning Treatments</h3><p>Deep conditioning and repair for hair that's had a rough go with heat, color, or Oklahoma summers.</p></div></div>
+    <div class="stats-row stagger" data-stagger><div><div class="n">Local</div><div class="l">owned &amp; operated</div></div><div><div class="n">5&#9733;</div><div class="l">service you can count on</div></div><div><div class="n">Owasso</div><div class="l">&amp; surrounding area</div></div><div><div class="n">Fast</div><div class="l">friendly &amp; on-time</div></div></div>
+  </div>
+</section>
+
+<section class="section" id="story">
+  <div class="wrap">
+    <div class="split-grid">
+      <figure class="split-photo" data-reveal>
+        <div class="frame"><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--paper),color-mix(in srgb,var(--accent) 22%,#fff))"></div></div>
+        <figcaption>A Cut Above the Rest, Owasso.</figcaption>
+      </figure>
+      <div class="split-copy" data-reveal>
+        <span class="kicker">Our story</span>
+        <h2>A local name you can trust</h2>
+        <p>We're a hair salon tucked into the shops at 8805 N 145th E Ave in Owasso, and we've built our chairs around regulars — the kind of clients whose kids grow up in here. Color, cuts, styling, the works. You'll get an honest opinion about what'll actually work with your hair, not a sales pitch for something you don't need.</p>
+        <blockquote class="pull-quote">I've been coming here for years and I still leave grinning.</blockquote>
+        <ul class="tenet-list">
+          <li><span class="n">No. 1</span><span><b>Straight answers, every time</b><span>You'll hear what the job actually needs &mdash; plainly, with no sales pitch attached.</span></span></li>
+          <li><span class="n">No. 2</span><span><b>The price you were quoted</b><span>Everything agreed up front, so the number you hear is the number you pay.</span></span></li>
+          <li><span class="n">No. 3</span><span><b>We answer after the job</b><span>If something isn't right, we make it right. That's why people keep coming back.</span></span></li>
+        </ul>
+        <a class="btn solid" href="#findus">Come say hi <span class="arr">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section week-sec" id="faq">
+  <div class="wrap">
+    <div class="center" data-reveal>
+      <span class="kicker">Good to know</span>
+      <h2 style="margin-top:1rem">Common <em>questions.</em></h2>
+    </div>
+    <div class="faq" data-reveal><details><summary>Do I need an appointment?</summary><p>Appointments are the safest bet, especially evenings and Saturdays, but give us a call — we can often work you in.</p></details>
+<details><summary>Where exactly are you located?</summary><p>8805 N 145th E Ave #101 in Owasso, in the suite at the front of the building.</p></details>
+<details><summary>Can I bring a photo of what I want?</summary><p>Please do — and we'll tell you straight whether it'll work with your hair type and current color.</p></details></div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="wrap">
+    <div class="center" data-reveal>
+      <span class="kicker">Kind words</span>
+      <h2 style="margin-top:1rem">Word around <em>town.</em></h2>
+    </div>
+    <div class="rev-grid stagger" data-stagger><div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"This is where your real Google and Facebook reviews shine - front and center."</p><div class="who">- Your customers</div></div>
+<div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Folks already say great things about you online. A website puts it to work."</p><div class="who">- Your reviews, showcased</div></div>
+<div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"We feature your genuine 5-star reviews so new customers trust you instantly."</p><div class="who">- Preston Scott Systems</div></div></div>
+  </div>
+</section>
+
+<section class="section ctaband">
+  <div class="wrap" data-reveal>
+    <span class="kicker">Get started</span>
+    <h2>Ready when you are.</h2>
+    <p class="lede center" style="margin-inline:auto">A neighborhood hair salon in Owasso where folks keep coming back.</p>
+    <div class="cta-row">
+      <a class="btn solid" href="tel:9182720909">Call (918) 272-0909 <span class="arr">&rarr;</span></a>
+      <a class="btn quiet" href="https://www.google.com/maps/search/?api=1&query=A%20Cut%20Above%20the%20Rest%20Owasso" target="_blank" rel="noopener">Get directions <span class="arr">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section counter-sec" id="findus">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="kicker">Visit</span>
+      <h2 style="margin-top:1rem">Come find <em>us.</em></h2>
+    </div>
+    <div class="find-grid">
+      <div class="addr" data-reveal>
+        <h3>A Cut Above the Rest</h3>
+        <p>Owasso</p>
+        <a class="phone" href="tel:9182720909">(918) 272-0909</a>
+        <div class="cta-row" style="justify-content:flex-start">
+          <a class="btn solid" href="https://www.google.com/maps/search/?api=1&query=A%20Cut%20Above%20the%20Rest%20Owasso" target="_blank" rel="noopener">Get directions <span class="arr">&rarr;</span></a>
+          <a class="btn quiet" href="tel:9182720909">Call ahead <span class="arr">&rarr;</span></a>
+        </div>
+        <p class="area">Proudly serving Owasso and the surrounding area.</p>
+      </div>
+      <div class="hours-card" data-reveal>
+        <h3>Hours</h3>
+        <div class="hours-rows"><div><span>Monday - Friday</span><span>8:00 AM - 5:00 PM</span></div>
+<div><span>Saturday</span><span>9:00 AM - 2:00 PM</span></div>
+<div><span>Sunday</span><span>Closed</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top">A Cut Above the Rest</a>
+    <p class="fine">&copy; 2026 A Cut Above the Rest &middot; Owasso<br>Website by <a href="https://prestonscottsystems.com">Preston Scott Systems</a></p>
+    <div class="fsoc">
+      <a href="#" target="_blank" rel="noopener">Facebook</a>
+      <a href="tel:9182720909">(918) 272-0909</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* nav + hairline progress */
+  var nav = document.getElementById('nav');
+  var bar = document.getElementById('progress');
+  var ticking = false;
+  function onScroll(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    if(!reduced){
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(window.scrollY / max, 1) : 0) + ')';
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ requestAnimationFrame(onScroll); ticking = true; }
+  }, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* gallery photos get a clipping frame so the Ken Burns drift stays inside the card
+     (never touches the inline object-position on the img) */
+  document.querySelectorAll('.gallery .shot > img').forEach(function(img){
+    var frame = document.createElement('div');
+    frame.className = 'frame';
+    img.parentNode.insertBefore(frame, img);
+    frame.appendChild(img);
+  });
+
+  /* reveal + stagger */
+  document.querySelectorAll('[data-stagger]').forEach(function(el){ el.classList.add('stagger'); });
+  var els = document.querySelectorAll('[data-reveal],[data-stagger]');
+  if(reduced || !('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.15, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  /* count-up stats — reads the injected .n text, animates only if it starts with a number */
+  var nums = [];
+  document.querySelectorAll('.stats-row .n').forEach(function(el){
+    var raw = (el.textContent || '').trim();
+    var m = raw.match(/^([0-9][0-9,]*(?:\.[0-9]+)?)(.*)$/);
+    if(!m) return;
+    el.setAttribute('data-target', m[1].replace(/,/g,''));
+    el.setAttribute('data-suffix', m[2] || '');
+    el.setAttribute('data-final', raw);
+    if(!reduced) el.textContent = '0' + (m[2] || '');
+    nums.push(el);
+  });
+  function runCounter(el){
+    var target = parseFloat(el.getAttribute('data-target'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var decimals = (el.getAttribute('data-target').split('.')[1] || '').length;
+    if(reduced || !(target > 0)){ el.textContent = el.getAttribute('data-final'); return; }
+    var dur = 1500, start = null;
+    function frame(t){
+      if(start === null) start = t;
+      var p = Math.min((t - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals) + suffix;
+      if(p < 1){ requestAnimationFrame(frame); } else { el.textContent = el.getAttribute('data-final'); }
+    }
+    requestAnimationFrame(frame);
+  }
+  if(reduced || !('IntersectionObserver' in window)){
+    nums.forEach(runCounter);
+  } else {
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ runCounter(e.target); cio.unobserve(e.target); }
+      });
+    },{threshold:.6});
+    nums.forEach(function(el){ cio.observe(el); });
+  }
+})();
+</script>
+
+<!-- Unofficial-concept notice. This is the difference between a flattering surprise and
+     something an owner reports as impersonation - which is exactly how outreach accounts
+     get killed. Visible, honest, one-click removal. -->
+<div id="paul-concept-note" style="position:fixed;left:0;right:0;bottom:0;z-index:99999;
+  background:rgba(12,12,14,.94);color:#e9e9ee;font:13px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;
+  padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:center;
+  flex-wrap:wrap;backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,.14)">
+  <span>Unofficial concept by <b>Preston Darnell</b>, an independent web designer in Owasso &mdash;
+  not affiliated with A Cut Above the Rest. Photos belong to the business owner.</span>
+  <a href="mailto:prestondarnell46@gmail.com?subject=Take%20down%20A Cut Above the Rest%20concept"
+     style="color:#7fc4ff;text-decoration:underline;white-space:nowrap">Take this down</a>
+  <button onclick="document.getElementById('paul-concept-note').remove()"
+     style="background:none;border:1px solid rgba(255,255,255,.3);color:#e9e9ee;border-radius:6px;
+     padding:3px 9px;cursor:pointer">Hide</button>
+</div>
+</body>
+</html>

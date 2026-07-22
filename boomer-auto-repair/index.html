@@ -296,7 +296,71 @@ footer.site a:hover{text-decoration:underline}
   #progress{display:none}
   .proc-slide{position:static;opacity:1;transform:none;margin-bottom:2rem}
   .hero-bg{animation:none}
+  .slides{scroll-behavior:auto}
+  .slide img{transform:none!important}
 }
+
+/* ---------- about: dual photo (owner + throwback) ---------- */
+.about-photos{position:relative;padding-bottom:3.2rem}
+.about-photos .photo{aspect-ratio:4/5;border-radius:22px;overflow:hidden;border:1px solid var(--line-soft);background:var(--bg-2)}
+.about-photos .photo img{width:100%;height:100%;object-fit:cover}
+.about-photos .throwback{position:absolute;right:-.4rem;bottom:0;width:47%;margin:0;border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);background:var(--bg-2);box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.about-photos .throwback img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(1) contrast(1.05) brightness(.92)}
+.about-photos .throwback figcaption{position:absolute;inset:auto 0 0 0;z-index:4;padding:.7rem .8rem .6rem;
+  font-family:var(--display),Georgia,serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone);
+  background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.mini-stats .n{font-family:var(--display),Georgia,serif;line-height:1;text-transform:uppercase;color:var(--bone)}
+.mini-stats .l{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-top:.5rem}
+@media(max-width:900px){.about-photos{max-width:440px}}
+
+/* ---------- sliding photo section ---------- */
+.slider{position:relative;margin-top:3rem}
+.slides{display:flex;gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  padding:.5rem max(3vw,calc((100vw - 1200px)/2 + 4vw));
+  scrollbar-width:none;-ms-overflow-style:none}
+.slides::-webkit-scrollbar{display:none}
+.slide{position:relative;flex:0 0 auto;width:min(560px,80vw);aspect-ratio:3/2;border-radius:22px;overflow:hidden;
+  scroll-snap-align:center;border:1px solid var(--line-soft);background:var(--bg-2)}
+.slide img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.06) brightness(.82);
+  transform:scale(1.06);transition:transform 1.2s cubic-bezier(.19,.8,.26,1),filter .5s}
+.slide::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(120deg,var(--glow-08),rgba(0,0,0,.34));mix-blend-mode:overlay}
+.slide:hover img{transform:scale(1);filter:grayscale(0) contrast(1.03) brightness(.96)}
+.slide figcaption{position:absolute;inset:auto 0 0 0;z-index:3;padding:1.4rem 1.4rem 1.2rem;
+  display:flex;align-items:baseline;gap:.7rem;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.slide figcaption b{font-family:var(--display),Georgia,serif;color:var(--accent);letter-spacing:.1em;font-size:.9rem}
+.slide figcaption span{font-family:var(--display),Georgia,serif;text-transform:uppercase;letter-spacing:.05em;font-size:1.15rem;color:var(--bone)}
+.s-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:52px;height:52px;border-radius:50%;
+  display:grid;place-items:center;cursor:pointer;font-size:1.7rem;line-height:1;color:var(--bone);
+  background:color-mix(in srgb,var(--bg) 62%,transparent);border:1px solid var(--line);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .25s,border-color .25s,transform .2s,opacity .25s}
+.s-arrow:hover{background:var(--accent);color:var(--bg);border-color:transparent}
+.s-arrow.prev{left:max(1.4vw,10px)}
+.s-arrow.next{right:max(1.4vw,10px)}
+.s-arrow[disabled]{opacity:.28;pointer-events:none}
+.s-dots{display:flex;justify-content:center;gap:.55rem;margin-top:1.8rem}
+.s-dots button{width:8px;height:8px;padding:0;border:none;border-radius:50%;cursor:pointer;
+  background:var(--line);transition:background .25s,transform .25s}
+.s-dots button.on{background:var(--accent);transform:scale(1.5);box-shadow:0 0 12px var(--glow-35)}
+@media(max-width:640px){
+  .slide{width:82vw;aspect-ratio:4/5}
+  .s-arrow{width:44px;height:44px;font-size:1.4rem}
+  .slide figcaption span{font-size:1rem}
+}
+@media(hover:none){.s-arrow{display:none}}
+
+/* ---------- credentials: awards + certifications ---------- */
+.cred-head{margin:3rem 0 1.4rem}
+.cred-head .kicker{margin:0}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+.cert{position:relative;border:1px solid var(--line-soft);border-radius:var(--radius);background:var(--panel);
+  padding:1.5rem 1.4rem;display:flex;flex-direction:column;gap:.4rem;transition:transform .25s,border-color .25s,box-shadow .25s}
+.cert:hover{transform:translateY(-4px);border-color:var(--glow-35);box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.cert b{font-family:var(--display),Georgia,serif;font-size:1.5rem;letter-spacing:.03em;line-height:1;
+  background:linear-gradient(180deg,var(--accent-pale),var(--accent-deep));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 14px var(--glow-15))}
+.cert span{font-size:.82rem;color:var(--mute);font-family:var(--body),system-ui,sans-serif;letter-spacing:.02em}
 </style>
 </head>
 <body>
@@ -310,6 +374,8 @@ footer.site a:hover{text-decoration:underline}
       <a href="#services">Services</a>
       <a href="#process">Process</a>
       <a href="#about">About</a>
+      <a href="#creds">Awards</a>
+      <a href="#gallery">Photos</a>
       <a href="#reviews">Reviews</a>
       <a href="#visit">Visit</a>
       <a class="btn solid navcta" href="tel:9183421030">Call now <span class="arr">&rarr;</span></a>
@@ -335,7 +401,7 @@ footer.site a:hover{text-decoration:underline}
     <h1><span class="w" style="animation-delay:0.12s">Fixed</span> <span class="w" style="animation-delay:0.24s">right,</span> <span class="w" style="animation-delay:0.36s">first</span> <span class="w" style="animation-delay:0.48s">time.</span></h1>
     <p class="lede" data-reveal>Honest auto repair on Route 66 in Claremore — folks around here trust us with their rigs.</p>
     <div class="rating" data-reveal><span class="stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Loved by locals</div>
-    <div class="trust stagger" data-stagger>TRUST_CHIPS</div>
+    <div class="trust stagger" data-stagger><span><b>&#10003;</b> ASE Certified &middot; 25+ Years</span><span><b>&#10003;</b> Jasper Engines &amp; Transmissions</span><span><b>&#10003;</b> Reader's Choice &mdash; Rogers County Best</span><span><b>&#10003;</b> Family Owned on Route 66</span></div>
     <div class="cta-row" data-reveal>
       <a class="btn solid" href="tel:9183421030">Call (918) 342-1030 <span class="arr">&rarr;</span></a>
       <a class="btn line" href="#services">What we do <span class="arr">&rarr;</span></a>
@@ -423,28 +489,93 @@ footer.site a:hover{text-decoration:underline}
   <div class="wrap about">
     <div data-reveal>
       <span class="eyebrow">About us</span>
-      <h2>A local name you can trust</h2>
-      <p class="lead">Boomer Auto Repair sits right on old Route 66 in Claremore, keeping local cars, trucks, and work rigs running the way they should. We tell you straight what needs doing, what can wait, and what it'll run you — no upsell, no runaround. Been earning our neighbors' trust one honest fix at a time.</p>
-      <div class="quote">Word around town is these folks fix it right and shoot you straight.</div>
+      <h2>Grease under the nails <span class="serif-it glow-word">since day one.</span></h2>
+      <p class="lead">From a farm kid on the family tractor to 25+ years ASE Certified on old Route 66 — the work's always been the same: fix it right and shoot you straight. Boomer Auto Repair keeps Claremore's cars, trucks, and work rigs running the way they should. We tell you plainly what needs doing, what can wait, and what it'll run you. No upsell, no runaround — just honest fixes, one neighbor at a time.</p>
+      <div class="mini-stats">
+        <div><div class="n" style="font-size:1.8rem">25+</div><div class="l">Years ASE Certified</div></div>
+        <div><div class="n" style="font-size:1.8rem">Jasper</div><div class="l">Engines &amp; Transmissions</div></div>
+        <div><div class="n" style="font-size:1.8rem">Route 66</div><div class="l">Claremore, OK</div></div>
+      </div>
+      <div class="quote">Love God. Love others. Drive a Jeep.</div>
       <div class="cta-row" style="justify-content:flex-start;margin-top:1.8rem">
         <a class="btn solid" href="tel:9183421030">Talk to us <span class="arr">&rarr;</span></a>
       </div>
     </div>
-    <div class="photo curtain" data-curtain><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--paper),color-mix(in srgb,var(--accent) 22%,#fff))"></div></div>
+    <div class="about-photos" data-reveal>
+      <div class="photo curtain" data-curtain><img src="photos/owner.jpg" alt="The owner of Boomer Auto Repair"></div>
+      <figure class="throwback curtain" data-curtain>
+        <img src="photos/owner-throwback.jpg" alt="The owner years ago, out on the family tractor">
+        <figcaption>Where it started</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
 
 
+<section id="creds" class="alt">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="eyebrow">Credentials</span>
+      <h2>Certified &amp; <span class="serif-it glow-word">recognized.</span></h2>
+      <p class="lead">Award-winning work backed by real, current certifications &mdash; from ASE to EPA-certified A/C service. Proof we do it right, not just talk about it.</p>
+    </div>
+
+    <div class="cred-head" data-reveal><span class="kicker">Awards &amp; recognition</span></div>
+    <div class="grid stagger" data-stagger>
+      <div class="card"><span class="num">&#9733;</span><span class="pill">2019 &amp; 2020</span><h3>Reader's Choice &mdash; Rogers County Best</h3><p>Voted the area's best by Claremore Daily Progress readers, two years running.</p></div>
+      <div class="card"><h3>Oklahoma Senate Citation</h3><p>Official State of Oklahoma citations recognizing Boomer Auto Repair, presented on the motion of State Senator Sean Burrage.</p></div>
+      <div class="card"><h3>Community Recognized</h3><p>Honored by the City of Claremore and Rogers County for outstanding service to the community.</p></div>
+    </div>
+
+    <div class="cred-head" data-reveal><span class="kicker">Certifications</span></div>
+    <div class="cert-grid stagger" data-stagger>
+      <div class="cert"><b>ASE</b><span>Certified &middot; 25+ Years</span></div>
+      <div class="cert"><b>BG</b><span>Certified Vehicle Maintenance Service</span></div>
+      <div class="cert"><b>EPA 609</b><span>Certified A/C Service (multiple techs)</span></div>
+      <div class="cert"><b>MACS</b><span>Mobile A/C Climate Certified</span></div>
+      <div class="cert"><b>Jasper</b><span>Engines &amp; Transmissions Installer</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="eyebrow">In the shop</span>
+      <h2>Real work, <span class="serif-it glow-word">real rigs.</span></h2>
+      <p class="lead">A look at what rolls through the bay &mdash; engines out on the stand, brakes apart, tough jobs done right. Swipe on through.</p>
+    </div>
+  </div>
+  <div class="slider" data-slider>
+    <div class="slides" data-track>
+      <figure class="slide"><img src="photos/jeep.jpg" alt="Jeep Wrangler in for engine work" loading="lazy"><figcaption><b>01</b><span>Jeep specialists</span></figcaption></figure>
+      <figure class="slide"><img src="photos/engine-bay.jpg" alt="Engine and drivetrain work in the bay" loading="lazy"><figcaption><b>02</b><span>Engine &amp; drivetrain</span></figcaption></figure>
+      <figure class="slide"><img src="photos/suv-lift.jpg" alt="SUV up on the lift" loading="lazy"><figcaption><b>03</b><span>Brakes &amp; suspension</span></figcaption></figure>
+      <figure class="slide"><img src="photos/engine-stand-1.jpg" alt="Engine mounted on the rebuild stand" loading="lazy"><figcaption><b>04</b><span>Full rebuilds</span></figcaption></figure>
+      <figure class="slide"><img src="photos/engine-drop.jpg" alt="Engine and subframe dropped for major repair" loading="lazy"><figcaption><b>05</b><span>Major repair</span></figcaption></figure>
+      <figure class="slide"><img src="photos/engine-stand-2.jpg" alt="Engine on the stand between the lifts" loading="lazy"><figcaption><b>06</b><span>Precision work</span></figcaption></figure>
+      <figure class="slide"><img src="photos/tool-boxes.jpg" alt="Matco tool boxes in the shop" loading="lazy"><figcaption><b>07</b><span>Pro-grade tools</span></figcaption></figure>
+      <figure class="slide"><img src="photos/shop-dog.jpg" alt="The shop dog keeping watch" loading="lazy"><figcaption><b>08</b><span>Shop supervisor</span></figcaption></figure>
+    </div>
+    <button class="s-arrow prev" data-prev type="button" aria-label="Previous photo">&#8249;</button>
+    <button class="s-arrow next" data-next type="button" aria-label="Next photo">&#8250;</button>
+  </div>
+  <div class="s-dots wrap" data-dots aria-hidden="true"></div>
+</section>
+
 <section class="alt" id="reviews">
   <div class="wrap">
     <div data-reveal>
-      <span class="eyebrow">Word around town</span>
+      <span class="eyebrow">Reviews</span>
       <h2>Neighbors <span class="serif-it glow-word">talk.</span></h2>
+      <p class="lead"><span style="color:var(--gold);letter-spacing:.14em">&#9733;&#9733;&#9733;&#9733;&#9733;</span> &nbsp;4.5 stars &middot; 90+ reviews &middot; 92% recommend on Facebook.</p>
     </div>
-    <div class="rev-grid stagger" data-stagger><div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"This is where your real Google and Facebook reviews shine - front and center."</p><div class="who">- Your customers</div></div>
-<div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Folks already say great things about you online. A website puts it to work."</p><div class="who">- Your reviews, showcased</div></div>
-<div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"We feature your genuine 5-star reviews so new customers trust you instantly."</p><div class="who">- Preston Scott Systems</div></div></div>
+    <div class="rev-grid stagger" data-stagger><div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Boomer Auto is reliable, honest, quick and effective every time. It's very helpful to have such a consistently reliable shop in Claremore. Larry is a great help, and the kind of mechanic that everyone hopes to find in their home town."</p><div class="who">&mdash; J. Renee, Claremore</div></div></div>
+    <div class="cta-row" data-reveal style="margin-top:2.2rem">
+      <a class="btn solid" href="https://www.facebook.com/BoomerAutoRepairLLC/reviews" target="_blank" rel="noopener">Read our Facebook reviews <span class="arr">&rarr;</span></a>
+      <a class="btn line" href="https://www.google.com/search?q=Boomer+Auto+Repair+Claremore+reviews" target="_blank" rel="noopener">See Google reviews <span class="arr">&rarr;</span></a>
+    </div>
   </div>
 </section>
 
@@ -578,23 +709,74 @@ footer.site a:hover{text-decoration:underline}
   } else {
     steps.forEach(function(s){ s.classList.add('lit'); });
   }
+
+  /* ---------- sliding photo section ---------- */
+  var slider = document.querySelector('[data-slider]');
+  if(slider){
+    var track = slider.querySelector('[data-track]');
+    var slides = Array.prototype.slice.call(track.children);
+    var prev = slider.querySelector('[data-prev]');
+    var next = slider.querySelector('[data-next]');
+    var dotsWrap = document.querySelector('[data-dots]');
+    var active = 0, timer = null, paused = false;
+
+    /* build dots */
+    slides.forEach(function(s, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.addEventListener('click', function(){ go(i); rest(); });
+      dotsWrap.appendChild(b);
+    });
+    var dots = Array.prototype.slice.call(dotsWrap.children);
+
+    function setActive(i){
+      active = i;
+      dots.forEach(function(d, n){ d.classList.toggle('on', n === i); });
+      if(prev) prev.disabled = (i === 0);
+      if(next) next.disabled = (i === slides.length - 1);
+    }
+    function go(i){
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      slides[i].scrollIntoView({behavior: reduced ? 'auto' : 'smooth', inline:'center', block:'nearest'});
+      setActive(i);
+    }
+    if(prev) prev.addEventListener('click', function(){ go(active - 1); rest(); });
+    if(next) next.addEventListener('click', function(){ go(active + 1); rest(); });
+
+    /* track which slide is centered while the user swipes */
+    if('IntersectionObserver' in window){
+      var sio = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting) setActive(slides.indexOf(e.target));
+        });
+      },{root: track, threshold:.6});
+      slides.forEach(function(s){ sio.observe(s); });
+    }
+
+    /* autoplay — pause on interaction, respect reduced motion */
+    function tick(){ if(!paused){ go(active >= slides.length - 1 ? 0 : active + 1); } }
+    function play(){ if(!reduced && !timer){ timer = setInterval(tick, 4500); } }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+    function rest(){ stop(); play(); }
+    ['mouseenter','focusin','touchstart','pointerdown'].forEach(function(ev){
+      slider.addEventListener(ev, function(){ paused = true; }, {passive:true});
+    });
+    ['mouseleave','focusout'].forEach(function(ev){
+      slider.addEventListener(ev, function(){ paused = false; }, {passive:true});
+    });
+    document.addEventListener('visibilitychange', function(){ paused = document.hidden; });
+
+    /* only start autoplay once the slider scrolls into view */
+    setActive(0);
+    if('IntersectionObserver' in window){
+      var vio = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ play(); } else { stop(); } });
+      },{threshold:.25});
+      vio.observe(slider);
+    } else { play(); }
+  }
 })();
 </script>
 
-<!-- Unofficial-concept notice. This is the difference between a flattering surprise and
-     something an owner reports as impersonation - which is exactly how outreach accounts
-     get killed. Visible, honest, one-click removal. -->
-<div id="paul-concept-note" style="position:fixed;left:0;right:0;bottom:0;z-index:99999;
-  background:rgba(12,12,14,.94);color:#e9e9ee;font:13px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;
-  padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:center;
-  flex-wrap:wrap;backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,.14)">
-  <span>Unofficial concept by <b>Preston Darnell</b>, an independent web designer in Owasso &mdash;
-  not affiliated with Boomer Auto Repair. Photos belong to the business owner.</span>
-  <a href="mailto:prestondarnell46@gmail.com?subject=Take%20down%20Boomer Auto Repair%20concept"
-     style="color:#7fc4ff;text-decoration:underline;white-space:nowrap">Take this down</a>
-  <button onclick="document.getElementById('paul-concept-note').remove()"
-     style="background:none;border:1px solid rgba(255,255,255,.3);color:#e9e9ee;border-radius:6px;
-     padding:3px 9px;cursor:pointer">Hide</button>
-</div>
 </body>
 </html>

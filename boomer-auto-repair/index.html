@@ -119,8 +119,9 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem
 @media(max-width:560px){.scroll-cue{display:none}.hero{padding-top:7rem}}
 
 /* ---------- marquee: MARQUEE -> <span>PHRASE</span><b>&#9679;</b> ---------- */
-.marquee{border-block:1px solid var(--line-soft);padding:1.15rem 0;overflow:hidden;background:var(--bg-2);white-space:nowrap}
-.marquee .track{display:inline-block;animation:marq 30s linear infinite;will-change:transform}
+.marquee{border-block:1px solid var(--line-soft);padding:1.15rem 0;overflow:hidden;background:var(--bg-2);white-space:nowrap;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.marquee .track{display:inline-block;animation:marq 28s linear infinite;will-change:transform}
 .marquee:hover .track{animation-play-state:paused}
 .marquee span{font-family:var(--display),Georgia,serif;font-size:1rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mute);margin:0 1.3rem}
 .marquee b{color:var(--accent);font-size:.6rem;vertical-align:middle;text-shadow:0 0 12px var(--accent)}

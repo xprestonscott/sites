@@ -240,18 +240,25 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;
     <div>
       <div class="field">
         <label for="job">What's an average job worth to you?</label>
-        <div class="val" id="jobv">$6,500</div>
-        <input type="range" id="job" min="500" max="25000" step="250" value="6500">
+        <div class="val" id="jobv">$4,500</div>
+        <input type="range" id="job" min="500" max="25000" step="250" value="4500">
         <div class="hint">Your typical ticket — not your biggest, not your smallest.</div>
       </div>
       <div class="field">
         <label for="miss">Calls you miss in a normal week</label>
-        <div class="val" id="missv">6</div>
-        <input type="range" id="miss" min="1" max="40" step="1" value="6">
-        <div class="hint">Count voicemails, hang-ups, and after-hours rings. Most owners guess low.</div>
+        <div class="val" id="missv">5</div>
+        <input type="range" id="miss" min="1" max="40" step="1" value="5">
+        <div class="hint">Count voicemails, hang-ups, and after-hours rings.</div>
       </div>
       <div class="field">
-        <label for="close">Of the people you do call back, how many book?</label>
+        <label for="newpct">How many of those are new customers wanting work?</label>
+        <div class="val" id="newpctv">35%</div>
+        <input type="range" id="newpct" min="10" max="80" step="5" value="35">
+        <div class="hint">The rest are suppliers, existing customers, spam and wrong numbers.
+          Those don't count, so we leave them out.</div>
+      </div>
+      <div class="field">
+        <label for="close">Of the new ones you do reach, how many book?</label>
         <div class="val" id="closev">25%</div>
         <input type="range" id="close" min="5" max="70" step="5" value="25">
       </div>
@@ -264,9 +271,10 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;
       <div class="cap" id="detail"></div>
       <hr>
       <div class="payoff" id="payoff"></div>
-      <div class="assume">Assumes 40% of people who get an instant text write back — the rest were
-        never going to answer anyway. Change any number above and this updates. Nothing here is a
-        promise of results; it's a model built from the numbers you just entered.</div>
+      <div class="assume">The one number you didn't set: we assume 40% of people who get an instant
+        text write back. The rest were never going to answer anyway. Everything else above is yours,
+        and the defaults are deliberately conservative — most contractors miss more calls than they
+        think. This is a model built from your numbers, not a promise of results.</div>
     </div>
   </div></div>
 </div></section>
@@ -518,29 +526,34 @@ setTimeout(play, 700);
 const REPLY_RATE = 0.40;      // of texted-back callers who respond
 const YEARLY_COST = 397 * 12; // Growth tier
 
-const job   = document.getElementById('job');
-const miss  = document.getElementById('miss');
-const close = document.getElementById('close');
-const money = n => '$' + Math.round(n).toLocaleString();
+const job    = document.getElementById('job');
+const miss   = document.getElementById('miss');
+const newpct = document.getElementById('newpct');
+const close  = document.getElementById('close');
+const money  = n => '$' + Math.round(n).toLocaleString();
 
 function calc(){
-  const j = +job.value, m = +miss.value, c = +close.value / 100;
+  const j = +job.value, m = +miss.value,
+        n = +newpct.value / 100, c = +close.value / 100;
 
-  document.getElementById('jobv').textContent   = money(j);
-  document.getElementById('missv').textContent  = m;
-  document.getElementById('closev').textContent = c * 100 + '%';
+  document.getElementById('jobv').textContent    = money(j);
+  document.getElementById('missv').textContent   = m;
+  document.getElementById('newpctv').textContent = n * 100 + '%';
+  document.getElementById('closev').textContent  = c * 100 + '%';
 
   const perMonth   = m * 4.33;
-  const recovered  = perMonth * REPLY_RATE;
+  const realLeads  = perMonth * n;              // actual prospects, not suppliers/spam
+  const recovered  = realLeads * REPLY_RATE;
   const booked     = recovered * c;
   const yearlyJobs = booked * 12;
   const yearlyRev  = yearlyJobs * j;
 
   document.getElementById('lost').textContent = money(yearlyRev);
   document.getElementById('detail').textContent =
-    `About ${Math.round(perMonth)} missed calls a month. Texting them back gets roughly `
-    + `${recovered.toFixed(1)} into a conversation, and ${booked.toFixed(1)} of those book — `
-    + `${yearlyJobs.toFixed(0)} jobs a year you're not getting today.`;
+    `About ${Math.round(perMonth)} missed calls a month — call it ${realLeads.toFixed(1)} real `
+    + `prospects. Texting them back gets roughly ${recovered.toFixed(1)} of those talking, and `
+    + `${booked.toFixed(1)} book. That's about ${yearlyJobs.toFixed(0)} jobs a year `
+    + `you're not getting today.`;
 
   const jobsToBreakEven = YEARLY_COST / j;
   const payoff = document.getElementById('payoff');
@@ -556,7 +569,7 @@ function calc(){
       + ` — and at your numbers it's catching about <b>${yearlyJobs.toFixed(0)} a year.</b>`;
   }
 }
-[job, miss, close].forEach(el => el.addEventListener('input', calc));
+[job, miss, newpct, close].forEach(el => el.addEventListener('input', calc));
 calc();
 </script>
 </body>

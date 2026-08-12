@@ -1,0 +1,1524 @@
+<!-- NAME: The Sugar Studio | CLIENT: Spin N Sugar — Glenpool, OK | VIBE: Candy-glass. Cream + hot pink + sky blue on deep plum, with a chalkboard "Fall Sugars" break lifted straight from her own flyer. Built from scratch for this business — nothing borrowed from the other demos. | ANIM: live-spinning machine (SVG), floss ribbons, interactive flavor wheel, drifting sugar, order drawer, booking builder. -->
+<!--
+  ══════════════════════════════════════════════════════════════
+  SPIN N SUGAR — DEMO BUILD  ·  Preston Scott Systems
+
+  BUILT FROM MITZIE'S OWN WORDS + HER FACEBOOK PAGE:
+    · Live spinning at events (for hire)
+    · Fresh homemade cotton candy, sold in tubs and dome cups
+    · 12 inch cotton candy cakes
+    · Serving Glenpool + anywhere within 45 minutes
+    · Booking area for birthdays, baby showers, businesses, socials
+    · Pickup or shipping
+    · Their pastry chef makes every cotton candy sugar in house
+    · Booking line: (918) 729-7035
+
+  >> NO PRICING ANYWHERE — by request. <<
+  There is no price field in the catalog, no totals in the order
+  drawer, and no estimate in the booking builder. When Mitzie is
+  ready to publish numbers, prices slot back in without a redesign.
+
+  >> ADDING PRODUCTS OR FLAVORS IS ONE LINE. <<
+  See the CATALOG block at the top of the <script>. Add an object
+  to PRODUCTS and it appears in the shop, the filters and the
+  order drawer. Add a name to FLAVORS and it appears on the wheel,
+  the marquee and every flavor dropdown. FALL_SUGARS drives the
+  chalkboard menu — swap it for a spring or Christmas list later.
+
+  >> PHOTOS <<
+  Drop the real photos into ./photos/ with these names and they
+  take over automatically. Anything missing falls back to
+  hand-built candy artwork, so the page never looks broken:
+
+    photos/logo.png        the Spin N Sugar logo (transparent PNG best)
+    photos/hero.jpg        the booth / cover shot
+    photos/spinning.jpg    live spinning in action
+    photos/dome-cups.jpg   >> the stacked dome cups on the counter
+    photos/fall-sugars.jpg >> the Fall Sugars chalkboard flyer
+    photos/cake-12.jpg     a 12 inch cotton candy cake
+    photos/cake-custom.jpg a color-matched cake
+    photos/tub.jpg         a tub
+    photos/packaged.jpg    sealed packaged cotton candy
+    photos/cone.jpg        a hand-spun cone
+    photos/g1.jpg … g4.jpg gallery extras
+
+  >> PAYMENTS ARE INTENTIONALLY OFF <<
+  The order drawer and the booking form are wired visually but
+  transmit nothing and charge nothing. See handleDemoAction().
+  ══════════════════════════════════════════════════════════════
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spin N Sugar — Live-Spun Cotton Candy | Glenpool, Oklahoma</title>
+<meta name="description" content="Spin N Sugar hand-spins fresh cotton candy in Glenpool, Oklahoma. Live spinning for hire at birthdays, baby showers, business and social events. 12 inch cotton candy cakes, tubs and dome cups. Pickup or shipping. Text (918) 729-7035.">
+<meta name="theme-color" content="#2a0e2f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Caveat:wght@600;700&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   1. BRAND TOKENS — taken from her logo
+   ═══════════════════════════════════════════ */
+:root{
+  --pink:#ff3d92;
+  --pink-soft:#ffd3e6;
+  --blue:#3fb8ff;
+  --blue-soft:#d3efff;
+  --grape:#7b3fe4;
+  --lemon:#ffcf4d;
+  --mint:#5ee0c0;
+
+  --plum:#2a0e2f;
+  --ink:#33132f;
+  --mute:#7c5d78;
+  --cream:#fff7fb;
+  --cream-2:#ffeef6;
+  --white:#ffffff;
+  --line:#f4d9e8;
+
+  --chalk-bg:#0e0a10;
+  --chalk-ink:#f6e2be;
+
+  --floss:linear-gradient(100deg,var(--pink) 0%,#ff6bb5 32%,#a06bff 62%,var(--blue) 100%);
+  --floss-soft:linear-gradient(100deg,var(--pink-soft),#e7dcff 55%,var(--blue-soft));
+
+  --display:'Fredoka';
+  --sans:'Plus Jakarta Sans';
+  --script:'Caveat';
+  --chalk:'Amatic SC';
+
+  --r-lg:34px;
+  --r-md:22px;
+  --r-sm:14px;
+  --shadow:0 24px 60px -28px rgba(120,20,80,.42);
+  --shadow-sm:0 10px 28px -14px rgba(120,20,80,.35);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans),system-ui,sans-serif;
+  background:var(--cream);color:var(--ink);
+  font-size:16px;line-height:1.65;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--display),system-ui,sans-serif;font-weight:600;line-height:1.08;letter-spacing:-.02em}
+h2{font-size:clamp(2.1rem,5vw,3.6rem)}
+h3{font-size:1.3rem}
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.section{padding:clamp(4.5rem,9vw,8rem) 0;position:relative}
+.center{text-align:center}
+.lede{color:var(--mute);font-size:1.06rem;max-width:36em}
+.center .lede{margin-inline:auto}
+.kicker{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:1rem;
+}
+.kicker::before{content:"";width:26px;height:2px;border-radius:2px;background:var(--floss)}
+.center .kicker::after{content:"";width:26px;height:2px;border-radius:2px;background:var(--floss)}
+.script{font-family:var(--script),cursive;font-weight:700;font-size:1.35em;line-height:.9;color:var(--pink)}
+
+/* ═══════════════════════════════════════════
+   2. BUTTONS
+   ═══════════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  font-family:var(--display),sans-serif;font-weight:600;font-size:.95rem;
+  padding:.95em 1.9em;border-radius:999px;border:2px solid transparent;
+  cursor:pointer;transition:transform .22s cubic-bezier(.3,1.4,.5,1),box-shadow .25s,background .25s,color .25s,border-color .25s;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--floss);color:#fff;box-shadow:0 12px 26px -12px rgba(255,61,146,.8)}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 34px -14px rgba(255,61,146,.85)}
+.btn-outline{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-outline:hover{background:var(--ink);color:var(--cream);transform:translateY(-3px)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35)}
+.btn-ghost:hover{background:#fff;color:var(--plum);transform:translateY(-3px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none}
+
+/* ═══════════════════════════════════════════
+   3. NAV
+   ═══════════════════════════════════════════ */
+/* Scoped to #nav on purpose — a bare `nav` selector would also grab the
+   footer's <nav> and pin it to the top of the viewport. */
+#nav{position:fixed;inset:0 0 auto;z-index:800;padding:1.1rem 0}
+#nav .bar{
+  display:flex;align-items:center;gap:1.4rem;
+  background:rgba(255,247,251,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.8);border-radius:999px;
+  padding:.55rem .65rem .55rem 1.25rem;
+  box-shadow:0 10px 34px -20px rgba(120,20,80,.5);
+  transition:box-shadow .35s,background .35s;
+}
+#nav.scrolled .bar{background:rgba(255,247,251,.95);box-shadow:0 14px 40px -22px rgba(120,20,80,.6)}
+.brand{display:flex;align-items:center;gap:.6rem;margin-right:auto}
+.brand-mark{position:relative;width:42px;height:42px;border-radius:50%;background:var(--floss);display:grid;place-items:center;flex:none;overflow:hidden;box-shadow:0 6px 16px -8px rgba(255,61,146,.9)}
+.brand-mark img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.brand-mark svg{width:26px;height:26px}
+.brand-txt{font-family:var(--display),sans-serif;font-weight:600;font-size:1.12rem;letter-spacing:-.02em;line-height:1.05}
+.brand-txt small{display:block;font-family:var(--sans),sans-serif;font-weight:500;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.nav-links{display:flex;gap:.3rem;list-style:none}
+.nav-links a{display:block;padding:.55em .95em;border-radius:999px;font-size:.88rem;font-weight:600;color:var(--mute);transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--ink);background:rgba(255,61,146,.09)}
+.order-btn{
+  position:relative;display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--ink);color:var(--cream);border:none;border-radius:999px;
+  padding:.72em 1.25em;font-family:var(--display),sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;
+  transition:transform .2s,background .25s;
+}
+.order-btn:hover{transform:translateY(-2px);background:var(--pink)}
+.order-btn .count{min-width:21px;height:21px;padding:0 6px;border-radius:999px;background:var(--pink);color:#fff;font-size:.72rem;font-weight:700;display:grid;place-items:center;transition:background .25s,transform .3s}
+.order-btn:hover .count{background:#fff;color:var(--pink)}
+.order-btn .count.pop{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{50%{transform:scale(1.45)}}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:none;background:var(--ink);cursor:pointer;position:relative}
+.burger span{position:absolute;left:13px;width:18px;height:2px;border-radius:2px;background:var(--cream);transition:transform .3s,opacity .2s}
+.burger span:nth-child(1){top:17px}.burger span:nth-child(2){top:22px}.burger span:nth-child(3){top:27px}
+.burger.open span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+@media(max-width:1040px){
+  .nav-links{
+    position:absolute;top:calc(100% + .6rem);left:0;right:0;flex-direction:column;gap:.2rem;
+    background:rgba(255,247,251,.97);backdrop-filter:blur(16px);border-radius:26px;padding:1rem;
+    box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(-10px);transition:.3s;
+  }
+  .nav-links.open{opacity:1;visibility:visible;transform:none}
+  .nav-links a{padding:.75em 1.1em;font-size:1rem}
+  .burger{display:block}
+}
+@media(max-width:520px){
+  .order-btn span.label{display:none}
+  .brand-txt small{display:none}
+  .brand-txt{font-size:1rem;white-space:nowrap}
+}
+
+/* ═══════════════════════════════════════════
+   4. HERO
+   ═══════════════════════════════════════════ */
+.hero{position:relative;padding:clamp(8rem,14vw,11rem) 0 clamp(3rem,6vw,5rem);overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;z-index:-1}
+.hero::before{width:46vw;height:46vw;background:var(--pink-soft);top:-8vw;left:-12vw}
+.hero::after{width:40vw;height:40vw;background:var(--blue-soft);bottom:-14vw;right:-10vw}
+.hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero h1{font-size:clamp(2.1rem,4.9vw,4rem);max-width:12em}
+.hero h1 .w{display:inline-block;opacity:0;animation:wordIn .9s cubic-bezier(.2,.9,.25,1) forwards}
+@keyframes wordIn{from{opacity:0;transform:translateY(28px) rotate(-3deg)}to{opacity:1;transform:none}}
+.hero .lede{margin:1.5rem 0 2rem;font-size:1.1rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.85rem}
+.hero-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.2rem}
+.hero-chips span{display:inline-flex;align-items:center;gap:.45rem;font-size:.74rem;font-weight:600;color:var(--mute);background:var(--white);border:1px solid var(--line);border-radius:999px;padding:.5em 1em}
+.hero-chips b{color:var(--pink)}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.6rem;background:var(--white);border:1px solid var(--line);
+  border-radius:999px;padding:.5em 1.15em .5em 1.15em;font-size:.8rem;font-weight:600;color:var(--mute);
+  box-shadow:var(--shadow-sm);margin-bottom:1.6rem;
+}
+.hero-badge i{width:9px;height:9px;border-radius:50%;background:var(--mint);position:relative;flex:none}
+.hero-badge i::after{content:"";position:absolute;inset:-5px;border-radius:50%;background:var(--mint);opacity:.35;animation:ping 2s ease-out infinite}
+@keyframes ping{0%{transform:scale(.6);opacity:.5}100%{transform:scale(1.7);opacity:0}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero{text-align:center}.hero h1,.hero .lede{margin-inline:auto}.hero-cta,.hero-chips{justify-content:center}}
+@media(max-width:560px){.hero .lede{font-size:1rem}.hero-badge{font-size:.74rem}}
+
+/* ---- the machine ---- */
+.machine{position:relative;width:min(470px,100%);margin-inline:auto;aspect-ratio:1;display:grid;place-items:center}
+.machine svg{width:100%;height:100%;overflow:visible}
+.spin-bowl{transform-origin:200px 296px;animation:bowlSpin 2.6s linear infinite}
+@keyframes bowlSpin{to{transform:rotate(360deg)}}
+.wisp{stroke-dasharray:6 130;animation:wispRise 3.4s linear infinite}
+.wisp:nth-of-type(2){animation-duration:4.1s;animation-delay:-1.1s}
+.wisp:nth-of-type(3){animation-duration:3.8s;animation-delay:-2.3s}
+.wisp:nth-of-type(4){animation-duration:4.6s;animation-delay:-.6s}
+@keyframes wispRise{from{stroke-dashoffset:140}to{stroke-dashoffset:-30}}
+.cloud-puff{animation:puff 5s ease-in-out infinite;transform-origin:center}
+.cloud-puff:nth-of-type(2){animation-duration:6.2s;animation-delay:-1.4s}
+.cloud-puff:nth-of-type(3){animation-duration:5.6s;animation-delay:-2.8s}
+.cloud-puff:nth-of-type(4){animation-duration:6.8s;animation-delay:-3.6s}
+@keyframes puff{0%,100%{transform:scale(1) translate(0,0)}50%{transform:scale(1.06) translate(2px,-4px)}}
+.machine-tag{
+  position:absolute;background:var(--white);border-radius:var(--r-sm);padding:.6rem .95rem;
+  box-shadow:var(--shadow-sm);font-size:.76rem;font-weight:700;line-height:1.3;
+  border:1px solid var(--line);animation:floaty 6s ease-in-out infinite;
+}
+.machine-tag small{display:block;font-weight:500;color:var(--mute);font-size:.68rem}
+.machine-tag.t1{top:7%;left:-2%}
+.machine-tag.t2{bottom:15%;right:-3%;animation-delay:-3s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+@media(max-width:900px){.machine-tag.t1{left:2%}.machine-tag.t2{right:2%}}
+
+.sugar{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
+.sugar i{position:absolute;border-radius:50%;opacity:0;animation:drift linear infinite}
+@keyframes drift{
+  0%{opacity:0;transform:translateY(20px) scale(.5)}
+  15%{opacity:.7}85%{opacity:.5}
+  100%{opacity:0;transform:translateY(-160px) translateX(40px) scale(1.15)}
+}
+
+/* ═══════════════════════════════════════════
+   5. MARQUEE
+   ═══════════════════════════════════════════ */
+/* The tilt makes the band wider than the viewport, so it gets its own clip. */
+.marquee-clip{overflow:hidden}
+.marquee{background:var(--ink);color:var(--cream);padding:1.05rem 0;overflow:hidden;transform:rotate(-1.1deg) scale(1.04)}
+.marquee-track{display:flex;width:max-content;animation:slide 38s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track .grp{display:flex;align-items:center;gap:1.6rem;padding-right:1.6rem}
+.marquee-track span{font-family:var(--display),sans-serif;font-weight:500;font-size:1rem;white-space:nowrap}
+.marquee-track b{width:8px;height:8px;border-radius:50%;background:var(--pink);flex:none}
+.marquee-track b:nth-child(4n){background:var(--blue)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════════════════
+   6. REVEAL
+   ═══════════════════════════════════════════ */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.8,.3,1),transform .8s cubic-bezier(.2,.8,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+
+/* ═══════════════════════════════════════════
+   7. THREE WAYS
+   ═══════════════════════════════════════════ */
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.way{position:relative;background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:2.2rem 1.9rem 2rem;overflow:hidden;transition:transform .4s cubic-bezier(.2,.9,.3,1),box-shadow .4s,border-color .4s}
+.way::after{content:"";position:absolute;top:-40px;right:-40px;width:150px;height:150px;border-radius:50%;background:var(--floss-soft);opacity:.6;transition:transform .5s}
+.way:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
+.way:hover::after{transform:scale(1.35)}
+.way>*{position:relative;z-index:1}
+.way-ico{width:56px;height:56px;border-radius:18px;background:var(--floss);display:grid;place-items:center;margin-bottom:1.3rem;box-shadow:0 10px 22px -12px rgba(255,61,146,.9)}
+.way-ico svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.way h3{margin-bottom:.5rem}
+.way p{color:var(--mute);font-size:.95rem}
+.way .more{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.1rem;font-weight:700;font-size:.85rem;color:var(--pink)}
+.way .more svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;transition:transform .25s}
+.way:hover .more svg{transform:translateX(4px)}
+@media(max-width:880px){.ways{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════
+   8. FLAVOR WHEEL
+   ═══════════════════════════════════════════ */
+.wheel-sec{background:var(--plum);color:var(--cream);overflow:hidden}
+.wheel-sec::before{content:"";position:absolute;width:60vw;height:60vw;border-radius:50%;background:radial-gradient(circle,rgba(255,61,146,.28),transparent 68%);top:-20vw;right:-16vw;pointer-events:none}
+.wheel-sec::after{content:"";position:absolute;width:50vw;height:50vw;border-radius:50%;background:radial-gradient(circle,rgba(63,184,255,.22),transparent 68%);bottom:-22vw;left:-14vw;pointer-events:none}
+.wheel-sec .lede{color:rgba(255,247,251,.68)}
+.wheel-sec .kicker{color:var(--lemon)}
+.wheel-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,5rem);align-items:center;margin-top:3rem;position:relative;z-index:1}
+.wheel-stage{position:relative;width:min(410px,84vw);margin-inline:auto;aspect-ratio:1}
+.wheel-ring{position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(from 0deg,var(--pink),var(--lemon),var(--mint),var(--blue),var(--grape),var(--pink));opacity:.55;filter:blur(9px);animation:bowlSpin 14s linear infinite}
+.wheel{position:absolute;inset:0;border-radius:50%;border:10px solid var(--white);box-shadow:0 24px 60px -20px rgba(0,0,0,.7),inset 0 0 0 3px rgba(255,255,255,.35);transition:transform 4.6s cubic-bezier(.15,.9,.15,1)}
+/* Each label is a zero-height strip from hub to rim; its left-centre sits on
+   the wheel centre, so rotating about that origin walks it around the wheel. */
+.wheel .lbl{
+  position:absolute;top:50%;left:50%;width:50%;height:0;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding-right:8%;transform-origin:0 50%;
+  font-family:var(--display),sans-serif;font-weight:600;font-size:.76rem;color:#fff;
+  text-shadow:0 1px 5px rgba(0,0,0,.55);white-space:nowrap;pointer-events:none;
+}
+/* Labels past the halfway mark would hang upside down, so their text gets
+   spun back the other way while the strip itself stays on its own ray. */
+.wheel .lbl i{font-style:normal;display:block}
+.wheel .lbl.flip i{transform:rotate(180deg)}
+.wheel-hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:24%;height:24%;border-radius:50%;background:var(--white);z-index:3;display:grid;place-items:center;box-shadow:0 8px 22px -8px rgba(0,0,0,.6)}
+.wheel-hub svg{width:52%;height:52%}
+.wheel-pin{position:absolute;top:-20px;left:50%;transform:translateX(-50%);z-index:4;width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:30px solid var(--white);filter:drop-shadow(0 5px 8px rgba(0,0,0,.45));transition:transform .12s}
+.wheel-pin.tick{transform:translateX(-50%) rotate(-11deg)}
+.result{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:var(--r-lg);padding:2rem;backdrop-filter:blur(10px);min-height:206px;display:flex;flex-direction:column;justify-content:center}
+.result .swatch{width:52px;height:52px;border-radius:16px;margin-bottom:1rem;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);transition:background .5s}
+.result h3{font-size:1.9rem;margin-bottom:.4rem}
+.result p{color:rgba(255,247,251,.72);font-size:.95rem}
+.result .idle{color:rgba(255,247,251,.55)}
+.flavor-chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.6rem}
+.flavor-chips button{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.05);color:rgba(255,247,251,.85);border-radius:999px;padding:.45em .95em;font-size:.78rem;font-weight:600;cursor:pointer;transition:.22s}
+.flavor-chips button:hover{background:#fff;color:var(--plum);border-color:#fff;transform:translateY(-2px)}
+.spin-cta{margin-top:1.8rem;display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.spin-note{font-size:.78rem;color:rgba(255,247,251,.5)}
+@media(max-width:900px){.wheel-grid{grid-template-columns:1fr}.wheel-panel{order:2}}
+
+/* ═══════════════════════════════════════════
+   9. FALL SUGARS — chalkboard, after her own flyer
+   ═══════════════════════════════════════════ */
+.chalk{background:var(--chalk-bg);color:var(--chalk-ink);overflow:hidden}
+.chalk::before{
+  content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background:
+    radial-gradient(70% 55% at 22% 12%, rgba(246,226,190,.09), transparent 65%),
+    radial-gradient(60% 50% at 82% 88%, rgba(255,61,146,.07), transparent 65%),
+    repeating-linear-gradient(112deg, rgba(246,226,190,.035) 0 1px, transparent 1px 5px);
+}
+.chalk-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(2.2rem,5vw,4.5rem);align-items:center;position:relative;z-index:1}
+.chalk .kicker{color:#ffb0d4}
+.chalk .kicker::before,.chalk .kicker::after{background:#ffb0d4}
+.chalk h2{font-family:var(--chalk),cursive;font-weight:700;font-size:clamp(3rem,7.5vw,5.4rem);letter-spacing:.02em;line-height:.92;color:var(--chalk-ink)}
+.chalk p{color:rgba(246,226,190,.68);font-size:1rem;max-width:32em;margin-top:1.1rem}
+.chalk .signoff{font-family:var(--script),cursive;font-size:1.5rem;color:#ffb0d4;margin-top:1.4rem;line-height:1.2}
+.chalk-menu{
+  border:2px solid rgba(246,226,190,.3);border-radius:8px;padding:clamp(1.6rem,4vw,2.8rem);
+  position:relative;background:rgba(246,226,190,.02);
+}
+.chalk-menu::before{content:"";position:absolute;inset:7px;border:1px solid rgba(246,226,190,.16);border-radius:4px;pointer-events:none}
+.chalk-menu .banner{
+  font-family:var(--chalk),cursive;font-weight:700;font-size:clamp(1.9rem,4vw,2.6rem);
+  text-align:center;letter-spacing:.08em;color:#ffd9a8;margin-bottom:1.2rem;
+}
+.chalk-list{list-style:none;display:flex;flex-direction:column;gap:.15rem}
+.chalk-list li{
+  font-family:var(--chalk),cursive;font-weight:700;font-size:clamp(1.35rem,2.7vw,1.85rem);
+  letter-spacing:.045em;line-height:1.22;text-align:center;
+  transition:color .25s,transform .25s;cursor:default;
+}
+.chalk-list li:hover{color:#ffb0d4;transform:scale(1.035)}
+.chalk-foot{text-align:center;font-family:var(--sans),sans-serif;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,226,190,.45);margin-top:1.4rem}
+@media(max-width:880px){.chalk-grid{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════
+   10. SHOP
+   ═══════════════════════════════════════════ */
+.shop-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.shop-filters{display:flex;gap:.4rem;flex-wrap:wrap}
+.shop-filters button{border:1px solid var(--line);background:var(--white);border-radius:999px;padding:.55em 1.15em;font-size:.84rem;font-weight:600;color:var(--mute);cursor:pointer;transition:.22s}
+.shop-filters button:hover{color:var(--ink);border-color:var(--pink)}
+.shop-filters button.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.fulfil{
+  display:flex;align-items:center;justify-content:center;gap:1.4rem;flex-wrap:wrap;
+  background:var(--white);border:1px solid var(--line);border-radius:999px;
+  padding:.85rem 1.6rem;margin-top:2.2rem;box-shadow:var(--shadow-sm);
+}
+.fulfil span{display:inline-flex;align-items:center;gap:.55rem;font-size:.88rem;font-weight:600}
+.fulfil svg{width:18px;height:18px;stroke:var(--pink);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.fulfil em{font-style:normal;color:var(--mute);font-weight:500;font-size:.85rem}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:1.4rem;margin-top:2.2rem}
+.product{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.9,.3,1),box-shadow .35s,border-color .35s;animation:cardIn .5s cubic-bezier(.2,.9,.3,1) backwards}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.97)}}
+.product:hover{transform:translateY(-7px);box-shadow:var(--shadow);border-color:transparent}
+.product .shot{position:relative;aspect-ratio:4/3;overflow:hidden}
+.product .shot .art{transition:transform .6s cubic-bezier(.2,.9,.3,1)}
+.product:hover .shot .art{transform:scale(1.07)}
+.product .tag{position:absolute;top:.8rem;left:.8rem;z-index:3;background:var(--white);color:var(--pink);font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.42em .85em;border-radius:999px;box-shadow:var(--shadow-sm)}
+.product .body{padding:1.35rem 1.4rem 1.5rem;display:flex;flex-direction:column;flex:1;gap:.45rem}
+.product h3{font-size:1.12rem}
+.product .desc{font-size:.86rem;color:var(--mute);flex:1}
+.product .opts{display:flex;gap:.5rem;margin-top:.9rem}
+.product select{
+  flex:1;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--cream);
+  padding:.6em .9em;font-size:.8rem;font-weight:600;cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c5d78' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .8em center;background-size:13px;padding-right:2.2em;
+}
+.product select:focus{outline:2px solid var(--pink);outline-offset:1px}
+.add{border:none;border-radius:999px;background:var(--ink);color:var(--cream);font-family:var(--display),sans-serif;font-weight:600;font-size:.85rem;padding:.72em 1.2em;cursor:pointer;transition:background .25s,transform .2s;flex:none}
+.add:hover{background:var(--pink);transform:translateY(-2px)}
+.add.added{background:var(--mint);color:var(--plum)}
+
+/* ═══════════════════════════════════════════
+   11. CANDY ARTWORK (photo fallback)
+   ═══════════════════════════════════════════ */
+.ph{position:absolute;inset:0;overflow:hidden;background:var(--cream-2)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.ph .art{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(64% 58% at 24% 24%, var(--c1,#ff8ec4), transparent 72%),
+    radial-gradient(62% 56% at 78% 30%, var(--c2,#8fd6ff), transparent 72%),
+    radial-gradient(90% 72% at 52% 96%, var(--c1,#ff8ec4), transparent 74%),
+    linear-gradient(150deg,#ffe4f1,#dcecff);
+}
+.ph .art::before{
+  content:"";position:absolute;inset:0;opacity:.5;
+  background:repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.5) 0deg 9deg, transparent 9deg 18deg);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 8%,transparent 62%);
+  mask-image:radial-gradient(circle at 50% 50%,#000 8%,transparent 62%);
+  animation:bowlSpin 26s linear infinite;
+}
+.ph .art::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 22%, rgba(255,255,255,.5), transparent 44%)}
+.ph .swirl{position:absolute;inset:0;display:grid;place-items:center;z-index:1}
+.ph .swirl svg{width:46%;height:46%;opacity:.92;filter:drop-shadow(0 10px 20px rgba(120,20,80,.35))}
+
+/* ═══════════════════════════════════════════
+   12. BOOKING BUILDER
+   ═══════════════════════════════════════════ */
+.event-sec{background:linear-gradient(180deg,var(--cream) 0%,var(--cream-2) 100%)}
+.builder{display:grid;grid-template-columns:1.15fr .85fr;margin-top:3rem;background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.builder-in{padding:clamp(1.8rem,3.5vw,2.8rem)}
+.field{margin-bottom:1.9rem}
+.field:last-child{margin-bottom:0}
+.field>label{display:block;font-family:var(--display),sans-serif;font-weight:600;font-size:.98rem;margin-bottom:.8rem}
+.occasions{display:flex;flex-wrap:wrap;gap:.5rem}
+.occasions button{border:1px solid var(--line);background:var(--cream);border-radius:999px;padding:.6em 1.15em;font-size:.85rem;font-weight:600;color:var(--mute);cursor:pointer;transition:.22s}
+.occasions button:hover{border-color:var(--pink);color:var(--ink)}
+.occasions button.on{background:var(--floss);color:#fff;border-color:transparent;box-shadow:0 8px 18px -10px rgba(255,61,146,.9)}
+.slider-row{display:flex;align-items:center;gap:1rem}
+.slider-val{font-family:var(--display),sans-serif;font-weight:600;font-size:1.05rem;min-width:104px;text-align:right;color:var(--pink);flex:none}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:999px;background:var(--cream-2);cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--pink);border:3px solid #fff;box-shadow:0 4px 12px -3px rgba(255,61,146,.9);cursor:grab}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--pink);border:3px solid #fff;box-shadow:0 4px 12px -3px rgba(255,61,146,.9);cursor:grab}
+input[type=range]:focus{outline:none}
+input[type=range]:focus::-webkit-slider-thumb{box-shadow:0 0 0 5px rgba(255,61,146,.22)}
+.toggles{display:flex;flex-wrap:wrap;gap:.6rem}
+.toggle{display:inline-flex;align-items:center;gap:.55rem;border:1px solid var(--line);background:var(--cream);border-radius:999px;padding:.6em 1.1em;font-size:.85rem;font-weight:600;color:var(--mute);cursor:pointer;transition:.22s}
+.toggle input{display:none}
+.toggle .box{width:17px;height:17px;border-radius:6px;border:2px solid var(--line);display:grid;place-items:center;transition:.2s;flex:none}
+.toggle .box svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .18s}
+.toggle.on{color:var(--ink);border-color:var(--pink)}
+.toggle.on .box{background:var(--pink);border-color:var(--pink)}
+.toggle.on .box svg{opacity:1}
+.summary{background:var(--plum);color:var(--cream);padding:clamp(1.8rem,3.5vw,2.8rem);display:flex;flex-direction:column}
+.summary .qk{font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lemon)}
+.summary h3{font-size:1.75rem;margin:.7rem 0 .3rem}
+.summary .sub{color:rgba(255,247,251,.62);font-size:.88rem}
+.summary ul{list-style:none;margin:1.5rem 0;display:flex;flex-direction:column;gap:.6rem}
+.summary li{display:flex;gap:.65rem;font-size:.89rem;color:rgba(255,247,251,.86);align-items:flex-start}
+.summary li svg{width:16px;height:16px;stroke:var(--mint);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;flex:none;margin-top:.28rem}
+.summary .foot{margin-top:auto;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.16)}
+.summary .foot .btn{width:100%}
+.summary .foot .btn+.btn{margin-top:.65rem}
+.summary .foot p{font-size:.74rem;color:rgba(255,247,251,.5);margin-top:.9rem;line-height:1.5}
+@media(max-width:880px){.builder{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════
+   13. GALLERY
+   ═══════════════════════════════════════════ */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:1rem;margin-top:3rem}
+.gtile{position:relative;border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm)}
+.gtile .ph{transition:transform .7s cubic-bezier(.2,.9,.3,1)}
+.gtile:hover .ph{transform:scale(1.06)}
+.gtile::after{content:attr(data-cap);position:absolute;inset:auto 0 0;z-index:3;padding:2.2rem .95rem .85rem;background:linear-gradient(transparent,rgba(42,14,47,.85));color:#fff;font-size:.8rem;font-weight:600;opacity:0;transform:translateY(8px);transition:.35s}
+.gtile:hover::after{opacity:1;transform:none}
+.gtile.wide{grid-column:span 2}
+.gtile.tall{grid-row:span 2}
+@media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}}
+@media(max-width:520px){.gallery{grid-template-columns:1fr}.gtile.wide{grid-column:span 1}}
+
+/* ═══════════════════════════════════════════
+   14. STORY
+   ═══════════════════════════════════════════ */
+.story{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.story-shot{position:relative;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.story-quote{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;z-index:4;background:rgba(255,247,251,.94);backdrop-filter:blur(10px);border-radius:var(--r-md);padding:1.1rem 1.3rem;box-shadow:var(--shadow-sm)}
+.story-quote p{font-family:var(--script),cursive;font-size:1.4rem;line-height:1.25;color:var(--ink)}
+.story-quote span{font-size:.72rem;font-weight:600;color:var(--mute);letter-spacing:.05em}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.2rem}
+.fact{background:var(--white);border:1px solid var(--line);border-radius:var(--r-md);padding:1.2rem 1.1rem}
+.fact b{display:block;font-family:var(--display),sans-serif;font-weight:600;font-size:1.35rem;color:var(--pink);line-height:1.15}
+.fact span{font-size:.78rem;color:var(--mute);font-weight:500}
+@media(max-width:880px){.story{grid-template-columns:1fr}.story-shot{max-width:430px;margin-inline:auto}}
+@media(max-width:430px){.facts{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════
+   15. REVIEWS (sample content)
+   ═══════════════════════════════════════════ */
+.sample-flag{display:inline-flex;align-items:center;gap:.45rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);background:var(--cream-2);border:1px dashed var(--line);border-radius:999px;padding:.4em .9em;margin-top:1rem}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:3rem}
+.review{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.9rem 1.7rem}
+.review .stars{color:var(--lemon);letter-spacing:.15em;font-size:.9rem;margin-bottom:.8rem}
+.review p{font-size:.94rem}
+.review .who{margin-top:1.2rem;display:flex;align-items:center;gap:.7rem}
+.review .av{width:38px;height:38px;border-radius:50%;background:var(--floss-soft);display:grid;place-items:center;font-family:var(--display),sans-serif;font-weight:600;font-size:.9rem;color:var(--pink);flex:none}
+.review .who b{display:block;font-size:.86rem}
+.review .who span{font-size:.74rem;color:var(--mute)}
+@media(max-width:880px){.reviews{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════
+   16. CONTACT
+   ═══════════════════════════════════════════ */
+.contact-sec{background:var(--plum);color:var(--cream);overflow:hidden}
+.contact-sec::before{content:"";position:absolute;width:56vw;height:56vw;border-radius:50%;background:radial-gradient(circle,rgba(255,61,146,.22),transparent 68%);top:-24vw;left:-14vw;pointer-events:none}
+.contact-sec .lede{color:rgba(255,247,251,.68)}
+.contact-sec .kicker{color:var(--lemon)}
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2.2rem,5vw,4.5rem);margin-top:3rem;position:relative;z-index:1}
+.cinfo{display:flex;flex-direction:column;gap:1.2rem}
+.cinfo .row{display:flex;gap:1rem;align-items:flex-start}
+.cinfo .ic{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;flex:none}
+.cinfo .ic svg{width:20px;height:20px;stroke:var(--pink);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.cinfo b{display:block;font-family:var(--display),sans-serif;font-weight:600;font-size:.98rem}
+.cinfo p,.cinfo a{color:rgba(255,247,251,.68);font-size:.9rem}
+.cinfo a:hover{color:#fff}
+.cinfo .big{font-family:var(--display),sans-serif;font-weight:600;font-size:1.45rem;color:#fff!important;letter-spacing:-.01em}
+.form{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-lg);padding:clamp(1.6rem,3.5vw,2.4rem);backdrop-filter:blur(10px)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fld{margin-bottom:1rem}
+.fld label{display:block;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,247,251,.55);margin-bottom:.45rem}
+.fld input,.fld textarea,.fld select{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:var(--r-sm);padding:.85em 1em;font-size:.92rem;color:var(--cream);transition:border-color .25s,background .25s}
+.fld textarea{resize:vertical;min-height:96px}
+.fld input::placeholder,.fld textarea::placeholder{color:rgba(255,247,251,.32)}
+.fld input:focus,.fld textarea:focus,.fld select:focus{outline:none;border-color:var(--pink);background:rgba(255,255,255,.1)}
+.fld select option{background:var(--plum);color:var(--cream)}
+.form .btn{width:100%;margin-top:.5rem}
+@media(max-width:880px){.contact-grid{grid-template-columns:1fr}.frow{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════
+   17. FOOTER
+   ═══════════════════════════════════════════ */
+footer{background:var(--ink);color:rgba(255,247,251,.62);padding:3.5rem 0 2rem;font-size:.88rem;position:relative;z-index:1}
+.foot-top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:flex-start;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.foot-top .brand-txt{color:var(--cream)}
+.foot-nav{display:flex;gap:1.6rem;flex-wrap:wrap}
+.foot-nav a:hover{color:#fff}
+.foot-bot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:1.5rem;font-size:.78rem}
+.foot-bot a{color:var(--pink)}
+
+/* ═══════════════════════════════════════════
+   18. ORDER DRAWER
+   ═══════════════════════════════════════════ */
+.scrim{position:fixed;inset:0;background:rgba(42,14,47,.55);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.35s;z-index:900}
+.scrim.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);background:var(--cream);z-index:950;display:flex;flex-direction:column;transform:translateX(102%);transition:transform .42s cubic-bezier(.3,.9,.25,1);box-shadow:-24px 0 60px -24px rgba(42,14,47,.6)}
+.drawer.open{transform:none}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.5rem;border-bottom:1px solid var(--line)}
+.drawer-top h3{font-size:1.25rem}
+.x{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--white);cursor:pointer;display:grid;place-items:center;transition:.22s}
+.x:hover{background:var(--ink);border-color:var(--ink)}
+.x svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round}
+.x:hover svg{stroke:var(--cream)}
+.drawer-body{flex:1;overflow-y:auto;padding:1.2rem 1.5rem}
+.empty{text-align:center;padding:3.5rem 1rem;color:var(--mute)}
+.empty svg{width:78px;height:78px;margin:0 auto 1.2rem;opacity:.8}
+.line{display:flex;gap:.9rem;padding:.95rem 0;border-bottom:1px solid var(--line);align-items:center}
+.line:last-child{border-bottom:none}
+.line .thumb{position:relative;width:60px;height:60px;border-radius:var(--r-sm);overflow:hidden;flex:none}
+.line .info{flex:1;min-width:0}
+.line .info b{display:block;font-size:.92rem;font-family:var(--display),sans-serif;font-weight:600}
+.line .info span{font-size:.76rem;color:var(--mute)}
+.qty{display:flex;align-items:center;gap:.15rem;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:.15rem;flex:none}
+.qty button{width:26px;height:26px;border-radius:50%;border:none;background:transparent;cursor:pointer;font-size:1rem;line-height:1;color:var(--mute);transition:.2s;font-family:var(--display),sans-serif}
+.qty button:hover{background:var(--pink);color:#fff}
+.qty span{min-width:22px;text-align:center;font-size:.85rem;font-weight:700}
+.drawer-foot{padding:1.3rem 1.5rem;border-top:1px solid var(--line);background:var(--white)}
+.drawer-foot>label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:.6rem}
+.pickship{display:flex;gap:.5rem;margin-bottom:1rem}
+.pickship button{flex:1;border:1px solid var(--line);background:var(--cream);border-radius:999px;padding:.65em .5em;font-size:.85rem;font-weight:600;color:var(--mute);cursor:pointer;transition:.22s}
+.pickship button.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.drawer-foot .btn{width:100%}
+.demo-note{margin-top:.9rem;font-size:.75rem;color:var(--mute);text-align:center;line-height:1.5;background:var(--cream-2);border:1px dashed var(--line);border-radius:var(--r-sm);padding:.7rem .8rem}
+
+/* ═══════════════════════════════════════════
+   19. TOAST
+   ═══════════════════════════════════════════ */
+.toast{position:fixed;left:50%;bottom:2rem;transform:translate(-50%,140%);z-index:990;background:var(--ink);color:var(--cream);border-radius:22px;padding:.9rem 1.6rem;font-size:.88rem;font-weight:600;box-shadow:var(--shadow);transition:transform .45s cubic-bezier(.3,1.3,.4,1);display:flex;align-items:center;gap:.6rem;max-width:min(460px,92vw)}
+.toast.show{transform:translate(-50%,0)}
+.toast svg{width:17px;height:17px;stroke:var(--mint);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--cream);padding:.8rem 1.2rem;border-radius:0 0 12px 0;z-index:1000}
+.skip:focus{left:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="bar">
+      <a href="#top" class="brand" aria-label="Spin N Sugar home">
+        <span class="brand-mark">
+          <img src="photos/logo.png" alt="" onerror="this.remove()">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2c3.4 0 6 2.3 6 5.2 0 2-1.2 3.5-3 4.3 1.4.7 2.2 1.9 2.2 3.3 0 2.4-2.3 4.2-5.2 4.2S6.8 17.2 6.8 14.8c0-1.4.8-2.6 2.2-3.3-1.8-.8-3-2.3-3-4.3C6 4.3 8.6 2 12 2z" fill="#fff" opacity=".95"/><path d="M12 19v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <span class="brand-txt">Spin N Sugar<small>Glenpool, OK</small></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#flavors">Flavors</a></li>
+        <li><a href="#fall">Fall Sugars</a></li>
+        <li><a href="#book">Book Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#story">Who We Are</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="order-btn" id="orderBtn" aria-label="Open your order">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="label">Order</span>
+        <span class="count" id="orderCount">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<!-- ══════════ HERO ══════════ -->
+<header class="hero" id="top">
+  <div class="sugar" id="sugar" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-badge"><i></i> Booking events across Green Country</span>
+        <h1 id="heroTitle">Fresh cotton candy, spun right in front of your guests.</h1>
+        <p class="lede">We're a mother-and-daughter shop in Glenpool. We roll the machine in and hand-spin clouds of sugar at your event, and we make it fresh at home too — tubs, dome cups and 12&nbsp;inch cotton candy cakes, ready for pickup or shipping.</p>
+        <div class="hero-cta">
+          <a href="#shop" class="btn btn-primary">See what we make
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#book" class="btn btn-outline">Book us for your event</a>
+        </div>
+        <div class="hero-chips">
+          <span><b>&#9733;</b> Live spinning for hire</span>
+          <span><b>&#9733;</b> Our pastry chef makes every sugar</span>
+          <span><b>&#9733;</b> Pickup or shipping</span>
+        </div>
+      </div>
+
+      <div class="machine" aria-hidden="true">
+        <svg viewBox="0 0 400 400" role="img">
+          <defs>
+            <linearGradient id="gFloss" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#ff3d92"/><stop offset="50%" stop-color="#c46bff"/><stop offset="100%" stop-color="#3fb8ff"/>
+            </linearGradient>
+            <linearGradient id="gMetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#e6e9f2"/>
+              <stop offset="70%" stop-color="#b9bfd0"/><stop offset="100%" stop-color="#8d94a8"/>
+            </linearGradient>
+            <linearGradient id="gCone" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f0d3a8"/><stop offset="100%" stop-color="#c99a5e"/>
+            </linearGradient>
+            <filter id="fBlur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="7"/></filter>
+            <filter id="fSoft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.5"/></filter>
+          </defs>
+
+          <ellipse cx="200" cy="150" rx="140" ry="120" fill="url(#gFloss)" opacity=".2" filter="url(#fBlur)"/>
+
+          <g filter="url(#fSoft)">
+            <circle class="cloud-puff" cx="168" cy="140" r="52" fill="#ff77b9" opacity=".92"/>
+            <circle class="cloud-puff" cx="232" cy="134" r="48" fill="#6fc9ff" opacity=".9"/>
+            <circle class="cloud-puff" cx="200" cy="106" r="45" fill="#ffa8d4" opacity=".95"/>
+            <circle class="cloud-puff" cx="202" cy="164" r="50" fill="#c9a6ff" opacity=".88"/>
+            <circle cx="182" cy="122" r="20" fill="#fff" opacity=".5"/>
+          </g>
+
+          <path d="M182 176 L218 176 L204 268 Q200 276 196 268 Z" fill="url(#gCone)"/>
+          <path d="M186 186 L214 186" stroke="#a97c45" stroke-width="1.6" opacity=".5"/>
+          <path d="M190 206 L210 206" stroke="#a97c45" stroke-width="1.6" opacity=".5"/>
+          <path d="M193 226 L207 226" stroke="#a97c45" stroke-width="1.6" opacity=".5"/>
+
+          <g fill="none" stroke="url(#gFloss)" stroke-width="3" stroke-linecap="round" opacity=".9">
+            <path class="wisp" d="M150 286 C120 250 138 200 172 178"/>
+            <path class="wisp" d="M250 286 C282 250 262 200 228 178"/>
+            <path class="wisp" d="M176 292 C160 254 176 210 194 182"/>
+            <path class="wisp" d="M224 292 C242 254 224 210 206 182"/>
+          </g>
+
+          <path d="M92 296 Q200 268 308 296 L292 352 Q200 372 108 352 Z" fill="url(#gMetal)"/>
+          <ellipse cx="200" cy="296" rx="108" ry="27" fill="#dfe3ec"/>
+          <g class="spin-bowl">
+            <ellipse cx="200" cy="296" rx="96" ry="23" fill="#c3c9d8"/>
+            <ellipse cx="200" cy="296" rx="60" ry="14" fill="#eef0f6"/>
+            <path d="M140 296 A60 14 0 0 1 260 296" stroke="#fff" stroke-width="2.5" fill="none" opacity=".85"/>
+            <circle cx="200" cy="296" r="15" fill="url(#gMetal)"/>
+            <circle cx="200" cy="296" r="6" fill="#8d94a8"/>
+          </g>
+          <ellipse cx="200" cy="296" rx="108" ry="27" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>
+
+          <path d="M118 352 L282 352 L272 380 Q200 392 128 380 Z" fill="#ff3d92"/>
+          <rect x="150" y="358" width="100" height="9" rx="4.5" fill="#fff" opacity=".55"/>
+        </svg>
+        <div class="machine-tag t1">Live spinning<small>we set up at your event</small></div>
+        <div class="machine-tag t2">Or made at home<small>tubs, cups &amp; cakes</small></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ FLAVOR MARQUEE ══════════ -->
+<div class="marquee-clip"><div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div></div>
+
+<!-- ══════════ WHAT WE DO ══════════ -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Who and what we are</span>
+      <h2>Three ways we get you <span class="script">cotton candy</span></h2>
+      <p class="lede">It's the same hand-spun sugar every time. The only question is whether we bring it to you, you pick it up, or we ship it out.</p>
+    </div>
+    <div class="ways">
+      <article class="way rv">
+        <div class="way-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><circle cx="12" cy="15" r="6"/></svg></div>
+        <h3>Live spinning, for hire</h3>
+        <p>We bring the machine, the sugar and the show. Guests watch their cone get spun right in front of them — birthdays, baby showers, business parties, socials, carnivals and harvest events.</p>
+        <a href="#book" class="more">Book your date <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="way rv">
+        <div class="way-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M4 8h16"/></svg></div>
+        <h3>Tubs &amp; dome cups</h3>
+        <p>Fresh homemade cotton candy packed the day it's spun. Every tub holds three spun cones inside, and the dome cups stack beautifully on a dessert table.</p>
+        <a href="#shop" class="more">Pick your flavor <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="way rv">
+        <div class="way-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16v-6a8 8 0 0 0-16 0z"/><path d="M8 8V5M12 8V4M16 8V5"/><path d="M2 20h20"/></svg></div>
+        <h3>12 inch cotton candy cakes</h3>
+        <p>A full twelve inches of hand-spun floss built up into a cake. It's the thing people photograph before anybody's allowed to touch it — and we'll spin it in your colors.</p>
+        <a href="#shop" class="more">See the cakes <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FLAVOR WHEEL ══════════ -->
+<section class="section wheel-sec" id="flavors">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">In stock right now</span>
+      <h2>Spin the <span class="script" style="color:var(--lemon)">flavor wheel</span></h2>
+      <p class="lede">These are the flavors we have spinning today. Give it a whirl and let the sugar pick for you.</p>
+    </div>
+    <div class="wheel-grid">
+      <div class="wheel-panel">
+        <div class="result" id="result" aria-live="polite">
+          <div class="swatch" id="swatch" style="background:var(--floss)"></div>
+          <h3 id="resultName">Give it a spin</h3>
+          <p id="resultDesc" class="idle">Hit the button and the wheel picks one of today's flavors. Or tap a name below to go straight to it.</p>
+        </div>
+        <div class="spin-cta">
+          <button class="btn btn-primary" id="spinBtn">Spin the wheel</button>
+          <span class="spin-note">Not feeling it? Spin again.</span>
+        </div>
+        <div class="flavor-chips" id="flavorChips"></div>
+      </div>
+
+      <div class="wheel-stage">
+        <div class="wheel-ring" aria-hidden="true"></div>
+        <div class="wheel-pin" id="wheelPin" aria-hidden="true"></div>
+        <div class="wheel" id="wheel" role="img" aria-label="Flavor wheel"></div>
+        <div class="wheel-hub" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c3.4 0 6 2.3 6 5.2 0 2-1.2 3.5-3 4.3 1.4.7 2.2 1.9 2.2 3.3 0 2.4-2.3 4.2-5.2 4.2S6.8 17.2 6.8 14.8c0-1.4.8-2.6 2.2-3.3-1.8-.8-3-2.3-3-4.3C6 4.3 8.6 2 12 2z" fill="#ffd3e6" stroke="#ff3d92" stroke-width="1.6"/><path d="M12 19v3" stroke="#3fb8ff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FALL SUGARS (chalkboard) ══════════ -->
+<section class="section chalk" id="fall">
+  <div class="wrap">
+    <div class="chalk-grid">
+      <div>
+        <span class="kicker">Seasonal menu</span>
+        <h2>Fall Sugars</h2>
+        <p>When the weather turns we swap the whole board. Our pastry chef makes every one of these cotton candy sugars from scratch — no shortcuts, no bought mixes — and we spin them at carnivals, Halloween parties and harvest events all season.</p>
+        <p>Any flavor on this board can be spun into a cone, packed in a tub, or built into a 12&nbsp;inch cake.</p>
+        <p class="signoff">Ask us what's on the board this week.</p>
+        <a href="#book" class="btn btn-ghost" style="margin-top:1.6rem">Book a fall event</a>
+      </div>
+      <div class="chalk-menu">
+        <div class="banner">Fall Sugars</div>
+        <ul class="chalk-list" id="fallList"></ul>
+        <p class="chalk-foot">Made in house by our pastry chef</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SHOP ══════════ -->
+<section class="section" id="shop">
+  <div class="wrap">
+    <div class="shop-head">
+      <div>
+        <span class="kicker">Fresh homemade</span>
+        <h2>Cakes, tubs &amp; <span class="script">dome cups</span></h2>
+        <p class="lede">Spun to order in small batches. Pick what you want and the flavor to go with it.</p>
+      </div>
+      <div class="shop-filters" id="filters"></div>
+    </div>
+
+    <div class="fulfil">
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18M5 10V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3M5 10v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9"/></svg> Pickup in Glenpool</span>
+      <em>or</em>
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 3h13v13H1zM14 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="17.5" cy="18.5" r="2"/></svg> Shipping available</span>
+      <em>·</em>
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10z"/><circle cx="12" cy="11" r="2.6"/></svg> We travel 45 minutes out</span>
+    </div>
+
+    <div class="products" id="products"></div>
+
+    <p class="demo-note" style="max-width:660px;margin:2.5rem auto 0">
+      <strong>Preview build.</strong> Prices are left off on purpose for now &mdash; when Mitzie's ready they drop in without touching the design. Adding a new flavor or a new item is a one-line change and it shows up everywhere at once.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ BOOKING ══════════ -->
+<section class="section event-sec" id="book">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Live spinning for hire</span>
+      <h2>Book your <span class="script">party</span></h2>
+      <p class="lede">Tell us what you're throwing and we'll tell you what we'd bring. Nothing here is binding &mdash; it just gets us both on the same page before we talk.</p>
+    </div>
+
+    <div class="builder rv">
+      <div class="builder-in">
+        <div class="field">
+          <label id="occLabel">What are we celebrating?</label>
+          <div class="occasions" id="occasions" role="group" aria-labelledby="occLabel"></div>
+        </div>
+        <div class="field">
+          <label for="guests">About how many guests?</label>
+          <div class="slider-row">
+            <input type="range" id="guests" min="20" max="300" step="10" value="80">
+            <span class="slider-val" id="guestsVal">80 guests</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="hours">How long do you want us spinning?</label>
+          <div class="slider-row">
+            <input type="range" id="hours" min="1" max="5" step="1" value="2">
+            <span class="slider-val" id="hoursVal">2 hours</span>
+          </div>
+        </div>
+        <div class="field">
+          <label id="extraLabel">Anything else you'd like?</label>
+          <div class="toggles" id="extras" role="group" aria-labelledby="extraLabel"></div>
+        </div>
+      </div>
+
+      <aside class="summary">
+        <span class="qk">Your event</span>
+        <h3 id="pkgName">Birthday party</h3>
+        <p class="sub" id="pkgSub">Right in the sweet spot for a backyard birthday.</p>
+        <ul id="pkgList"></ul>
+        <div class="foot">
+          <a class="btn btn-primary" href="sms:+19187297035">Text (918) 729-7035</a>
+          <button class="btn btn-ghost" id="requestBtn">Send us the details</button>
+          <p>We serve Glenpool and anywhere within about 45 minutes. Mitzie confirms the date and the quote &mdash; pricing isn't listed on this preview.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">From the kitchen and the booth</span>
+      <h2>What it looks like <span class="script">in person</span></h2>
+    </div>
+    <div class="gallery" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- ══════════ STORY ══════════ -->
+<section class="section" id="story" style="background:var(--cream-2)">
+  <div class="wrap">
+    <div class="story">
+      <div class="story-shot rv">
+        <div class="ph" style="--c1:#ffa3d0;--c2:#a8dcff">
+          <div class="art"></div>
+          <div class="swirl"><svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 12c16 0 28 10 28 23 0 9-6 16-14 19 7 3 11 9 11 15 0 11-11 19-25 19s-25-8-25-19c0-6 4-12 11-15-8-3-14-10-14-19 0-13 12-23 28-23z" fill="#fff" opacity=".55"/><path d="M50 88v6" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <img src="photos/spinning.jpg" alt="Spin N Sugar spinning cotton candy" onerror="this.remove()">
+        </div>
+        <div class="story-quote">
+          <p>&ldquo;Kids are the whole reason we do this.&rdquo;</p>
+          <span>SPIN N SUGAR &middot; GLENPOOL, OKLAHOMA</span>
+        </div>
+      </div>
+      <div>
+        <span class="kicker">Who we are</span>
+        <h2>A mother, a daughter, and one very loud machine</h2>
+        <p class="lede" style="margin-top:1.2rem">Spin N Sugar is a home business in Glenpool, Oklahoma. We started spinning at local events and it grew the way good things do around here &mdash; one birthday, one church festival, one wedding at a time.</p>
+        <p class="lede" style="margin-top:1rem">What makes ours different is the sugar itself: our pastry chef makes every cotton candy flavor we spin, from the everyday pink vanilla to the whole fall board. That's why you'll find things here you won't find at a fair &mdash; caramel apple cider, sweet potato pie, cinnamon roll icing.</p>
+        <p class="lede" style="margin-top:1rem">We live spin at events for hire, and we sell fresh cotton candy by the tub, the dome cup and the 12&nbsp;inch cake. Pickup here in Glenpool, shipping if you're further out.</p>
+        <div class="facts">
+          <div class="fact"><b>45 minutes</b><span>How far we travel from Glenpool</span></div>
+          <div class="fact"><b>In house</b><span>Every sugar made by our pastry chef</span></div>
+          <div class="fact"><b>Any color</b><span>Spun to match your theme</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ REVIEWS ══════════ -->
+<section class="section" id="reviews">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Word of mouth</span>
+      <h2>People talk about the <span class="script">cotton candy</span></h2>
+      <span class="sample-flag">Sample text &mdash; swap in real reviews before launch</span>
+    </div>
+    <div class="reviews">
+      <article class="review rv">
+        <div class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>The line at our daughter's party never stopped. Every kid wanted to watch it spin before they'd take the cone.</p>
+        <div class="who"><span class="av">A</span><div><b>Placeholder Name</b><span>Birthday party, Glenpool</span></div></div>
+      </article>
+      <article class="review rv">
+        <div class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>The 12 inch cake was the centerpiece of the whole dessert table. Nobody wanted to cut into it.</p>
+        <div class="who"><span class="av">B</span><div><b>Placeholder Name</b><span>Baby shower, Tulsa</span></div></div>
+      </article>
+      <article class="review rv">
+        <div class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>Ordered tubs for the office and they showed up perfect. Still fluffy a week later.</p>
+        <div class="who"><span class="av">C</span><div><b>Placeholder Name</b><span>Business event</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section class="section contact-sec" id="contact">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Say hello</span>
+      <h2>Let's get some sugar <span class="script" style="color:var(--lemon)">on your calendar</span></h2>
+      <p class="lede">Text is the fastest way to reach us. Tell us the date and what you're throwing.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="cinfo">
+        <div class="row">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <div><b>Text to book</b><p><a class="big" href="sms:+19187297035">(918) 729-7035</a></p></div>
+        </div>
+        <div class="row">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10z"/><circle cx="12" cy="11" r="2.6"/></svg></span>
+          <div><b>Glenpool, Oklahoma</b><p>In-home business, pickup by appointment. We travel to events anywhere within about 45 minutes of Glenpool.</p></div>
+        </div>
+        <div class="row">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 3h13v13H1zM14 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="17.5" cy="18.5" r="2"/></svg></span>
+          <div><b>Pickup or shipping</b><p>Grab your order here in Glenpool, or we'll pack it up and ship it to you.</p></div>
+        </div>
+        <div class="row">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg></span>
+          <div><b>Find us on Facebook</b><p><a href="https://www.facebook.com/" target="_blank" rel="noopener">Spin N Sugar</a> &mdash; flavors in stock get posted there first</p></div>
+        </div>
+      </div>
+
+      <form class="form" id="contactForm" novalidate>
+        <div class="frow">
+          <div class="fld"><label for="cName">Your name</label><input id="cName" type="text" placeholder="First and last"></div>
+          <div class="fld"><label for="cPhone">Phone</label><input id="cPhone" type="tel" placeholder="(918) 000-0000"></div>
+        </div>
+        <div class="frow">
+          <div class="fld"><label for="cEmail">Email</label><input id="cEmail" type="email" placeholder="you@email.com"></div>
+          <div class="fld"><label for="cDate">Event or pickup date</label><input id="cDate" type="date"></div>
+        </div>
+        <div class="fld">
+          <label for="cType">What do you need?</label>
+          <select id="cType">
+            <option>Birthday party</option><option>Baby shower</option><option>Business event</option>
+            <option>Social event</option><option>Wedding</option><option>Church or school event</option>
+            <option>Carnival or harvest event</option><option>Ordering a cake</option>
+            <option>Ordering tubs or dome cups</option><option>Shipping an order</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label for="cMsg">Tell us about it</label>
+          <textarea id="cMsg" placeholder="Guest count, flavors you're after, colors you want, where we'd be setting up..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send it over</button>
+        <p class="demo-note" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:rgba(255,247,251,.6)">
+          Preview build &mdash; this form doesn't send anywhere yet. It gets hooked up at launch.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="brand">
+        <span class="brand-mark">
+          <img src="photos/logo.png" alt="" onerror="this.remove()">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2c3.4 0 6 2.3 6 5.2 0 2-1.2 3.5-3 4.3 1.4.7 2.2 1.9 2.2 3.3 0 2.4-2.3 4.2-5.2 4.2S6.8 17.2 6.8 14.8c0-1.4.8-2.6 2.2-3.3-1.8-.8-3-2.3-3-4.3C6 4.3 8.6 2 12 2z" fill="#fff" opacity=".95"/><path d="M12 19v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <span class="brand-txt">Spin N Sugar<small>Live-spun cotton candy</small></span>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="#shop">Shop</a><a href="#flavors">Flavors</a><a href="#fall">Fall Sugars</a>
+        <a href="#book">Book Us</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; <span id="yr"></span> Spin N Sugar &middot; Glenpool, Oklahoma &middot; <a href="sms:+19187297035">(918) 729-7035</a></span>
+      <span>Website preview by <a href="#top">Preston Scott Systems</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════ ORDER DRAWER ══════════ -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Your order">
+  <div class="drawer-top">
+    <h3>Your order</h3>
+    <button class="x" id="closeOrder" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="drawer-body" id="orderBody"></div>
+  <div class="drawer-foot">
+    <label id="fulfilLabel">How do you want it?</label>
+    <div class="pickship" id="pickship" role="group" aria-labelledby="fulfilLabel">
+      <button data-mode="Pickup in Glenpool" class="on">Pickup</button>
+      <button data-mode="Shipped to me">Shipping</button>
+    </div>
+    <button class="btn btn-primary" id="sendOrder" disabled>Send my order request</button>
+    <p class="demo-note">No prices and no payment in this preview. On the live site this is where card, Apple&nbsp;Pay and Google&nbsp;Pay switch on.</p>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   CATALOG — everything Mitzie would ever edit lives here.
+   Add an object, save, done. No prices anywhere by request.
+   ══════════════════════════════════════════════════════════════ */
+
+/* The flavors posted as in stock on the Spin N Sugar page. */
+const FLAVORS = [
+  {name:'Pink Vanilla',   color:'#ff8ec4', note:'The house classic. Soft, sweet and the one most folks reach for first.'},
+  {name:'Blue Raspberry', color:'#3fb8ff', note:'The one every kid points at. Tart, blue, and it turns your tongue &mdash; that is the point.'},
+  {name:'Strawberry',     color:'#ff3d92', note:'Bright and jammy. Our workhorse flavor for parties and showers.'},
+  {name:'Watermelon',     color:'#ff6b6b', note:'Summer at a ball game. Juicy, light, gone in about four bites.'},
+  {name:'Cherry',         color:'#e0245e', note:'Deep and a little tart. Tastes like the candy you remember.'},
+  {name:'Coconut',        color:'#f4ead6', note:'Creamy and unexpected. The grown-ups quietly order a second tub.'},
+  {name:'Plain',          color:'#ffffff', note:'Straight spun sugar, nothing added. Clean, white and honestly great.'}
+];
+
+/* The seasonal board. Swap this list for spring or Christmas later. */
+const FALL_SUGARS = [
+  'Pumpkin Cheesecake','Caramel Apple Cider','Maple Glazed Donut','Brown Butter Pecan',
+  'Cranberry Orange Bliss','Toasted Marshmallow Chai','Sweet Potato Pie','Pumpkin S’mores',
+  'Maple Bourbon Vanilla','Cinnamon Roll Icing'
+];
+
+const PRODUCTS = [
+  {id:'cake-12',     name:'12" Cotton Candy Cake', cat:'Cakes',     tag:'Our specialty',   desc:'A full twelve inches of hand-spun floss built into a cake. It is the showstopper on the dessert table.', c1:'#ff77b9', c2:'#c9a6ff'},
+  {id:'cake-custom', name:'Custom Color Cake',     cat:'Cakes',     tag:'Color matched',   desc:'The same 12 inch cake spun in your colors &mdash; blue and pink for a shower, school colors for a banquet.', c1:'#ffe3f1', c2:'#a8dcff'},
+  {id:'tub',         name:'Fresh-Spun Tub',        cat:'Tubs',      tag:'Best seller',     desc:'Our classic tub with three spun cones packed inside, sealed the day it is made so it keeps its fluff.', c1:'#ffa3d0', c2:'#8fd6ff'},
+  {id:'dome-cups',   name:'Dome Cup',              cat:'Dome Cups', tag:'Party favorite',  desc:'A clear dome cup packed full of fresh floss. Stacks neat on a table and travels without getting crushed.', c1:'#8fd6ff', c2:'#ffd3e6'},
+  {id:'packaged',    name:'Packaged Cotton Candy', cat:'Packaged',  tag:'',                desc:'Sealed and ready to go &mdash; the easy way to send everybody home with some, or to ship a batch out of town.', c1:'#c9a6ff', c2:'#ffcf4d'},
+  {id:'cone',        name:'Hand-Spun Cone',        cat:'Cones',     tag:'',                desc:'The one you watch us make. Spun to order at events, and wrapped for favors when you order ahead.', c1:'#ffcf4d', c2:'#ff8ec4'}
+];
+
+const OCCASIONS = [
+  {id:'birthday',  label:'Birthday party',  sub:'Right in the sweet spot for a backyard birthday.'},
+  {id:'shower',    label:'Baby shower',     sub:'Soft colors, small crowd, big reaction.'},
+  {id:'business',  label:'Business event',  sub:'A little chaos in the best possible way.'},
+  {id:'social',    label:'Social event',    sub:'Reunions, banquets, anniversaries, get-togethers.'},
+  {id:'wedding',   label:'Wedding',         sub:'Color-matched cones on the dessert table.'},
+  {id:'church',    label:'Church or school',sub:'Fundraisers, fall festivals, field days.'},
+  {id:'carnival',  label:'Carnival or harvest', sub:'High volume, long line, we keep up.'}
+];
+
+const EXTRAS = [
+  {id:'colors',   label:'Custom colors'},
+  {id:'cake',     label:'A 12" cake for the table'},
+  {id:'favors',   label:'Take-home tubs or cups'},
+  {id:'fall',     label:'Fall Sugars menu'}
+];
+
+/* ══════════════════════════════════════════════════════════════
+   Nothing below needs editing to add products or flavors.
+   ══════════════════════════════════════════════════════════════ */
+
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* Catalog copy is authored by us and may carry entities like &mdash;, so it is
+   trusted as markup. Anything a visitor types goes through esc() instead. */
+const raw = s => String(s);
+
+/* ---------- hero headline, word by word ---------- */
+(() => {
+  const h = $('#heroTitle');
+  h.innerHTML = h.textContent.trim().split(/\s+/)
+    .map((w, i) => `<span class="w" style="animation-delay:${(.15 + i * .07).toFixed(2)}s">${esc(w)}</span>`)
+    .join(' ');
+})();
+
+/* ---------- drifting sugar ---------- */
+(() => {
+  const tints = ['#ff3d92','#3fb8ff','#ffcf4d','#c9a6ff','#5ee0c0'];
+  let html = '';
+  for (let i = 0; i < 26; i++) {
+    const size = 4 + Math.random() * 9;
+    html += `<i style="left:${(Math.random()*100).toFixed(1)}%;top:${(45+Math.random()*60).toFixed(1)}%;
+      width:${size.toFixed(1)}px;height:${size.toFixed(1)}px;background:${tints[i % tints.length]};
+      animation-duration:${(9+Math.random()*11).toFixed(1)}s;animation-delay:-${(Math.random()*14).toFixed(1)}s"></i>`;
+  }
+  $('#sugar').innerHTML = html;
+})();
+
+/* ---------- marquee: in-stock flavors + the fall board ---------- */
+(() => {
+  const words = [...FLAVORS.map(f => f.name), ...FALL_SUGARS];
+  const grp = words.map(w => `<span>${esc(w)}</span><b></b>`).join('');
+  $('#marquee').innerHTML = `<div class="grp">${grp}</div><div class="grp">${grp}</div>`;
+})();
+
+/* ---------- fall board ---------- */
+$('#fallList').innerHTML = FALL_SUGARS.map(f => `<li>${esc(f)}</li>`).join('');
+
+/* ---------- nav ---------- */
+(() => {
+  const nav = $('#nav'), burger = $('#burger'), links = $('#navLinks');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 24), {passive:true});
+  burger.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  links.addEventListener('click', e => {
+    if (e.target.tagName === 'A') { links.classList.remove('open'); burger.classList.remove('open'); }
+  });
+})();
+
+/* ---------- reveal ---------- */
+(() => {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((en, i) => {
+      if (!en.isIntersecting) return;
+      setTimeout(() => en.target.classList.add('in'), i * 90);
+      io.unobserve(en.target);
+    });
+  }, {threshold:.16, rootMargin:'0px 0px -60px'});
+  $$('.rv').forEach(el => io.observe(el));
+})();
+
+/* ---------- candy artwork (photo falls back to art) ---------- */
+const SWIRL = `<div class="swirl"><svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+  <path d="M50 12c16 0 28 10 28 23 0 9-6 16-14 19 7 3 11 9 11 15 0 11-11 19-25 19s-25-8-25-19c0-6 4-12 11-15-8-3-14-10-14-19 0-13 12-23 28-23z" fill="#fff" opacity=".55"/>
+  <path d="M50 88v6" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>`;
+
+function art(c1, c2, src, alt) {
+  const img = src ? `<img src="${src}" alt="${esc(alt || '')}" loading="lazy" onerror="this.remove()">` : '';
+  return `<div class="ph" style="--c1:${c1};--c2:${c2}"><div class="art"></div>${SWIRL}${img}</div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FLAVOR WHEEL
+   ══════════════════════════════════════════════════════════════ */
+(() => {
+  const wheel = $('#wheel'), pin = $('#wheelPin'), btn = $('#spinBtn');
+  const seg = 360 / FLAVORS.length;
+
+  const stops = FLAVORS.map((f, i) => `${f.color} ${i * seg}deg ${(i + 1) * seg}deg`).join(',');
+  wheel.style.background = `conic-gradient(${stops})`;
+  // conic-gradient starts at 12 o'clock, CSS rotation at 3 o'clock — hence -90.
+  wheel.innerHTML = FLAVORS.map((f, i) => {
+    const angle = i * seg + seg / 2 - 90;
+    // Plain and Coconut are near-white, so their labels need dark text.
+    const light = ['#ffffff', '#f4ead6'].includes(f.color.toLowerCase());
+    const shade = light ? 'color:#33132f;text-shadow:none' : '';
+    return `<span class="lbl" data-angle="${angle}" style="transform:rotate(${angle}deg);${shade}"><i>${esc(f.name)}</i></span>`;
+  }).join('');
+
+  // A label pointing into the left half of the screen reads upside down, and
+  // which ones those are changes every time the wheel turns — so recompute
+  // against the rotation it is heading for, not the one it started from.
+  const labels = $$('.lbl', wheel);
+  function applyFlips(rot) {
+    labels.forEach(l => {
+      const facing = ((+l.dataset.angle + rot) % 360 + 360) % 360;
+      l.classList.toggle('flip', facing > 90 && facing < 270);
+    });
+  }
+
+  let rotation = 0, spinning = false;
+  applyFlips(0);
+
+  function land(i) {
+    const f = FLAVORS[i];
+    $('#swatch').style.background = f.color;
+    $('#resultName').textContent = f.name;
+    const d = $('#resultDesc');
+    d.innerHTML = raw(f.note);
+    d.classList.remove('idle');
+  }
+
+  function spinTo(index) {
+    if (spinning) return;
+    spinning = true;
+    btn.disabled = true;
+
+    // Segment i's centre sits (i*seg + seg/2) clockwise from the top, so the
+    // wheel has to finish at -(that) mod 360 for it to land under the pin.
+    // Four extra turns on top so it actually reads as a spin.
+    const settle = 360 - (index * seg + seg / 2);
+    rotation = Math.ceil(rotation / 360) * 360 + 360 * 4 + settle;
+    wheel.style.transform = `rotate(${rotation}deg)`;
+    applyFlips(rotation);
+
+    let ticks = 0;
+    const tick = setInterval(() => {
+      pin.classList.toggle('tick');
+      if (++ticks > 34) { clearInterval(tick); pin.classList.remove('tick'); }
+    }, 120);
+
+    setTimeout(() => { spinning = false; btn.disabled = false; land(index); }, 4700);
+  }
+
+  btn.addEventListener('click', () => spinTo(Math.floor(Math.random() * FLAVORS.length)));
+
+  $('#flavorChips').innerHTML = FLAVORS.map((f, i) => `<button data-i="${i}">${esc(f.name)}</button>`).join('');
+  $('#flavorChips').addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (b) spinTo(+b.dataset.i);
+  });
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   SHOP + ORDER LIST  (no prices, no totals)
+   ══════════════════════════════════════════════════════════════ */
+const order = [];
+let fulfilment = 'Pickup in Glenpool';
+
+(() => {
+  const grid = $('#products'), filterBox = $('#filters');
+  const cats = ['All', ...new Set(PRODUCTS.map(p => p.cat))];
+  let active = 'All';
+
+  filterBox.innerHTML = cats
+    .map(c => `<button data-cat="${esc(c)}"${c === 'All' ? ' class="on"' : ''}>${esc(c)}</button>`).join('');
+
+  const flavorOpts = [...FLAVORS.map(f => f.name), ...FALL_SUGARS]
+    .map(n => `<option>${esc(n)}</option>`).join('');
+
+  function render() {
+    const list = PRODUCTS.filter(p => active === 'All' || p.cat === active);
+    grid.innerHTML = list.map((p, i) => `
+      <article class="product" style="animation-delay:${(i * .05).toFixed(2)}s">
+        <div class="shot">
+          ${p.tag ? `<span class="tag">${esc(p.tag)}</span>` : ''}
+          ${art(p.c1, p.c2, `photos/${p.id}.jpg`, p.name)}
+        </div>
+        <div class="body">
+          <h3>${esc(p.name)}</h3>
+          <p class="desc">${raw(p.desc)}</p>
+          <div class="opts">
+            <select aria-label="Flavor for ${esc(p.name)}">${flavorOpts}</select>
+            <button class="add" data-id="${p.id}">Add</button>
+          </div>
+        </div>
+      </article>`).join('');
+  }
+
+  filterBox.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    active = b.dataset.cat;
+    $$('button', filterBox).forEach(x => x.classList.toggle('on', x === b));
+    render();
+  });
+
+  grid.addEventListener('click', e => {
+    const b = e.target.closest('.add');
+    if (!b) return;
+    const p = PRODUCTS.find(x => x.id === b.dataset.id);
+    addToOrder(p, b.closest('.opts').querySelector('select').value);
+    b.textContent = 'Added ✓';
+    b.classList.add('added');
+    setTimeout(() => { b.textContent = 'Add'; b.classList.remove('added'); }, 1300);
+  });
+
+  render();
+})();
+
+function addToOrder(p, flavor) {
+  const line = order.find(l => l.id === p.id && l.flavor === flavor);
+  if (line) line.qty++;
+  else order.push({id:p.id, name:p.name, flavor, qty:1, c1:p.c1, c2:p.c2});
+  drawOrder();
+  toast(`${p.name} — ${flavor} added to your order`);
+  const c = $('#orderCount');
+  c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop');
+}
+
+function drawOrder() {
+  const body = $('#orderBody');
+  $('#orderCount').textContent = order.reduce((n, l) => n + l.qty, 0);
+
+  if (!order.length) {
+    body.innerHTML = `<div class="empty">
+      <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M50 12c16 0 28 10 28 23 0 9-6 16-14 19 7 3 11 9 11 15 0 11-11 19-25 19s-25-8-25-19c0-6 4-12 11-15-8-3-14-10-14-19 0-13 12-23 28-23z" fill="#ffd3e6"/>
+        <path d="M50 88v6" stroke="#3fb8ff" stroke-width="4" stroke-linecap="round"/></svg>
+      <p>Nothing in here yet.<br>The cakes and tubs are right up there.</p></div>`;
+  } else {
+    body.innerHTML = order.map((l, i) => `
+      <div class="line">
+        <div class="thumb">${art(l.c1, l.c2, '', '')}</div>
+        <div class="info"><b>${esc(l.name)}</b><span>${esc(l.flavor)}</span></div>
+        <div class="qty">
+          <button data-act="dec" data-i="${i}" aria-label="One fewer">−</button>
+          <span>${l.qty}</span>
+          <button data-act="inc" data-i="${i}" aria-label="One more">+</button>
+        </div>
+      </div>`).join('');
+  }
+  $('#sendOrder').disabled = !order.length;
+}
+
+$('#orderBody').addEventListener('click', e => {
+  const b = e.target.closest('button[data-act]');
+  if (!b) return;
+  const i = +b.dataset.i;
+  if (b.dataset.act === 'inc') order[i].qty++;
+  else if (--order[i].qty <= 0) order.splice(i, 1);
+  drawOrder();
+});
+
+$('#pickship').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  fulfilment = b.dataset.mode;
+  $$('#pickship button').forEach(x => x.classList.toggle('on', x === b));
+});
+
+/* drawer open/close */
+(() => {
+  const drawer = $('#drawer'), scrim = $('#scrim');
+  const open = () => {
+    drawer.classList.add('open'); scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false'); document.body.classList.add('locked');
+  };
+  const close = () => {
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true'); document.body.classList.remove('locked');
+  };
+  $('#orderBtn').addEventListener('click', open);
+  $('#closeOrder').addEventListener('click', close);
+  scrim.addEventListener('click', close);
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+
+drawOrder();
+
+/* ══════════════════════════════════════════════════════════════
+   BOOKING BUILDER  (no pricing — a summary, not a quote)
+   ══════════════════════════════════════════════════════════════ */
+(() => {
+  const state = {occasion:'birthday', guests:80, hours:2, extras:new Set()};
+
+  $('#occasions').innerHTML = OCCASIONS
+    .map(o => `<button data-id="${o.id}"${o.id === state.occasion ? ' class="on"' : ''}>${esc(o.label)}</button>`).join('');
+
+  $('#extras').innerHTML = EXTRAS.map(x => `
+    <label class="toggle" data-id="${x.id}">
+      <input type="checkbox">
+      <span class="box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg></span>
+      ${esc(x.label)}
+    </label>`).join('');
+
+  function update() {
+    const occ = OCCASIONS.find(o => o.id === state.occasion);
+    const extras = EXTRAS.filter(x => state.extras.has(x.id));
+
+    $('#pkgName').textContent = occ.label;
+    $('#pkgSub').textContent = occ.sub;
+    $('#guestsVal').textContent = state.guests + (state.guests === 300 ? '+ guests' : ' guests');
+    $('#hoursVal').textContent = state.hours + (state.hours === 1 ? ' hour' : ' hours');
+
+    const check = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>`;
+    const items = [
+      `${state.hours} ${state.hours === 1 ? 'hour' : 'hours'} of live spinning`,
+      `Enough spun to keep about ${state.guests} guests happy`,
+      'Machine, sugar, cones and cleanup — we bring it all',
+      'Your pick of the flavors we have in stock',
+      ...extras.map(x => x.label)
+    ];
+    $('#pkgList').innerHTML = items.map(t => `<li>${check}<span>${esc(t)}</span></li>`).join('');
+  }
+
+  $('#occasions').addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    state.occasion = b.dataset.id;
+    $$('#occasions button').forEach(x => x.classList.toggle('on', x === b));
+    update();
+  });
+
+  $('#extras').addEventListener('change', e => {
+    const label = e.target.closest('.toggle');
+    if (!label) return;
+    label.classList.toggle('on', e.target.checked);
+    e.target.checked ? state.extras.add(label.dataset.id) : state.extras.delete(label.dataset.id);
+    update();
+  });
+
+  $('#guests').addEventListener('input', e => { state.guests = +e.target.value; update(); });
+  $('#hours').addEventListener('input',  e => { state.hours  = +e.target.value; update(); });
+
+  // Hand the builder's answers straight to the contact form.
+  $('#requestBtn').addEventListener('click', () => {
+    $('#contact').scrollIntoView({behavior:'smooth'});
+    setTimeout(() => {
+      const occ = OCCASIONS.find(o => o.id === state.occasion);
+      const opt = [...$('#cType').options].find(o => o.text === occ.label);
+      if (opt) $('#cType').value = opt.text;
+      const extras = EXTRAS.filter(x => state.extras.has(x.id)).map(x => x.label);
+      $('#cMsg').value =
+        `${occ.label} — about ${state.guests} guests, ${state.hours} ${state.hours === 1 ? 'hour' : 'hours'} of live spinning.`
+        + (extras.length ? ` Also interested in: ${extras.join(', ')}.` : '');
+      $('#cName').focus({preventScroll:true});
+    }, 650);
+  });
+
+  update();
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   GALLERY
+   ══════════════════════════════════════════════════════════════ */
+(() => {
+  const tiles = [
+    {src:'photos/hero.jpg',        cap:'The booth, set up and ready',        cls:'wide', c1:'#ffa3d0', c2:'#a8dcff'},
+    {src:'photos/dome-cups.jpg',   cap:'Dome cups stacked by flavor',        cls:'tall', c1:'#8fd6ff', c2:'#c9a6ff'},
+    {src:'photos/cake-12.jpg',     cap:'A 12 inch cotton candy cake',        cls:'',     c1:'#ff77b9', c2:'#c9a6ff'},
+    {src:'photos/fall-sugars.jpg', cap:'The Fall Sugars board',              cls:'',     c1:'#ffcf4d', c2:'#ff8ec4'},
+    {src:'photos/g1.jpg',          cap:'Spinning live',                      cls:'',     c1:'#ff77b9', c2:'#5ee0c0'},
+    {src:'photos/g2.jpg',          cap:'Party colors',                       cls:'',     c1:'#c9a6ff', c2:'#ffd3e6'},
+    {src:'photos/g3.jpg',          cap:'Packed and ready for pickup',        cls:'wide', c1:'#ffe3f1', c2:'#a8dcff'},
+    {src:'photos/g4.jpg',          cap:'Out at an event',                    cls:'',     c1:'#5ee0c0', c2:'#ffcf4d'}
+  ];
+  $('#galleryGrid').innerHTML = tiles.map(t =>
+    `<figure class="gtile ${t.cls}" data-cap="${esc(t.cap)}">${art(t.c1, t.c2, t.src, t.cap)}</figure>`
+  ).join('');
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   DEMO GUARDS — nothing here transmits or charges anything.
+   ══════════════════════════════════════════════════════════════ */
+function handleDemoAction(message) { toast(message); }
+
+$('#sendOrder').addEventListener('click', () => {
+  const n = order.reduce((t, l) => t + l.qty, 0);
+  handleDemoAction(`Preview only — ${n} item${n === 1 ? '' : 's'}, ${fulfilment.toLowerCase()}. Nothing was sent or charged.`);
+});
+
+$('#contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  handleDemoAction('Got it! In this preview nothing sends — at launch it lands with Mitzie.');
+});
+
+/* ---------- toast ---------- */
+let toastTimer;
+function toast(msg) {
+  $('#toastMsg').textContent = msg;
+  const t = $('#toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3800);
+}
+
+$('#yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

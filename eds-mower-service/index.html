@@ -148,6 +148,12 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem
 
 /* ---------- sunflower stand ---------- */
 .flowers{background:var(--cream);border-block:1px solid var(--line);position:relative;overflow:hidden}
+/* Sunflowers are a side note, not a headline act: compact band, single photo. */
+.flowers.section{padding:clamp(3rem,5.5vw,4.5rem) 0}
+.flowers .flow-grid{grid-template-columns:.62fr 1.38fr;align-items:center}
+.flowers .flow-photos{grid-template-columns:1fr;max-width:320px}
+.flowers .flow-photos figure:first-child{transform:rotate(-1.5deg)}
+.flowers .flow-copy h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
 .flowers::after{content:"";position:absolute;top:-120px;right:-120px;width:340px;height:340px;border-radius:50%;
   background:radial-gradient(circle,rgba(232,184,75,.28),transparent 68%);pointer-events:none}
 .flow-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(2.5rem,5vw,4.5rem);align-items:center}
@@ -276,9 +282,9 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
     </a>
     <ul class="nav-links">
       <li><a href="#services">Repair &amp; Service</a></li>
-      <li><a href="#flowers">Sunflowers</a></li>
       <li><a href="#words">Word Around Jenks</a></li>
       <li><a href="#story">Ed's Story</a></li>
+      <li><a href="#flowers">Sunflowers</a></li>
       <li><a href="#visit">Visit the Shop</a></li>
     </ul>
     <a class="nav-call" href="tel:+19182994554">(918) 299-4554</a>
@@ -289,8 +295,8 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
   <div class="wrap">
     <div>
       <div class="est-badge" data-reveal><b>24 years</b> fixing mowers in Jenks</div>
-      <h1 data-reveal>Bring Ed your mower. <em>Pick up some sunflowers.</em></h1>
-      <p class="lede" data-reveal>Honest lawn mower repair from a shop that's been part of Jenks for 24 years — and in season, fresh-cut sunflowers grown right here by Ed.</p>
+      <h1 data-reveal>Bring Ed your mower. <em>He'll make it run right.</em></h1>
+      <p class="lede" data-reveal>Honest lawn mower repair from a shop that's been part of Jenks for 24 years. Craftsman, Troy-Bilt, Honda, Bob-Cat — residential mowers are what Ed does all day, every day.</p>
       <div class="cta-row" data-reveal>
         <a class="btn gold" href="tel:+19182994554">Call Ed — (918) 299-4554 <span class="arr">&rarr;</span></a>
         <a class="btn ghost on-dark" href="#services">What we fix <span class="arr">&rarr;</span></a>
@@ -302,9 +308,8 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
       </div>
     </div>
     <figure class="hero-photo" data-reveal>
-      <span class="sun-tag">Sunflowers in season</span>
-      <div class="ph"><img src="assets/shop-front-sunflowers.jpg" alt="Ed's Mower Service shop front in Jenks with fresh-cut sunflowers for sale" style="object-position:50% 38%"></div>
-      <figcaption>The shop on N Elm Street — mowers in the back, sunflowers out front.</figcaption>
+      <div class="ph"><img src="assets/scraped/gmaps-row-of-mowers-inventory-lot.jpg" alt="Row of mowers waiting at Ed's Mower Service in Jenks" style="object-position:50% 55%"></div>
+      <figcaption>The lot on N Elm Street — mowers in, mowers out.</figcaption>
     </figure>
   </div>
 </header>
@@ -369,21 +374,15 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
     <div class="flow-grid">
       <div class="flow-photos" data-reveal>
         <figure>
-          <div class="fr"><img src="assets/sunflower-field.jpg" alt="Rows of sunflowers growing in Ed's field" style="object-position:50% 65%"></div>
-          <figcaption>Grown in Ed's own rows.</figcaption>
-        </figure>
-        <figure>
-          <div class="fr"><img src="assets/shop-front-sunflowers.jpg" alt="Fresh-cut sunflowers for sale at the shop" style="object-position:50% 30%"></div>
+          <div class="fr"><img src="assets/shop-front-sunflowers.jpg" alt="Fresh-cut sunflowers for sale at the shop" style="object-position:50% 34%"></div>
           <figcaption>Cut fresh, sold at the shop.</figcaption>
         </figure>
       </div>
       <div class="flow-copy">
-        <span class="kicker" data-reveal>The Sunflower Stand</span>
-        <h2 data-reveal>Seasonal cut flowers, <em>grown by the mower guy.</em></h2>
+        <span class="kicker" data-reveal>While you're here</span>
+        <h2 data-reveal>Ed also grows <em>sunflowers.</em></h2>
         <div class="season-chip" data-reveal><span class="dot"></span> In season — stop by while they last</div>
-        <p data-reveal>It surprises people the first time: the same hands that rebuild carburetors grow rows of sunflowers every year. When they bloom, Ed cuts them fresh and sells them right at the shop on N Elm Street.</p>
-        <p data-reveal>No app, no pre-order. Just swing in during shop hours, grab a bunch for the kitchen table, and say hi while you're at it.</p>
-        <a class="btn gold" href="#visit" data-reveal>Find the stand <span class="arr">&rarr;</span></a>
+        <p data-reveal>The same hands that rebuild carburetors plant rows of sunflowers every year. When they bloom, Ed cuts them fresh and sells them at the shop. No app, no pre-order — just swing in during shop hours.</p>
       </div>
     </div>
   </div>

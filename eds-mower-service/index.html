@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ed's Mower Service — Lawn Mower Repair in Jenks, OK | (918) 299-4554</title>
-<meta name="description" content="Ed's Mower Service — 24 years of honest lawn mower repair in Jenks, Oklahoma. Residential mower repair, tune-ups, Bob-Cat zero-turn sales & service, and seasonal sunflowers grown right here. Call (918) 299-4554.">
+<meta name="description" content="Save money — repair your lawn mower. Ed's Mower Service: 24 years of honest lawn mower repair in Jenks, Oklahoma. Residential mower repair, tune-ups, Bob-Cat zero-turn sales & service, money-saving tips, mower recall alerts, and seasonal sunflowers grown right here. Call (918) 299-4554.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -150,9 +150,10 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem
 .flowers{background:var(--cream);border-block:1px solid var(--line);position:relative;overflow:hidden}
 /* Sunflowers are a side note, not a headline act: compact band, single photo. */
 .flowers.section{padding:clamp(3rem,5.5vw,4.5rem) 0}
-.flowers .flow-grid{grid-template-columns:.62fr 1.38fr;align-items:center}
-.flowers .flow-photos{grid-template-columns:1fr;max-width:320px}
+.flowers .flow-grid{grid-template-columns:.95fr 1.05fr;align-items:center}
+.flowers .flow-photos{grid-template-columns:1fr 1fr;max-width:560px}
 .flowers .flow-photos figure:first-child{transform:rotate(-1.5deg)}
+.flowers .flow-photos figure:last-child{transform:rotate(1.2deg) translateY(14px)}
 .flowers .flow-copy h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
 .flowers::after{content:"";position:absolute;top:-120px;right:-120px;width:340px;height:340px;border-radius:50%;
   background:radial-gradient(circle,rgba(232,184,75,.28),transparent 68%);pointer-events:none}
@@ -200,12 +201,59 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem
 .tenets .n{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1rem}
 .tenets b{font-weight:600;font-size:.98rem}
 .tenets span span{display:block;color:var(--mute-on-dark);font-size:.88rem;font-weight:400}
-.shop-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:4rem}
+.shop-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:4rem}
 .shop-gallery figure{border:1px solid var(--line-on-dark);border-radius:14px;overflow:hidden;background:rgba(244,237,225,.05)}
 .shop-gallery .fr{aspect-ratio:4/3;overflow:hidden}
 .shop-gallery img{width:100%;height:100%;object-fit:cover}
 .shop-gallery figcaption{font-family:var(--serif);font-style:italic;font-size:.92rem;color:var(--mute-on-dark);padding:.75rem 1rem}
-@media(max-width:880px){.story-grid{grid-template-columns:1fr}.shop-gallery{grid-template-columns:1fr}}
+@media(max-width:1000px){.shop-gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:880px){.story-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.shop-gallery{grid-template-columns:1fr}}
+
+
+/* ---------- tips (save money) ---------- */
+.tips{background:var(--cream);border-block:1px solid var(--line)}
+.tips .kicker{color:var(--rust)}
+.tips-head{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:end;margin-bottom:3rem}
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.3rem}
+.tip{background:#fff;border:1px solid var(--line);border-radius:16px;padding:2rem 2rem 2rem 2rem;display:grid;grid-template-columns:auto 1fr;column-gap:1.4rem;row-gap:.5rem;align-items:baseline;
+  transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+.tip:hover{transform:translateY(-4px);border-color:rgba(47,59,46,.35);box-shadow:0 22px 44px -22px rgba(28,28,26,.3)}
+.tip .n{grid-row:span 2;font-family:var(--serif);font-style:italic;font-size:2.2rem;line-height:1;color:var(--gold-deep)}
+.tip h3{font-size:1.25rem}
+.tip p{color:var(--mute);font-size:.94rem}
+.tips-foot{display:flex;flex-wrap:wrap;gap:1.4rem;align-items:center;justify-content:space-between;margin-top:2.4rem;padding-top:1.8rem;border-top:1px solid var(--line)}
+.tips-foot p{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--ink);max-width:36em}
+@media(max-width:880px){.tips-head,.tips-grid{grid-template-columns:1fr}}
+
+/* ---------- sunflower field band ---------- */
+.field-band{position:relative;height:clamp(200px,32vw,380px);overflow:hidden}
+.field-band img{width:100%;height:100%;object-fit:cover;display:block}
+.field-band span{position:absolute;left:50%;bottom:1.2rem;transform:translateX(-50%);background:rgba(28,28,26,.72);color:var(--cream);font-family:var(--serif);font-style:italic;font-size:.95rem;padding:.5rem 1rem;border-radius:999px;white-space:nowrap;max-width:calc(100% - 2rem);overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- recalls ---------- */
+.recalls{background:var(--cream-soft)}
+.recalls .kicker{color:var(--rust)}
+.recalls-head{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:end;margin-bottom:3rem}
+.recall-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.recall{background:#fff;border:1px solid var(--line);border-left:4px solid var(--rust);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:.8rem}
+.recall .flag{align-self:flex-start;font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rust);background:rgba(201,98,43,.1);padding:.35rem .6rem;border-radius:999px}
+.recall h3{font-size:1.25rem}
+.recall p{color:var(--mute);font-size:.92rem}
+.recall p b{color:var(--ink);font-weight:600}
+.recall .do{background:var(--cream);border-radius:10px;padding:.8rem 1rem;color:var(--ink)}
+.recall .btn{margin-top:auto;align-self:flex-start}
+.recall-note{margin-top:2rem;font-size:.9rem;color:var(--mute);max-width:52em}
+.recall-note b{color:var(--ink)}
+@media(max-width:960px){.recall-grid{grid-template-columns:1fr}.recalls-head{grid-template-columns:1fr}}
+
+/* ---------- extra sunflower placements ---------- */
+.hero-photo{position:relative}
+.hero-flower{position:absolute;right:-14px;bottom:2.6rem;width:clamp(96px,11vw,150px);aspect-ratio:1;border-radius:14px;overflow:hidden;border:3px solid var(--cream);box-shadow:0 18px 36px -14px rgba(0,0,0,.55);transform:rotate(4deg)}
+.hero-flower img{width:100%;height:100%;object-fit:cover}
+.hours-flower{margin-top:1.4rem;border-radius:12px;overflow:hidden;aspect-ratio:16/7}
+.hours-flower img{width:100%;height:100%;object-fit:cover}
+@media(max-width:880px){.hero-flower{right:8px;bottom:3rem}}
 
 /* ---------- visit ---------- */
 .visit .kicker{color:var(--rust)}
@@ -282,7 +330,8 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
     </a>
     <ul class="nav-links">
       <li><a href="#services">Repair &amp; Service</a></li>
-      <li><a href="#words">Word Around Jenks</a></li>
+      <li><a href="#tips">Save Money</a></li>
+      <li><a href="#recalls">Recalls</a></li>
       <li><a href="#story">Ed's Story</a></li>
       <li><a href="#flowers">Sunflowers</a></li>
       <li><a href="#visit">Visit the Shop</a></li>
@@ -294,7 +343,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
 <header class="hero" id="top">
   <div class="wrap">
     <div>
-      <div class="est-badge" data-reveal><b>24 years</b> fixing mowers in Jenks</div>
+      <div class="est-badge" data-reveal><b>Save money</b> — repair your lawn mower</div>
       <h1 data-reveal>Bring Ed your mower. <em>He'll make it run right.</em></h1>
       <p class="lede" data-reveal>Honest lawn mower repair from a shop that's been part of Jenks for 24 years. Craftsman, Troy-Bilt, Honda, Bob-Cat — residential mowers are what Ed does all day, every day.</p>
       <div class="cta-row" data-reveal>
@@ -310,6 +359,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
     <figure class="hero-photo" data-reveal>
       <div class="ph"><img src="assets/scraped/gmaps-row-of-mowers-inventory-lot.jpg" alt="Row of mowers waiting at Ed's Mower Service in Jenks" style="object-position:50% 55%"></div>
       <figcaption>The lot on N Elm Street — mowers in, mowers out.</figcaption>
+      <div class="hero-flower" aria-hidden="true"><img src="assets/sunflower-field.jpg" alt="" style="object-position:50% 40%"></div>
     </figure>
   </div>
 </header>
@@ -369,6 +419,85 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
   </div>
 </section>
 
+<section class="section tips" id="tips">
+  <div class="wrap">
+    <div class="tips-head" data-reveal>
+      <div>
+        <span class="kicker">Helpful tips to save you money</span>
+        <h2 style="margin-top:1rem">Save money — <em>repair your lawn mower.</em></h2>
+      </div>
+      <p class="lede">Twenty-four years on the bench, boiled down to the handful of things that actually keep money in your pocket.</p>
+    </div>
+    <div class="tips-grid stagger" data-stagger>
+      <article class="tip">
+        <span class="n">01</span>
+        <h3>Start every year with fresh gas</h3>
+        <p>Gas that's been sitting in the can since last season usually has water in it — it condenses inside the can and the tank over the winter. Dump the old gas and start the year fresh. Bad gas is behind more "it won't start" mowers than anything else Ed sees.</p>
+      </article>
+      <article class="tip">
+        <span class="n">02</span>
+        <h3>Do the yearly service. It really does make them last</h3>
+        <p>Change the oil, sharpen the blade, put in a new spark plug and a new air filter. Ed has watched it for 24 years: the mowers that get that once-a-year service last a lot longer than the ones that don't.</p>
+      </article>
+      <article class="tip">
+        <span class="n">03</span>
+        <h3>Know when a weed eater isn't worth fixing</h3>
+        <p>Homeowner-grade string trimmers are built to last about 50 hours — roughly three years at 20 minutes a week. Once one is worn out, the repair usually costs more than half the price of a new one. Ed will tell you straight when it's time to replace instead of repair.</p>
+      </article>
+      <article class="tip">
+        <span class="n">04</span>
+        <h3>Think twice before going electric</h3>
+        <p>Ed hasn't found anyone who repairs electric mowers or electric string trimmers — there's no parts supply for them. The first real problem is usually the end of the machine, and it gets thrown away instead of fixed.</p>
+      </article>
+    </div>
+    <div class="tips-foot" data-reveal>
+      <p>Not sure whether yours is worth fixing? Bring it by. Ed would rather tell you "don't spend the money" than sell you a repair you don't need.</p>
+      <a class="btn ghost" href="tel:+19182994554">Ask Ed <span class="arr">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="field-band" aria-label="Ed's sunflower rows">
+  <img src="assets/sunflower-field.jpg" alt="Rows of sunflowers Ed grows behind the shop" loading="lazy" style="object-position:50% 55%">
+  <span>The sunflower rows — same hands, different kind of work.</span>
+</div>
+
+<section class="section recalls" id="recalls">
+  <div class="wrap">
+    <div class="recalls-head" data-reveal>
+      <div>
+        <span class="kicker">Safety notice</span>
+        <h2 style="margin-top:1rem">Mowers catching fire: <em>three recalls to know about.</em></h2>
+      </div>
+      <p class="lede">Ed keeps up with these so his customers hear about them. If you own one of these, stop using it and follow the official recall notice — the fix or replacement is free.</p>
+    </div>
+    <div class="recall-grid stagger" data-stagger>
+      <article class="recall">
+        <span class="flag">Gas &middot; Zero-turn</span>
+        <h3>John Deere ZTrak zero-turn mowers</h3>
+        <p>About 39,000 ZTrak mowers with Kawasaki engines — models <b>Z720E, Z730M, Z740R and Z760R</b>, sold at John Deere dealers from 2018 through 2024. The engine's voltage regulator can fail and overheat, and Kawasaki has received reports of five fires. Recalled January 2025.</p>
+        <p class="do"><b>What to do:</b> stop using it and contact an authorized John Deere dealer for the free repair.</p>
+        <a class="btn ghost" href="https://www.cpsc.gov/Recalls/2025/Kawasaki-Motors-USA-Recalls-John-Deere-ZTrak-Zero-Turn-Mowers-with-Kawasaki-Engines-Due-to-Fire-and-Burn-Hazards" target="_blank" rel="noopener">Official recall notice <span class="arr">&rarr;</span></a>
+      </article>
+      <article class="recall">
+        <span class="flag">Electric &middot; Walk-behind</span>
+        <h3>Ryobi 40V cordless mowers</h3>
+        <p>About 217,500 Ryobi <b>40-volt brushless 21-inch</b> cordless walk-behind mowers sold at Home Depot from 2021 into early 2025. A connector inside the powerhead can overheat — 97 reports of overheating, including five fires and two burn injuries.</p>
+        <p class="do"><b>What to do:</b> stop using it and contact Ryobi (TTI Outdoor Power Equipment) for a free replacement mower.</p>
+        <a class="btn ghost" href="https://www.cpsc.gov/Recalls/2025/TTI-Outdoor-Power-Equipment-Recalls-RYOBI-Battery-Powered-Mowers-Due-to-Fire-Hazard" target="_blank" rel="noopener">Official recall notice <span class="arr">&rarr;</span></a>
+      </article>
+      <article class="recall">
+        <span class="flag">Electric &middot; Battery tools</span>
+        <h3>Kobalt battery mowers &amp; yard tools (Lowe's)</h3>
+        <p>More than 550,000 Kobalt <b>24V and 48V</b> battery yard tools — lawn mowers, trimmers, blowers and chainsaws — sold at Lowe's January through May 2026. The batteries can short-circuit and catch fire when charged through the USB-C port while still in the tool; 34 reports of smoke, sparks or fire so far.</p>
+        <p class="do"><b>What to do:</b> stop charging through the USB-C port with the battery in the tool, and contact Greenworks for a free replacement battery.</p>
+        <a class="btn ghost" href="https://www.cpsc.gov/Recalls/2026/Greenworks-Tools-Recalls-24V-and-48V-Kobalt-Yard-Power-Tools-with-USB-C-Batteries-Due-to-Risk-of-Serious-Injury-from-Fire-Hazard" target="_blank" rel="noopener">Official recall notice <span class="arr">&rarr;</span></a>
+      </article>
+    </div>
+    <p class="recall-note" data-reveal><b>Not sure if yours is on the list?</b> Bring it by or call the shop — Ed will check the model number with you. Recall details are from the U.S. Consumer Product Safety Commission and are current as of September 2026.</p>
+  </div>
+</section>
+
 <section class="section flowers" id="flowers">
   <div class="wrap">
     <div class="flow-grid">
@@ -376,6 +505,10 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
         <figure>
           <div class="fr"><img src="assets/shop-front-sunflowers.jpg" alt="Fresh-cut sunflowers for sale at the shop" style="object-position:50% 34%"></div>
           <figcaption>Cut fresh, sold at the shop.</figcaption>
+        </figure>
+        <figure>
+          <div class="fr"><img src="assets/sunflower-field.jpg" alt="Sunflowers in bloom in Ed's field" style="object-position:50% 30%"></div>
+          <figcaption>Grown in Ed's own rows.</figcaption>
         </figure>
       </div>
       <div class="flow-copy">
@@ -447,6 +580,10 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
         <div class="fr"><img src="assets/scraped/gmaps-murray-mower-and-tools-closeup.jpg" alt="Riding mower and tools on the work pad at Ed's" loading="lazy"></div>
         <figcaption>Real work, done on the pad out back.</figcaption>
       </figure>
+      <figure>
+        <div class="fr"><img src="assets/shop-front-sunflowers.jpg" alt="Buckets of cut sunflowers out front of the shop" loading="lazy" style="object-position:50% 60%"></div>
+        <figcaption>And in season, sunflowers out front.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -481,6 +618,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
           <tr class="closed"><td>Sunday</td><td>Closed</td></tr>
         </table>
         <p class="hours-note"><b>&#10022;</b> Sunflower stand runs during shop hours while the season lasts.</p>
+        <div class="hours-flower"><img src="assets/sunflower-field.jpg" alt="Ed's sunflowers in bloom" loading="lazy" style="object-position:50% 65%"></div>
       </div>
     </div>
   </div>

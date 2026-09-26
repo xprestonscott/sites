@@ -52,6 +52,11 @@ a{color:inherit}
 h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em}
 h2{font-size:clamp(2.1rem,4.6vw,3.4rem)}
 h2 em,h1 em{font-style:italic;font-weight:400}
+/* Ed's thumbs-up: the actual decal off the sign out front, cut out of his
+   photo. Kept as a bitmap rather than a redrawn copy so it's his sign. */
+.ed-mark{width:1.5em;height:1.5em;flex:none;display:inline-block;object-fit:contain;vertical-align:-.36em}
+.kicker .ed-mark{width:1.65em;height:1.65em;margin-right:-.1em}
+.hours-note .ed-mark{width:1.5em;height:1.5em;align-self:center}
 .kicker{display:inline-flex;align-items:center;gap:.7rem;font-size:.7rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase}
 .kicker::before{content:"";width:26px;height:2px;background:currentColor;opacity:.5}
 .section{padding:clamp(4.5rem,9vw,7.5rem) 0}
@@ -343,7 +348,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
 <header class="hero" id="top">
   <div class="wrap">
     <div>
-      <div class="est-badge" data-reveal><b>Save money</b> — repair your lawn mower</div>
+      <div class="est-badge" data-reveal><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true"><b>Save money</b> — repair your lawn mower</div>
       <h1 data-reveal>Bring Ed your mower. <em>He'll make it run right.</em></h1>
       <p class="lede" data-reveal>Honest lawn mower repair from a shop that's been part of Jenks for 24 years. Craftsman, Troy-Bilt, Honda, Bob-Cat — residential mowers are what Ed does all day, every day.</p>
       <div class="cta-row" data-reveal>
@@ -352,7 +357,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
       </div>
       <div class="hero-facts stagger" data-stagger>
         <div><b>24 yrs</b><span>In business</span></div>
-        <div><b>Mon–Fri</b><span>8am – 5pm</span></div>
+        <div><b>Mon–Fri</b><span>8–12, 1–5</span></div>
         <div><b>Jenks</b><span>1177 N Elm St</span></div>
       </div>
     </div>
@@ -380,7 +385,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
   <div class="wrap">
     <div class="svc-head" data-reveal>
       <div>
-        <span class="kicker">Repair &amp; Service</span>
+        <span class="kicker"><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true">Repair &amp; Service</span>
         <h2 style="margin-top:1rem">If it cuts grass,<br>Ed can <em>fix it.</em></h2>
       </div>
       <a class="btn ghost" href="tel:+19182994554">Ask about your mower <span class="arr">&rarr;</span></a>
@@ -406,7 +411,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2.5"/></svg>
         </div>
         <h3>Small Engine Repair</h3>
-        <p>Trimmers, blowers, tillers, and most anything else with a small engine that won't start when you need it to.</p>
+        <p>Tillers, riders, push mowers — most anything with a small engine that won't start when you need it to. Handheld equipment is the one thing Ed turns away: he found it isn't cost-effective to repair.</p>
       </article>
       <article class="svc">
         <div class="tool" aria-hidden="true">
@@ -423,7 +428,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
   <div class="wrap">
     <div class="tips-head" data-reveal>
       <div>
-        <span class="kicker">Helpful tips to save you money</span>
+        <span class="kicker"><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true">Helpful tips to save you money</span>
         <h2 style="margin-top:1rem">Save money — <em>repair your lawn mower.</em></h2>
       </div>
       <p class="lede">Twenty-four years on the bench, boiled down to the handful of things that actually keep money in your pocket.</p>
@@ -441,8 +446,8 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
       </article>
       <article class="tip">
         <span class="n">03</span>
-        <h3>Know when a weed eater isn't worth fixing</h3>
-        <p>Homeowner-grade string trimmers are built to last about 50 hours — roughly three years at 20 minutes a week. Once one is worn out, the repair usually costs more than half the price of a new one. Ed will tell you straight when it's time to replace instead of repair.</p>
+        <h3>Why Ed won't repair your weed eater</h3>
+        <p>Homeowner-grade string trimmers are built to last about 50 hours — roughly three years at 20 minutes a week. Once one is worn out, the repair costs more than half the price of a new one. Ed found handheld equipment isn't cost-effective to repair, so he doesn't take it in — he'd rather tell you that than charge you for it.</p>
       </article>
       <article class="tip">
         <span class="n">04</span>
@@ -512,10 +517,10 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
         </figure>
       </div>
       <div class="flow-copy">
-        <span class="kicker" data-reveal>While you're here</span>
+        <span class="kicker" data-reveal><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true">While you're here</span>
         <h2 data-reveal>Ed also grows <em>sunflowers.</em></h2>
-        <div class="season-chip" data-reveal><span class="dot"></span> In season — stop by while they last</div>
-        <p data-reveal>The same hands that rebuild carburetors plant rows of sunflowers every year. When they bloom, Ed cuts them fresh and sells them at the shop. No app, no pre-order — just swing in during shop hours.</p>
+        <div class="season-chip" data-reveal><span class="dot"></span> Ed posts on Facebook when the flowers are cut</div>
+        <p data-reveal>The same hands that rebuild carburetors plant rows of sunflowers every year. He doesn't have them all season — when a batch is ready Ed cuts them fresh and posts on Facebook. No app, no pre-order: watch for the post, then swing in during shop hours.</p>
       </div>
     </div>
   </div>
@@ -523,7 +528,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
 
 <section class="section words" id="words">
   <div class="wrap">
-    <span class="kicker" data-reveal>Word Around Jenks</span>
+    <span class="kicker" data-reveal><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true">Word Around Jenks</span>
     <h2 style="margin-top:1rem" data-reveal>People don't stay with a shop<br>for 24 years <em>by accident.</em></h2>
     <div class="quote-stack">
       <div class="quote" data-reveal>
@@ -555,7 +560,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
   <div class="wrap">
     <div class="story-grid">
       <div>
-        <span class="kicker" data-reveal>Ed's Story</span>
+        <span class="kicker" data-reveal><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true">Ed's Story</span>
         <h2 style="margin-top:1rem" data-reveal>One shop. One Ed.<br><em>24 years.</em></h2>
         <p data-reveal>Ed Vincent has spent over two decades doing one thing well: keeping the mowers of Jenks and greater Tulsa running. No service writers, no runaround — when you call the shop, you're talking to the person who'll have your mower on the bench.</p>
         <blockquote class="pull" data-reveal>"I like doing residential lawn mowers. Always have."</blockquote>
@@ -582,7 +587,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
       </figure>
       <figure>
         <div class="fr"><img src="assets/shop-front-sunflowers.jpg" alt="Buckets of cut sunflowers out front of the shop" loading="lazy" style="object-position:50% 60%"></div>
-        <figcaption>And in season, sunflowers out front.</figcaption>
+        <figcaption>And when they're cut, sunflowers out front.</figcaption>
       </figure>
     </div>
   </div>
@@ -590,15 +595,15 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
 
 <section class="ctaband">
   <div class="wrap" data-reveal>
-    <h2>Mower acting up? Don't wait for the tall grass.</h2>
-    <p>Call the shop and talk to Ed — Monday through Friday, 8 to 5.</p>
+    <h2><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true"> Mower acting up? Don't wait for the tall grass.</h2>
+    <p>Call the shop and talk to Ed — Monday through Friday, 8 to noon and 1 to 5. He takes lunch from 12 to 1.</p>
     <a class="btn dark" href="tel:+19182994554">Call (918) 299-4554 <span class="arr">&rarr;</span></a>
   </div>
 </section>
 
 <section class="section visit" id="visit">
   <div class="wrap">
-    <span class="kicker" data-reveal>Visit the Shop</span>
+    <span class="kicker" data-reveal><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true">Visit the Shop</span>
     <h2 style="margin-top:1rem" data-reveal>Right here <em>in Jenks.</em></h2>
     <div class="visit-grid">
       <div class="addr" data-reveal>
@@ -613,11 +618,13 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
       <div class="hours-card" data-reveal>
         <h3>Shop Hours</h3>
         <table>
-          <tr><td>Monday – Friday</td><td>8:00 AM – 5:00 PM</td></tr>
+          <tr><td>Monday – Friday</td><td>8:00 AM – 12:00 PM</td></tr>
+          <tr><td></td><td>1:00 PM – 5:00 PM</td></tr>
+          <tr class="closed"><td>Closed for lunch</td><td>12:00 – 1:00 PM</td></tr>
           <tr class="closed"><td>Saturday</td><td>Closed</td></tr>
           <tr class="closed"><td>Sunday</td><td>Closed</td></tr>
         </table>
-        <p class="hours-note"><b>&#10022;</b> Sunflower stand runs during shop hours while the season lasts.</p>
+        <p class="hours-note"><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true"> Sunflowers aren't out all season — Ed posts on Facebook when he has them cut.</p>
         <div class="hours-flower"><img src="assets/sunflower-field.jpg" alt="Ed's sunflowers in bloom" loading="lazy" style="object-position:50% 65%"></div>
       </div>
     </div>
@@ -626,7 +633,7 @@ footer .fbrand{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:
 
 <footer>
   <div class="wrap">
-    <a class="fbrand" href="#top">Ed's Mower Service</a>
+    <a class="fbrand" href="#top"><img class="ed-mark" src="assets/eds-thumbs-up.png" alt="" aria-hidden="true"> Ed's Mower Service</a>
     <p class="fine">&copy; 2026 Ed's Mower Service &middot; 1177 N Elm St, Jenks, OK<br>Website by <a href="https://prestonscottsystems.com">Preston Scott Systems</a></p>
     <p class="fine"><a href="tel:+19182994554">(918) 299-4554</a></p>
   </div>
